@@ -6,9 +6,7 @@ export default async function fetchData(
   useOpenWeatherMap = false
 ): Promise<Response> {
   const baseUrl =
-    (useOpenWeatherMap
-      ? process.env.OPEN_WEATHER_URL
-      : process.env.NEXT_PUBLIC_APP_API_URL) || "";
+    (useOpenWeatherMap ? process.env.OPEN_WEATHER_URL : "/api/") || "";
 
   const params = new URLSearchParams({});
   if (useOpenWeatherMap) {
