@@ -1,5 +1,3 @@
-import Head from "next/head";
-import styles from "@/styles/Home.module.css";
 import fetchData from "@/lib/fetchData";
 import { useEffect, useState } from "react";
 import { CurrentWeatherResponse } from "@/types";
@@ -30,21 +28,13 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Weather App</title>
-        <meta name="description" content="Weather App" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={styles.main}>
-        <h1>Weather App</h1>
-        {currentWeather && (
-          <ul>
-            <li>{currentWeather.temp}</li>
-            <li>{currentWeather.tempFeelsLike}</li>
-          </ul>
-        )}
-      </main>
+      <h2>Current Conditions</h2>
+      {currentWeather && (
+        <ul>
+          <li>{currentWeather.temp}</li>
+          <li>{currentWeather.tempFeelsLike}</li>
+        </ul>
+      )}
     </>
   );
 }
