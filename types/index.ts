@@ -8,4 +8,5 @@ export interface CurrentWeatherResponse {
   state: "ok";
   temp: number;
   tempFeelsLike: number;
+  description: string;
 }

@@ -9,8 +9,8 @@ export default function Home() {
   useEffect(() => {
     async function fetchWeatherData() {
       const response = await fetchData("weather", {
-        lon: 50,
-        lat: 14,
+        lon: 14,
+        lat: 50,
         units: "metric",
         lang: "en",
       });
@@ -26,13 +26,12 @@ export default function Home() {
     fetchWeatherData();
   }, []);
 
-  // Vercel deploy
-
   return (
     <>
       <h2>Current Conditions</h2>
       {currentWeather && (
         <ul>
+          <li>{currentWeather.description}</li>
           <li>{currentWeather.temp}</li>
           <li>{currentWeather.tempFeelsLike}</li>
         </ul>

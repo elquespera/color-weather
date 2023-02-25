@@ -20,6 +20,7 @@ export default async function handler(
       state: "ok",
       temp: data.main.temp,
       tempFeelsLike: data.main.feels_like,
+      description: data.weather[0].description,
     });
   } else {
     res
