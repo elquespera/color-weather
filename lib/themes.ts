@@ -19,14 +19,16 @@ export type ThemeAction = {
 
 export const DEFAULT_THEME: ThemeType = "hopbush";
 
-export const THEMES_NAMES: { [key in ThemeType]: string } = {
-  hopbush: "Hopbush",
-  "mountain-meadow": "Mountain meadow",
-  starship: "Starship",
-  "honey-flower": "Honey flower",
-  shakespeare: "Shakespeare",
-  broom: "Broom",
-  "turquoise-blue": "Turquoise blue",
+export const THEMES_META: {
+  [key in ThemeType]: { name: string; color: string };
+} = {
+  hopbush: { name: "Hopbush", color: "#8a2a6c" },
+  "mountain-meadow": { name: "Mountain meadow", color: "#065f3e" },
+  starship: { name: "Starship", color: "#496113" },
+  "honey-flower": { name: "Honey flower", color: "#7b2aa9" },
+  shakespeare: { name: "Shakespeare", color: "#244c66" },
+  broom: { name: "Broom", color: "#87670c" },
+  "turquoise-blue": { name: "Turquoise blue", color: "#13575c" },
 } as const;
 
 export function setCurrentTheme(current: ThemeType): ThemeType {
@@ -34,6 +36,8 @@ export function setCurrentTheme(current: ThemeType): ThemeType {
     const themeName = `${theme}-theme`;
     document.body.classList.toggle(themeName, current === theme);
   });
+  const meta = document.querySelector("meta[name=theme-color]");
+  if (meta) meta.setAttribute("content", THEMES_META[current].color);
   return current;
 }
 
