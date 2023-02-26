@@ -9,4 +9,5 @@ export interface CurrentWeatherResponse {
   temp: number;
   tempFeelsLike: number;
   description: string;
+  city: string;
 }

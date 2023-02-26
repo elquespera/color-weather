@@ -21,6 +21,7 @@ export default async function handler(
       temp: data.main.temp,
       tempFeelsLike: data.main.feels_like,
       description: data.weather[0].description,
+      city: data.name,
     });
   } else {
     res
