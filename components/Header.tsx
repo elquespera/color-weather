@@ -37,7 +37,7 @@ export default function Header({}: HeaderProps) {
         fixed w-full h-header p-1 md:p-2 pb-0 md:pb-0 
         flex flex-col gap-2 items-center justify-between
         bg-slate-800 text-white
-        shadow-md`}
+        shadow-lg`}
     >
       <h1 className="text-3xl">Weather App</h1>
       <nav>

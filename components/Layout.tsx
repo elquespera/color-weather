@@ -25,7 +25,7 @@ export default function Layout({ children }: LayoutProps) {
       <AppContext.Provider value={appContext}>
         <Header />
         <main className="w-full md:w-max-app min-h-screen pt-header flex">
-          <div className="p-4 md:p-8 w-full">{children}</div>
+          <div className="p-6 md:p-8 w-full">{children}</div>
         </main>
       </AppContext.Provider>
     </div>
