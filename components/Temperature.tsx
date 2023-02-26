@@ -5,12 +5,14 @@ import { useContext } from "react";
 interface TemperatureProps {
   value?: number;
   large?: boolean;
+  feelsLike?: boolean;
   className?: string;
 }
 
 export default function Temperature({
   value,
   large,
+  feelsLike,
   className,
 }: TemperatureProps) {
   const { units } = useContext(AppContext);
@@ -23,6 +25,7 @@ export default function Temperature({
         className
       )}
     >
+      {feelsLike && <span className="mr-2">Feels like:</span>}
       {`${Math.round(value)}`}
       <span className={clsx(large && "text-5xl md:text-7xl")}>°</span>
       {large && (

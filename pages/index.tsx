@@ -33,22 +33,17 @@ export default function Home() {
   return (
     <>
       {currentWeather && (
-        <ul>
-          <li>
+        <div className="flex justify-between">
+          <div className="flex flex-col items-center">
             <Temperature
               value={currentWeather.temp}
               large
               className="text-primary-dark"
-            />{" "}
-            {}
-          </li>
-          <li>
-            Feels like:
-            <Temperature value={currentWeather.tempFeelsLike} />
-          </li>
-          <li>{`${currentWeather.city} (lat: ${location.lat} lon: ${location.lon})`}</li>
-          <li>{currentWeather.description}</li>
-        </ul>
+            />
+            <Temperature feelsLike value={currentWeather.tempFeelsLike} />
+          </div>
+          <div></div>
+        </div>
       )}
     </>
   );
