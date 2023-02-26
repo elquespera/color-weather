@@ -1,7 +1,7 @@
 import { AppContext } from "@/context/AppContext";
 import { useContext } from "react";
 import NavTabs from "components/ui/NavTabs";
-import { APP_TITLE } from "@/consts";
+import { APP_TITLE } from "consts";
 
 interface HeaderProps {}
 

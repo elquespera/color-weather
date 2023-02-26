@@ -11,3 +11,9 @@ export interface CurrentWeatherResponse {
   description: string;
   city: string;
 }
+
+const Icons = ["settings", "theme", "sunny", "calendar-sunny"] as const;
+
+export type IconType = typeof Icons[number];
+
+export type RouteInfo = { route: string; title: string; icon: IconType };

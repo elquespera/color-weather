@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       width: {
         "max-app": '768px',
-        "tab": '6em', 
+        "tab": '8em', 
       },
       height: {
         "header": '6rem'
