@@ -6,7 +6,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}", 
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        "max-app": '768px'
+      },
+      height: {
+        "header": '6rem'
+      },
+      padding: {
+        "header": '6rem'
+      }
+    },
   },
   plugins: [],
 }

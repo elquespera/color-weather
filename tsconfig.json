@@ -18,6 +18,8 @@
     "paths": {
       "@/*": ["./*"],
       "@/components/*": ["components/*"],
+      "@/types/*": ["types/*"],
+      "@/consts/*": ["consts/*"],
       "@/ui/*": ["components/ui/*"]
     }
   },
