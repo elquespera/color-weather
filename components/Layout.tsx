@@ -1,5 +1,13 @@
+import { getLocalStorage, setLocalStorage } from "lib/storage";
+import {
+  DEFAULT_THEME,
+  setCurrentTheme,
+  setRandomTheme,
+  ThemeAction,
+  ThemeType,
+} from "lib/themes";
 import { AppContext, defaultAppContext } from "context/AppContext";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import Header from "./Header";
 
 interface LayoutProps {
@@ -7,7 +15,20 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  const [appContext, setAppContext] = useState(defaultAppContext);
+  const [theme, setTheme] = useReducer(setAppTheme, DEFAULT_THEME);
+  const [appContext, setAppContext] = useState({
+    ...defaultAppContext,
+    setTheme,
+  });
+
+  function setAppTheme(current: ThemeType, action: ThemeAction): ThemeType {
+    const newTheme =
+      action.type === "set"
+        ? setCurrentTheme(action.newTheme || DEFAULT_THEME)
+        : setRandomTheme(current);
+    setLocalStorage({ theme: newTheme });
+    return newTheme;
+  }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -18,7 +39,13 @@ export default function Layout({ children }: LayoutProps) {
       };
       setAppContext({ ...appContext, location });
     });
+    const { theme: storedTheme } = getLocalStorage();
+    setTheme({ type: "set", newTheme: storedTheme });
   }, []);
+
+  useEffect(() => {
+    setAppContext({ ...appContext, theme });
+  }, [theme]);
 
   return (
     <div className="flex flex-col items-center min-w-full min-h-screen ">

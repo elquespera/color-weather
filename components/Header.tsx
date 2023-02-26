@@ -1,8 +1,10 @@
+import { AppContext } from "@/context/AppContext";
+import { setRandomTheme } from "@/lib/themes";
 import clsx from "clsx";
 import { APP_TITLE, ROUTES } from "consts";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 interface HeaderProps {}
 
@@ -13,6 +15,8 @@ export default function Header({}: HeaderProps) {
     ({ route }) => route === router.pathname
   );
   const currentRoute = ROUTES[currentRouteIndex];
+
+  const { theme, setTheme } = useContext(AppContext);
 
   useEffect(() => {
     let title = APP_TITLE;
@@ -36,8 +40,9 @@ export default function Header({}: HeaderProps) {
       className={`
         fixed w-full h-header p-1 md:p-2 pb-0 md:pb-0 
         flex flex-col gap-2 items-center justify-between
-        bg-slate-800 text-white
+        bg-primary-800 text-white
         shadow-lg`}
+      onClick={() => setTheme({ type: "random" })}
     >
       <h1 className="text-3xl">Weather App</h1>
       <nav>

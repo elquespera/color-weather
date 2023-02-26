@@ -1,3 +1,9 @@
+import {
+  DEFAULT_THEME,
+  setRandomTheme,
+  ThemeAction,
+  ThemeType,
+} from "lib/themes";
 import { createContext } from "react";
 
 interface AppContextInterface {
@@ -6,6 +12,8 @@ interface AppContextInterface {
     lon: number;
     city: string;
   };
+  theme: ThemeType;
+  setTheme: (action: ThemeAction) => void;
 }
 
 export const defaultAppContext: AppContextInterface = {
@@ -14,6 +22,8 @@ export const defaultAppContext: AppContextInterface = {
     lon: 0,
     city: "",
   },
+  theme: DEFAULT_THEME,
+  setTheme: () => {},
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultAppContext);
