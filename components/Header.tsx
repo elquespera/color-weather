@@ -16,7 +16,10 @@ export default function Header({}: HeaderProps) {
         bg-primary-800 text-white
         shadow-lg`}
     >
-      <h1 className="text-3xl" onClick={() => setTheme({ type: "random" })}>
+      <h1
+        className="text-3xl cursor-pointer"
+        onClick={() => setTheme({ type: "random" })}
+      >
         {APP_TITLE}
       </h1>
       <NavTabs />
