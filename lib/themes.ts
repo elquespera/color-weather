@@ -36,7 +36,7 @@ export function setCurrentTheme(current: ThemeType): ThemeType {
     const themeName = `${theme}-theme`;
     document.body.classList.toggle(themeName, current === theme);
   });
-  const meta = document.querySelector("meta[name=theme-color]");
+  let meta = document.querySelector("meta[name=theme-color]");
   if (meta) meta.setAttribute("content", THEMES_META[current].color);
   return current;
 }

@@ -5,11 +5,6 @@ import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import Icon from "./Icon";
 
-type NavTabItem = {
-  title: string;
-  route: string;
-};
-
 export default function NavTabs() {
   const navRef = useRef<HTMLDivElement>(null);
   const router = useRouter();

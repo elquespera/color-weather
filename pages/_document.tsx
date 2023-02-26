@@ -4,8 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <meta name="description" content="Weather App" />
-        <link rel="icon" href="/favicon.svg" />
+        <meta name="theme-color" />
       </Head>
       <body>
         <Main />

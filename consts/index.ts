@@ -7,3 +7,4 @@ export const ROUTES: RouteInfo[] = [
 ];
 
 export const APP_TITLE = "ColorWeather";
+export const APP_DESCRIPTION = "ColorWeather - cool and colorful weather app";
