@@ -21,7 +21,7 @@
       "@/types/*": ["types/*"],
       "@/consts/*": ["consts/*"],
       "@/context/*": ["context/*"],
-      "@/ui/*": ["components/ui/*"]
+      "@/components/ui/*": ["ui/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

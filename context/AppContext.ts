@@ -1,9 +1,4 @@
-import {
-  DEFAULT_THEME,
-  setRandomTheme,
-  ThemeAction,
-  ThemeType,
-} from "lib/themes";
+import { DEFAULT_THEME, ThemeAction, ThemeType } from "lib/themes";
 import { createContext } from "react";
 
 interface AppContextInterface {

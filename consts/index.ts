@@ -4,4 +4,4 @@ export const ROUTES = [
   { route: "/5-days", title: "5 Days" },
 ];
 
-export const APP_TITLE = "Weather App";
+export const APP_TITLE = "ColorWeather";
