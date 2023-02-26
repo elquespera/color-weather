@@ -2,19 +2,20 @@ import fetchData from "@/lib/fetchData";
 import { useContext, useEffect, useState } from "react";
 import { CurrentWeatherResponse } from "@/types";
 import { AppContext } from "@/context/AppContext";
+import Temperature from "@/components/Temperature";
 
 export default function Home() {
   const [currentWeather, setCurrentWeather] =
     useState<CurrentWeatherResponse>();
 
-  const { location } = useContext(AppContext);
+  const { location, units } = useContext(AppContext);
 
   useEffect(() => {
     async function fetchWeatherData() {
       const response = await fetchData("weather", {
         lon: location.lon,
         lat: location.lat,
-        units: "metric",
+        units,
         lang: "en",
       });
 
@@ -31,13 +32,22 @@ export default function Home() {
 
   return (
     <>
-      <h2>Current Conditions</h2>
       {currentWeather && (
         <ul>
+          <li>
+            <Temperature
+              value={currentWeather.temp}
+              large
+              className="text-primary-dark"
+            />{" "}
+            {}
+          </li>
+          <li>
+            Feels like:
+            <Temperature value={currentWeather.tempFeelsLike} />
+          </li>
           <li>{`${currentWeather.city} (lat: ${location.lat} lon: ${location.lon})`}</li>
           <li>{currentWeather.description}</li>
-          <li>{currentWeather.temp}</li>
-          <li>{currentWeather.tempFeelsLike}</li>
         </ul>
       )}
     </>
