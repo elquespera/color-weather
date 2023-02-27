@@ -17,7 +17,10 @@ export type ThemeAction = {
   newTheme?: ThemeType;
 };
 
+export type ThemeMode = "light" | "dark";
+
 export const DEFAULT_THEME: ThemeType = "hopbush";
+export const DEFAULT_THEME_MODE = "light";
 
 export const THEMES_META: {
   [key in ThemeType]: { name: string; color: string };
@@ -31,14 +34,13 @@ export const THEMES_META: {
   "turquoise-blue": { name: "Turquoise blue", color: "#13575c" },
 } as const;
 
-export function setCurrentTheme(current: ThemeType): ThemeType {
+export function setCurrentTheme(current: ThemeType) {
   THEMES.forEach((theme) => {
     const themeName = `${theme}-theme`;
     document.body.classList.toggle(themeName, current === theme);
   });
   let meta = document.querySelector("meta[name=theme-color]");
   if (meta) meta.setAttribute("content", THEMES_META[current].color);
-  return current;
 }
 
 export function getRandomTheme(previous: ThemeType): ThemeType {
@@ -48,4 +50,8 @@ export function getRandomTheme(previous: ThemeType): ThemeType {
     theme = THEMES[randomIndex];
   } while (theme === previous);
   return theme;
+}
+
+export function setCurrentThemeMode(themeMode: ThemeMode) {
+  document.body.classList.toggle("dark-mode", themeMode === "dark");
 }

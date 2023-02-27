@@ -1,10 +1,11 @@
 import { MeasurementUnits } from "@/types";
-import { ThemeType } from "./themes";
+import { ThemeMode, ThemeType } from "./themes";
 
 const LOCAL_STORAGE_KEY = "clrw-data";
 
 interface LocalStorageData {
   theme?: ThemeType;
+  themeMode?: ThemeMode;
   units?: MeasurementUnits;
   location?: {
     lat: number;

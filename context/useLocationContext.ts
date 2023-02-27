@@ -12,7 +12,10 @@ export default function useLocationContext() {
       setCity,
     });
 
-  function setLocation(lat: number, lon: number) {
+  function setLocation(latitude: number, longitude: number) {
+    const precision = 10000;
+    const lat = Math.round(latitude * precision) / precision;
+    const lon = Math.round(longitude * precision) / precision;
     setLocationContext((current) => {
       setLocalStorage({ location: { lat, lon, city: current.city } });
       return { ...current, lat, lon };
