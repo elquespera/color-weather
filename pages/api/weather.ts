@@ -22,6 +22,7 @@ export default async function handler(
       tempFeelsLike: data.main.feels_like,
       description: data.weather[0].description,
       city: data.name,
+      icon: data.weather[0].icon,
     });
   } else {
     res

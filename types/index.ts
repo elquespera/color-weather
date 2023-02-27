@@ -10,6 +10,7 @@ export interface CurrentWeatherResponse {
   tempFeelsLike: number;
   description: string;
   city: string;
+  icon: string;
 }
 
 const Icons = ["settings", "theme", "sunny", "calendar-sunny"] as const;
