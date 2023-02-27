@@ -15,7 +15,7 @@ interface IconButtonProps {
   onClick?: () => void;
 }
 
-const IconButton = forwardRef(function (
+const IconButton = forwardRef(function IconButton(
   { icon, size = "medium", className, animation, onClick }: IconButtonProps,
   ref: React.Ref<HTMLButtonElement>
 ) {
