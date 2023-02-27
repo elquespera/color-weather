@@ -27,6 +27,8 @@ const Icons = [
 
 export type IconType = typeof Icons[number];
 
+export type IconSize = "small" | "medium" | "large";
+
 export type RouteInfo = { route: string; title: string; icon: IconType };
 
 export type MeasurementUnits = "metric" | "imperial";

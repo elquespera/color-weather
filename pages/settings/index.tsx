@@ -1,11 +1,14 @@
-import Icon from "components/ui/Icon";
-import Switch from "components/Switch";
 import { useContext } from "react";
 import AppContext from "context/AppContext";
+import { THEMES_META } from "lib/themes";
+import Switch from "components/Switch";
+import Icon from "components/ui/Icon";
 import ListItem from "components/ui/ListItem";
+import IconButton from "components/ui/IconButton";
 
 export default function Settings() {
-  const { units, setUnits, themeMode, setThemeMode } = useContext(AppContext);
+  const { units, theme, themeMode, setUnits, setRandomTheme, setThemeMode } =
+    useContext(AppContext);
 
   function handleUnits(checked: boolean) {
     setUnits(checked ? "imperial" : "metric");
@@ -39,6 +42,13 @@ export default function Settings() {
               onChange={handleUnits}
             />
           </div>
+        </ListItem>
+        <ListItem onClick={() => setRandomTheme()}>
+          <div>
+            <div className="text-primary-header sm:text-xl">Next theme</div>
+            <div className="opacity-60 text-sm">{THEMES_META[theme].name}</div>
+          </div>
+          <IconButton icon="theme" className="text-primary-header" />
         </ListItem>
         <ListItem
           highlight={themeMode === "dark"}
