@@ -36,6 +36,13 @@ module.exports = {
           800: 'var(--color-primary-800)',
           900: 'var(--color-primary-900)',
         },
+        button: {
+          DEFAULT: 'var(--color-primary-900)',
+          unchecked: 'var(--color-unchecked)',
+        },
+        background: {
+          DEFAULT: 'var(--color-background)',
+        }
       }
     },
   },

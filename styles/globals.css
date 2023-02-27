@@ -13,6 +13,22 @@ body {
   --color-primary-700: #a63082;
   --color-primary-800: #8a2a6c;
   --color-primary-900: #74275c;
+
+  --color-text: #000;
+  --color-text-disabled: #777;
+  --color-text-secondary: #555;
+  --color-background: #fff;
+
+  --color-button: var(--color-primary-900);
+  --color-unchecked: #aaa;
+
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+body.dark-mode {
+  --color-text: #fff;
+  --color-background: #000;
 }
 
 body.hopbush-theme {

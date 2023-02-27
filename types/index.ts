@@ -20,6 +20,7 @@ const Icons = [
   "settings",
   "theme",
   "sunny",
+  "moon",
   "calendar-sunny",
   "partly-cloudy",
 ] as const;

@@ -51,10 +51,11 @@ export default function NavTabs() {
                 className={clsx(
                   `inline-flex items-center justify-center 
                   w-tab gap-2 px-2 pt-2 pb-3 rounded-t-sm
+                  text-primary-200
                   transition-colors
-                  focus:outline-none focus:bg-primary-700
-                  hover:bg-primary-700`,
-                  index === selectedIndex && "text-primary-200"
+                  focus:outline-none 
+                  focus-visible:bg-primary-700`,
+                  index === selectedIndex && "text-white"
                 )}
                 href={route}
               >
