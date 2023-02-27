@@ -8,12 +8,21 @@ export interface CurrentWeatherResponse {
   state: "ok";
   temp: number;
   tempFeelsLike: number;
+  tempMin: number;
+  tempMax: number;
   description: string;
   city: string;
   icon: string;
+  updatedAt: number;
 }
 
-const Icons = ["settings", "theme", "sunny", "calendar-sunny"] as const;
+const Icons = [
+  "settings",
+  "theme",
+  "sunny",
+  "calendar-sunny",
+  "partly-cloudy",
+] as const;
 
 export type IconType = typeof Icons[number];
 

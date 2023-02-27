@@ -20,9 +20,12 @@ export default async function handler(
       state: "ok",
       temp: data.main.temp,
       tempFeelsLike: data.main.feels_like,
+      tempMin: data.main.temp_min,
+      tempMax: data.main.temp_max,
       description: data.weather[0].description,
       city: data.name,
       icon: data.weather[0].icon,
+      updatedAt: data.dt,
     });
   } else {
     res
