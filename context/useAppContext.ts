@@ -19,7 +19,9 @@ export default function useAppContext() {
   });
 
   function setTheme(theme: ThemeType) {
-    setAppContext({ ...appContext, theme });
+    setAppContext((current) => {
+      return { ...current, theme };
+    });
     setLocalStorage({ theme });
     setCurrentTheme(theme);
   }
@@ -29,22 +31,13 @@ export default function useAppContext() {
   }
 
   function setUnits(units: MeasurementUnits) {
-    setAppContext({ ...appContext, units });
+    setAppContext((current) => {
+      return { ...current, units };
+    });
     setLocalStorage({ units });
   }
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({ coords }) => {
-      const location = {
-        lat: coords.latitude,
-        lon: coords.longitude,
-        city: "",
-      };
-      setAppContext((current) => {
-        return { ...current, location };
-      });
-    });
-
     const stored = getLocalStorage();
     setAppContext({
       ...appContext,

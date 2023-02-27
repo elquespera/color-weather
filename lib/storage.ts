@@ -6,6 +6,11 @@ const LOCAL_STORAGE_KEY = "clrw-data";
 interface LocalStorageData {
   theme?: ThemeType;
   units?: MeasurementUnits;
+  location?: {
+    lat: number;
+    lon: number;
+    city: string;
+  };
 }
 
 export function getLocalStorage(): LocalStorageData {

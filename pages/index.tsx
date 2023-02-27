@@ -6,12 +6,14 @@ import Temperature from "components/Temperature";
 import WeatherIcon from "components/ui/WeatherIcon";
 import TemperatureRange from "components/TemperatureRange";
 import convertDate from "lib/convertDate";
+import LocationContext from "context/LocationContext";
 
 export default function Home() {
   const [currentWeather, setCurrentWeather] =
     useState<CurrentWeatherResponse>();
 
-  const { location, units } = useContext(AppContext);
+  const { units } = useContext(AppContext);
+  const location = useContext(LocationContext);
 
   useEffect(() => {
     async function fetchWeatherData() {
@@ -24,13 +26,13 @@ export default function Home() {
 
       if (response.ok) {
         const data: CurrentWeatherResponse = await response.json();
+        location.setCity(data.city);
         setCurrentWeather(data);
       } else {
         setCurrentWeather(undefined);
       }
     }
-
-    console.log(location);
+    if (location.lon === 0 && location.lat === 0) return;
     fetchWeatherData();
   }, [location, units]);
 

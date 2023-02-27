@@ -4,11 +4,6 @@ import { DEFAULT_THEME, ThemeType } from "lib/themes";
 import { createContext } from "react";
 
 interface AppContextInterface {
-  location: {
-    lat: number;
-    lon: number;
-    city: string;
-  };
   theme: ThemeType;
   setTheme: (theme: ThemeType) => void;
   setRandomTheme: () => void;
@@ -17,11 +12,6 @@ interface AppContextInterface {
 }
 
 export const defaultAppContext: AppContextInterface = {
-  location: {
-    lat: 0,
-    lon: 0,
-    city: "",
-  },
   theme: DEFAULT_THEME,
   setTheme: () => {},
   setRandomTheme: () => {},
@@ -29,5 +19,5 @@ export const defaultAppContext: AppContextInterface = {
   setUnits: () => {},
 };
 
-const AppContext = createContext<AppContextInterface>(defaultAppContext);
+const AppContext = createContext(defaultAppContext);
 export default AppContext;
