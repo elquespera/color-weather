@@ -1,12 +1,18 @@
-import { useContext } from "react";
-import AppContext from "@/context/AppContext";
+import { useContext, useRef } from "react";
+import AppContext from "context/AppContext";
 import NavTabs from "components/ui/NavTabs";
 import { APP_TITLE } from "consts";
+import IconButton from "./ui/IconButton";
 
 interface HeaderProps {}
 
 export default function Header({}: HeaderProps) {
   const { setRandomTheme } = useContext(AppContext);
+  const themeButtonRef = useRef<HTMLButtonElement>(null);
+
+  function handleTitleClick() {
+    themeButtonRef.current?.click();
+  }
 
   return (
     <header
@@ -16,8 +22,17 @@ export default function Header({}: HeaderProps) {
         bg-primary-800 text-white
         shadow-lg transition-colors`}
     >
-      <h1 className="text-3xl cursor-pointer" onClick={setRandomTheme}>
+      <h1
+        className="flex items-end gap-1 text-3xl cursor-pointer select-none"
+        onClick={handleTitleClick}
+      >
         {APP_TITLE}
+        <IconButton
+          icon="theme"
+          animation="spin"
+          ref={themeButtonRef}
+          onClick={setRandomTheme}
+        />
       </h1>
       <NavTabs />
     </header>

@@ -21,6 +21,10 @@ module.exports = {
         "tab-offset": "var(--wapp-tab-offset)"
       },
 
+      animation: {
+        'spin-fast': 'spin 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) infinite',
+      },      
+
       colors: {
         primary: {
           DEFAULT: 'var(--color-primary-600)',

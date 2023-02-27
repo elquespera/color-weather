@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import AppContext from "context/AppContext";
 import { THEMES_META } from "lib/themes";
 import Switch from "components/Switch";
@@ -7,6 +7,8 @@ import ListItem from "components/ui/ListItem";
 import IconButton from "components/ui/IconButton";
 
 export default function Settings() {
+  const themeButtonRef = useRef<HTMLButtonElement>(null);
+
   const { units, theme, themeMode, setUnits, setRandomTheme, setThemeMode } =
     useContext(AppContext);
 
@@ -16,6 +18,10 @@ export default function Settings() {
 
   function handleThemeMode(checked: boolean) {
     setThemeMode(checked ? "dark" : "light");
+  }
+
+  function handleNextTheme() {
+    themeButtonRef.current?.click();
   }
 
   return (
@@ -43,12 +49,18 @@ export default function Settings() {
             />
           </div>
         </ListItem>
-        <ListItem onClick={() => setRandomTheme()}>
+        <ListItem onClick={handleNextTheme}>
           <div>
             <div className="text-primary-header sm:text-xl">Next theme</div>
             <div className="opacity-60 text-sm">{THEMES_META[theme].name}</div>
           </div>
-          <IconButton icon="theme" className="text-primary-header" />
+          <IconButton
+            icon="theme"
+            animation="spin"
+            ref={themeButtonRef}
+            className="text-primary-header"
+            onClick={() => setRandomTheme()}
+          />
         </ListItem>
         <ListItem
           highlight={themeMode === "dark"}
