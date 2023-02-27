@@ -8,7 +8,6 @@ export default function WeatherIcon({ icon, alt, large }: WeatherIconProps) {
   const size = large ? 100 : 50;
   return (
     <img
-      // className="object-cover"
       alt={alt}
       width={size}
       height={size}
