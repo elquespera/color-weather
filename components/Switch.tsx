@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 
 interface SwitchProps {
@@ -15,13 +15,12 @@ export default function Switch({
   uncheckedDecoration,
   onChange,
 }: SwitchProps) {
-  const [inputChecked, setInputChecked] = useState(checked === true);
+  const [inputChecked, setInputChecked] = useState(false);
 
-  function handleChange() {
-    setInputChecked((current) => {
-      if (onChange) onChange(!current);
-      return !current;
-    });
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const isChecked = event.target.checked;
+    setInputChecked(isChecked);
+    if (onChange) onChange(isChecked);
   }
 
   useEffect(() => setInputChecked(checked === true), [checked]);
@@ -35,6 +34,7 @@ export default function Switch({
         focus-within:opacity-100
         active:opacity-100
         hover:opacity-100
+        select-none
         `,
         inputChecked ? "bg-button" : "bg-button-unchecked"
       )}

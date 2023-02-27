@@ -1,12 +1,12 @@
-import { AppContext } from "@/context/AppContext";
 import { useContext } from "react";
+import AppContext from "@/context/AppContext";
 import NavTabs from "components/ui/NavTabs";
 import { APP_TITLE } from "consts";
 
 interface HeaderProps {}
 
 export default function Header({}: HeaderProps) {
-  const { setTheme } = useContext(AppContext);
+  const { setRandomTheme } = useContext(AppContext);
 
   return (
     <header
@@ -16,10 +16,7 @@ export default function Header({}: HeaderProps) {
         bg-primary-800 text-white
         shadow-lg transition-colors`}
     >
-      <h1
-        className="text-3xl cursor-pointer"
-        onClick={() => setTheme({ type: "random" })}
-      >
+      <h1 className="text-3xl cursor-pointer" onClick={setRandomTheme}>
         {APP_TITLE}
       </h1>
       <NavTabs />

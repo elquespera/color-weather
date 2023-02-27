@@ -1,4 +1,7 @@
-import { RouteInfo } from "@/types";
+import { MeasurementUnits, RouteInfo } from "@/types";
+
+export const APP_TITLE = "ColorWeather";
+export const APP_DESCRIPTION = "ColorWeather - cool and colorful weather app";
 
 export const ROUTES: RouteInfo[] = [
   { route: "/", title: "Current", icon: "partly-cloudy" },
@@ -6,5 +9,4 @@ export const ROUTES: RouteInfo[] = [
   { route: "/settings", title: "Settings", icon: "settings" },
 ];
 
-export const APP_TITLE = "ColorWeather";
-export const APP_DESCRIPTION = "ColorWeather - cool and colorful weather app";
+export const DEFAULT_UNITS: MeasurementUnits = "metric";

@@ -1,5 +1,6 @@
-import { MeasurementUnits } from "@/types";
-import { DEFAULT_THEME, ThemeAction, ThemeType } from "lib/themes";
+import { DEFAULT_UNITS } from "consts";
+import { MeasurementUnits } from "types";
+import { DEFAULT_THEME, ThemeType } from "lib/themes";
 import { createContext } from "react";
 
 interface AppContextInterface {
@@ -9,8 +10,10 @@ interface AppContextInterface {
     city: string;
   };
   theme: ThemeType;
+  setTheme: (theme: ThemeType) => void;
+  setRandomTheme: () => void;
   units: MeasurementUnits;
-  setTheme: (action: ThemeAction) => void;
+  setUnits: (units: MeasurementUnits) => void;
 }
 
 export const defaultAppContext: AppContextInterface = {
@@ -20,8 +23,11 @@ export const defaultAppContext: AppContextInterface = {
     city: "",
   },
   theme: DEFAULT_THEME,
-  units: "metric",
   setTheme: () => {},
+  setRandomTheme: () => {},
+  units: DEFAULT_UNITS,
+  setUnits: () => {},
 };
 
-export const AppContext = createContext<AppContextInterface>(defaultAppContext);
+const AppContext = createContext<AppContextInterface>(defaultAppContext);
+export default AppContext;

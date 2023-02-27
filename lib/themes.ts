@@ -41,12 +41,11 @@ export function setCurrentTheme(current: ThemeType): ThemeType {
   return current;
 }
 
-export function setRandomTheme(previous: ThemeType): ThemeType {
+export function getRandomTheme(previous: ThemeType): ThemeType {
   let theme = previous;
   do {
     const randomIndex = Math.floor(Math.random() * THEMES.length);
     theme = THEMES[randomIndex];
   } while (theme === previous);
-  setCurrentTheme(theme);
   return theme;
 }

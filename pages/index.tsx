@@ -1,11 +1,11 @@
-import fetchData from "@/lib/fetchData";
+import fetchData from "lib/fetchData";
 import { useContext, useEffect, useState } from "react";
 import { CurrentWeatherResponse } from "types";
-import { AppContext } from "context/AppContext";
+import AppContext from "context/AppContext";
 import Temperature from "components/Temperature";
 import WeatherIcon from "components/ui/WeatherIcon";
-import convertDate from "@/lib/convertDate";
-import TemperatureRange from "@/components/TemperatureRange";
+import TemperatureRange from "components/TemperatureRange";
+import convertDate from "lib/convertDate";
 
 export default function Home() {
   const [currentWeather, setCurrentWeather] =
@@ -30,13 +30,15 @@ export default function Home() {
       }
     }
 
+    console.log(location);
     fetchWeatherData();
-  }, [location]);
+  }, [location, units]);
 
   return (
     <>
       {currentWeather && (
         <div className="flex flex-col">
+          <div>{currentWeather.city}</div>
           <div className="text-primary">
             {convertDate(currentWeather.updatedAt)}
           </div>

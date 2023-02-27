@@ -1,9 +1,11 @@
+import { MeasurementUnits } from "@/types";
 import { ThemeType } from "./themes";
 
 const LOCAL_STORAGE_KEY = "clrw-data";
 
 interface LocalStorageData {
   theme?: ThemeType;
+  units?: MeasurementUnits;
 }
 
 export function getLocalStorage(): LocalStorageData {
@@ -17,5 +19,9 @@ export function getLocalStorage(): LocalStorageData {
 }
 
 export function setLocalStorage(data: LocalStorageData) {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
+  const storedData = getLocalStorage();
+  localStorage.setItem(
+    LOCAL_STORAGE_KEY,
+    JSON.stringify({ ...storedData, ...data })
+  );
 }
