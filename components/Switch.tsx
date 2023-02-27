@@ -36,7 +36,7 @@ export default function Switch({
         hover:opacity-100
         select-none
         `,
-        inputChecked ? "bg-button" : "bg-button-unchecked"
+        inputChecked ? "bg-switch" : "bg-switch-unchecked"
       )}
     >
       <input
@@ -47,7 +47,7 @@ export default function Switch({
       />
       <span
         className={clsx(
-          "absolute overflow-hidden inset-0 w-5 flex items-center text-background transition-all",
+          "absolute overflow-hidden inset-0 w-5 flex items-center text-text-contrast transition-all",
           inputChecked ? "translate-x-2" : "translate-x-7"
         )}
       >
@@ -55,7 +55,7 @@ export default function Switch({
       </span>
       <span
         className={clsx(
-          "absolute rounded-full inset-1 w-4 bg-background transition-all",
+          "absolute rounded-full inset-1 w-4 bg-switch-knob transition-all",
           inputChecked && "translate-x-6"
         )}
       />

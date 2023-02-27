@@ -26,6 +26,8 @@ module.exports = {
           DEFAULT: 'var(--color-primary-600)',
           light: 'var(--color-primary-300)',
           dark: 'var(--color-primary-800)',
+          header: 'var(--color-primary-header)',
+          'sub-header': 'var(--color-primary-subheader)',
           100: 'var(--color-primary-100)',
           200: 'var(--color-primary-200)',
           300: 'var(--color-primary-300)',
@@ -34,15 +36,24 @@ module.exports = {
           600: 'var(--color-primary-600)',
           700: 'var(--color-primary-700)',
           800: 'var(--color-primary-800)',
-          900: 'var(--color-primary-900)',
+          900: 'var(--color-primary-900)',          
         },
-        button: {
-          DEFAULT: 'var(--color-primary-900)',
-          unchecked: 'var(--color-unchecked)',
+        text: {
+          DEFAULT: 'var(--color-text)',
+          disabled: 'var(--color-text-disabled)',
+          secondary: 'var(--color-text-secondary)',
+          contrast: 'var(--color-text-contrast)',
         },
+
         background: {
           DEFAULT: 'var(--color-background)',
-        }
+        },
+
+        switch: {
+          DEFAULT: 'var(--color-checked)',
+          unchecked: 'var(--color-unchecked)',
+          knob: 'var(--color-switch-knob)',
+        },
       }
     },
   },

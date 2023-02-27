@@ -14,21 +14,32 @@ body {
   --color-primary-800: #8a2a6c;
   --color-primary-900: #74275c;
 
+  --color-primary-header: var(--color-primary-800);
+  --color-primary-subheader: var(--color-primary-600);
+
   --color-text: #000;
   --color-text-disabled: #777;
-  --color-text-secondary: #555;
+  --color-text-secondary: #333;
+  --color-text-contrast: #fff;
   --color-background: #fff;
 
-  --color-button: var(--color-primary-900);
+  --color-checked: var(--color-primary-900);
   --color-unchecked: #aaa;
+  --color-switch-knob: var(--color-text-contrast);
 
   color: var(--color-text);
   background-color: var(--color-background);
 }
 
 body.dark-mode {
+  --color-primary-header: var(--color-primary-400);
+  --color-primary-subheader: var(--color-primary-600);
+
   --color-text: #fff;
   --color-background: #000;
+
+  --color-checked: var(--color-primary-500);
+  --color-unchecked: #aaa;
 }
 
 body.hopbush-theme {

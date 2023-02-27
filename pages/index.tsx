@@ -41,7 +41,7 @@ export default function Home() {
       {currentWeather && (
         <div className="flex flex-col">
           <div>{currentWeather.city}</div>
-          <div className="text-primary">
+          <div className="text-primary-sub-header">
             {convertDate(currentWeather.updatedAt)}
           </div>
           <TemperatureRange
@@ -52,7 +52,7 @@ export default function Home() {
             <Temperature
               value={currentWeather.temp}
               large
-              className="text-primary-dark"
+              className="text-primary-header"
             />
             <WeatherIcon
               icon={currentWeather.icon}

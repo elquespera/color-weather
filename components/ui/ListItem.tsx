@@ -16,10 +16,11 @@ export default function ListItem({
     <div
       onClick={onClick}
       className={clsx(
-        "relative isolate p-4 ",
-        onClick && "cursor-pointer",
-        highlight &&
-          "before:absolute before:inset-1 before:bg-primary-100 before:rounded-lg"
+        `relative isolate px-4 py-3 sm:px-5 sm:py-4
+        before:absolute before:inset-1 before:rounded-lg
+        focus-within:before:bg-primary-400 focus-within:before:opacity-30`,
+        onClick && "cursor-pointer select-none",
+        highlight && "before:opacity-20 before:bg-primary-400"
       )}
     >
       <div className="relative flex items-center justify-between">
