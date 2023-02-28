@@ -18,6 +18,8 @@ export enum lng {
   language,
 
   outOf,
+
+  searchPlaces,
 }
 
 type LanguageData = {
@@ -42,6 +44,8 @@ export const languageData: LanguageData = {
     [lng.language]: "Language",
 
     [lng.outOf]: "out of",
+
+    [lng.searchPlaces]: "Search places",
   },
   ru: {
     [lng.currentTab]: "Сейчас",
@@ -60,6 +64,7 @@ export const languageData: LanguageData = {
     [lng.language]: "Язык приложения",
 
     [lng.outOf]: "из",
+    [lng.searchPlaces]: "Поиск городов",
   },
   es: {},
 };

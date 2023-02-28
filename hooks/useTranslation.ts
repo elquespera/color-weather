@@ -11,6 +11,6 @@ export default function useTranslation() {
     if (!translation) {
       translation = languageData[DEFAULT_APP_LANGUAGE][translationKey];
     }
-    return translation;
+    return translation || "";
   };
 }

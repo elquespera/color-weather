@@ -18,12 +18,12 @@ export default function Header({}: HeaderProps) {
   return (
     <header
       className={`
-        fixed w-full h-header p-1 md:p-2 pb-0 md:pb-0 
+        fixed w-full h-header p-2 pb-0 md:pb-0 
         flex flex-col gap-1 items-center justify-between
         bg-primary-800 text-white
         shadow-lg transition-colors`}
     >
-      <h1 className="flex items-end gap-3 text-3xl cursor-pointer select-none">
+      <h1 className="flex items-center gap-3 text-3xl select-none">
         <Logo onClick={handleTitleClick} />
         <Search />
         <IconButton

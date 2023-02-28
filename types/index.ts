@@ -25,6 +25,7 @@ const Icons = [
   "moon",
   "calendar-sunny",
   "partly-cloudy",
+  "search",
 ] as const;
 
 export type IconType = typeof Icons[number];
