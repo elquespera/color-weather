@@ -17,8 +17,10 @@ export default function NavTabs() {
   const currentRoute = ROUTES[selectedIndex];
 
   useSwipe((direction, distance, percentage) => {
+    console.log("swipe", direction, distance, percentage);
     if (percentage > 50 || distance > 70) {
       const nextIndex = selectedIndex + (direction === "left" ? 1 : -1);
+      console.log(selectedIndex, nextIndex);
       const nextRoute = ROUTES[nextIndex]?.route;
       if (nextRoute) router.push(nextRoute);
     }

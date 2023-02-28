@@ -9,14 +9,13 @@ type SwipeCallback = (
 ) => void;
 
 export default function useSwipe(callback: SwipeCallback) {
+  const [startCoord, setStartCoord] = useState(0);
   useEffect(() => {
-    let touchStartCoord = 0;
-
     function handleTouchStart(this: HTMLElement, event: TouchEvent) {
-      touchStartCoord = event.changedTouches[0].screenX;
+      setStartCoord(event.changedTouches[0].screenX);
     }
     function handleTouchEnd(this: HTMLElement, event: TouchEvent) {
-      let distance = event.changedTouches[0].screenX - touchStartCoord;
+      let distance = event.changedTouches[0].screenX - startCoord;
       const direction = distance > 0 ? "right" : "left";
       distance = Math.abs(distance);
       const percentage = distance / window.innerWidth;
