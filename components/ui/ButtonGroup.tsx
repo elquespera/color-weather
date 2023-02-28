@@ -36,7 +36,8 @@ export default function ButtonGroup({
       ref={wrapperRef}
       className="
         relative flex bg-switch-unchecked
-        overflow-hidden rounded-md 
+        overflow-hidden rounded-md shadow-inner
+        text-sm sm:text-base
         transition-opacity opacity-80
         focus-within:opacity-100
         active:opacity-100
@@ -54,7 +55,7 @@ export default function ButtonGroup({
         items.map((item) => (
           <button
             className={clsx(
-              `relative text-text-contrast py-1 w-[2.5em] focus:outline-none focus-visible:bg-primary-sub-header`
+              `relative text-text-contrast leading-none pt-[0.4em] pb-[0.6em] w-[2.5em] focus:outline-none focus-visible:bg-primary-sub-header`
             )}
             key={item}
             onClick={() => handleClick(item)}
