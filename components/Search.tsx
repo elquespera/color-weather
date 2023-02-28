@@ -1,8 +1,14 @@
 import { lng } from "assets/translations";
 import useTranslation from "hooks/useTranslation";
 import clsx from "clsx";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import IconButton from "components/ui/IconButton";
+import AppContext from "@/context/AppContext";
+import {
+  setMetaThemeColor,
+  THEMES_META,
+  THEME_MODE_BACKGROUNDS,
+} from "@/lib/themes";
 
 interface SearchProps {
   open?: boolean;
@@ -11,6 +17,7 @@ interface SearchProps {
 
 export default function Search({ open, onClose }: SearchProps) {
   const t = useTranslation();
+  const { theme, themeMode } = useContext(AppContext);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -42,6 +49,12 @@ export default function Search({ open, onClose }: SearchProps) {
     if (open) inputRef.current?.focus();
     setValue("");
   }, [open]);
+
+  useEffect(() => {
+    setMetaThemeColor(
+      open ? THEME_MODE_BACKGROUNDS[themeMode] : THEMES_META[theme].color
+    );
+  }, [theme, themeMode, open]);
 
   return (
     <div
@@ -84,7 +97,13 @@ export default function Search({ open, onClose }: SearchProps) {
             selection:text-primary-dark selection:bg-primary-200`
             )}
           />
-          {value !== "" && <IconButton icon="close" onClick={handleClear} />}
+          {value !== "" && (
+            <IconButton
+              icon="close"
+              className="text-text-secondary"
+              onClick={handleClear}
+            />
+          )}
         </div>
       </div>
     </div>

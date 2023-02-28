@@ -29,13 +29,22 @@ export const THEMES_META: {
   "turquoise-blue": { name: "Turquoise blue", color: "#13575c" },
 } as const;
 
+export const THEME_MODE_BACKGROUNDS: { [key in ThemeMode]: string } = {
+  light: "#fff",
+  dark: "#000",
+};
+
+export function setMetaThemeColor(color: string) {
+  let meta = document.querySelector("meta[name=theme-color]");
+  if (meta) meta.setAttribute("content", color);
+}
+
 export function setCurrentTheme(current: ThemeType) {
   THEMES.forEach((theme) => {
     const themeName = `${theme}-theme`;
     document.body.classList.toggle(themeName, current === theme);
   });
-  let meta = document.querySelector("meta[name=theme-color]");
-  if (meta) meta.setAttribute("content", THEMES_META[current].color);
+  setMetaThemeColor(THEMES_META[current].color);
 }
 
 export function getNextTheme(previous: ThemeType): ThemeType {
