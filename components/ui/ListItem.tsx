@@ -23,7 +23,7 @@ export default function ListItem({
         highlight && "before:opacity-20 before:bg-primary-400"
       )}
     >
-      <div className="relative flex items-center justify-between">
+      <div className="relative flex gap-2 items-center justify-between">
         {children}
       </div>
     </div>

@@ -1,8 +1,9 @@
 import { useContext, useRef } from "react";
 import AppContext from "context/AppContext";
 import NavTabs from "components/ui/NavTabs";
-import { APP_TITLE } from "consts";
 import IconButton from "./ui/IconButton";
+import Logo from "./Logo";
+import Search from "./Search";
 
 interface HeaderProps {}
 
@@ -22,11 +23,9 @@ export default function Header({}: HeaderProps) {
         bg-primary-800 text-white
         shadow-lg transition-colors`}
     >
-      <h1
-        className="flex items-end gap-1 text-3xl cursor-pointer select-none"
-        onClick={handleTitleClick}
-      >
-        {APP_TITLE}
+      <h1 className="flex items-end gap-3 text-3xl cursor-pointer select-none">
+        <Logo onClick={handleTitleClick} />
+        <Search />
         <IconButton
           icon="theme"
           animation="spin"
