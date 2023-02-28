@@ -1,4 +1,5 @@
 import { APP_TITLE, ROUTES } from "@/consts";
+import useTranslation from "@/hooks/useTranslation";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -8,6 +9,7 @@ import Icon from "./Icon";
 export default function NavTabs() {
   const navRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const t = useTranslation();
   const selectedIndex = ROUTES.findIndex(
     ({ route }) => route === router.pathname
   );
@@ -15,7 +17,7 @@ export default function NavTabs() {
 
   useEffect(() => {
     let title = APP_TITLE;
-    if (currentRoute) title += ` | ${currentRoute.title}`;
+    if (currentRoute) title += ` | ${t(currentRoute.title)}`;
     document.title = title;
   }, [currentRoute, router]);
 
@@ -59,7 +61,7 @@ export default function NavTabs() {
                 )}
                 href={route}
               >
-                {title}
+                {t(title)}
                 <Icon type={icon} size="small" />
               </Link>
             </li>

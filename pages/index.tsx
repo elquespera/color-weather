@@ -7,6 +7,7 @@ import WeatherIcon from "components/ui/WeatherIcon";
 import TemperatureRange from "components/TemperatureRange";
 import useConvertDate from "hooks/useConvertDate";
 import LocationContext from "context/LocationContext";
+import useTranslation from "@/hooks/useTranslation";
 
 export default function Home() {
   const [currentWeather, setCurrentWeather] =
@@ -14,6 +15,7 @@ export default function Home() {
   const convertDate = useConvertDate();
   const { units, language } = useContext(AppContext);
   const location = useContext(LocationContext);
+  const t = useTranslation();
 
   useEffect(() => {
     async function fetchWeatherData() {

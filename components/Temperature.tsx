@@ -1,3 +1,5 @@
+import { lng } from "@/assets/translations";
+import useTranslation from "@/hooks/useTranslation";
 import clsx from "clsx";
 import AppContext from "context/AppContext";
 import { useContext } from "react";
@@ -16,6 +18,7 @@ export default function Temperature({
   className,
 }: TemperatureProps) {
   const { units } = useContext(AppContext);
+  const t = useTranslation();
 
   return value ? (
     <span
@@ -26,7 +29,7 @@ export default function Temperature({
         className
       )}
     >
-      {feelsLike && <span className="mr-2">Feels like:</span>}
+      {feelsLike && <span className="mr-2">{t(lng.feelsLike)}</span>}
       {`${Math.round(value)}`}
       <span className={clsx(large && "text-5xl md:text-7xl")}>°</span>
       {large && (

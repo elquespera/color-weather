@@ -7,9 +7,13 @@ import ListItem from "components/ui/ListItem";
 import IconButton from "components/ui/IconButton";
 import ButtonGroup from "components/ui/ButtonGroup";
 import { APP_LANGUAGES, APP_LANGUAGES_META, AppLanguage } from "types";
+import useTranslation from "@/hooks/useTranslation";
+import { lng } from "@/assets/translations";
 
 export default function Settings() {
   const themeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const t = useTranslation();
 
   const {
     units,
@@ -45,7 +49,9 @@ export default function Settings() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h2 className="text-3xl sm:text-5xl text-primary-header">Settings</h2>
+      <h2 className="text-3xl sm:text-5xl text-primary-header">
+        {t(lng.settingsTitle)}
+      </h2>
       <div className="flex flex-col">
         <ListItem
           highlight={units === "imperial"}
@@ -53,10 +59,10 @@ export default function Settings() {
         >
           <div>
             <div className="text-primary-header sm:text-xl">
-              Measurement units
+              {t(lng.measurementUnits)}
             </div>
             <div className="opacity-60 text-sm">
-              {units === "metric" ? "Celsius" : "Fahrenheit"}
+              {t(units === "metric" ? lng.celsius : lng.fahrenheit)}
             </div>
           </div>
           <Switch
@@ -68,7 +74,9 @@ export default function Settings() {
         </ListItem>
         <ListItem onClick={handleNextTheme}>
           <div>
-            <div className="text-primary-header sm:text-xl">Next theme</div>
+            <div className="text-primary-header sm:text-xl">
+              {t(lng.nextTheme)}
+            </div>
             <div className="opacity-60 text-sm">{THEMES_META[theme].name}</div>
           </div>
           <IconButton
@@ -84,9 +92,11 @@ export default function Settings() {
           onClick={() => handleThemeMode(themeMode === "light")}
         >
           <div>
-            <div className="text-primary-header sm:text-xl">Dark mode</div>
+            <div className="text-primary-header sm:text-xl">
+              {t(lng.darkMode)}
+            </div>
             <div className="opacity-60 text-sm">
-              {themeMode === "dark" ? "dark" : "light"}
+              {t(themeMode === "dark" ? lng.dark : lng.light)}
             </div>
           </div>
           <Switch
@@ -98,7 +108,9 @@ export default function Settings() {
         </ListItem>
         <ListItem onClick={handleNextLanguage}>
           <div>
-            <div className="text-primary-header sm:text-xl">Language</div>
+            <div className="text-primary-header sm:text-xl">
+              {t(lng.language)}
+            </div>
             <div className="opacity-60 text-sm">
               {APP_LANGUAGES_META[language].name}
             </div>

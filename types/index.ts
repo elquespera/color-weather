@@ -1,3 +1,5 @@
+import { lng } from "assets/translations";
+
 export interface ErrorResponse {
   state: "error";
   status: number;
@@ -29,7 +31,7 @@ export type IconType = typeof Icons[number];
 
 export type IconSize = "small" | "medium" | "large";
 
-export type RouteInfo = { route: string; title: string; icon: IconType };
+export type RouteInfo = { route: string; title: lng; icon: IconType };
 
 export type MeasurementUnits = "metric" | "imperial";
 
