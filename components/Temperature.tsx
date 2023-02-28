@@ -21,7 +21,8 @@ export default function Temperature({
     <span
       className={clsx(
         "inline-flex",
-        large && "tracking-tighter text-7xl sm:text-9xl drop-shadow-md",
+        large &&
+          "tracking-tighter text-7xl sm:text-9xl drop-shadow-md select-none",
         className
       )}
     >
