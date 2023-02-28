@@ -4,7 +4,7 @@ import React from "react";
 interface ListItemProps {
   highlight?: boolean;
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent) => void;
 }
 
 export default function ListItem({

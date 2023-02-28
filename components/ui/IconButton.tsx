@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import Icon from "./Icon";
 
-const BUTTON_ANIMATION_DURATION = 1000;
+const BUTTON_ANIMATION_DURATION = 500;
 type IconButtonAnimation = "spin";
 
 interface IconButtonProps {

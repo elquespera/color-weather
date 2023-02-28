@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import AppContext from "context/AppContext";
 import { THEMES_META } from "lib/themes";
 import Switch from "components/Switch";
@@ -12,6 +12,7 @@ import { lng } from "@/assets/translations";
 
 export default function Settings() {
   const themeButtonRef = useRef<HTMLButtonElement>(null);
+  const languageButtonsRef = useRef<HTMLDivElement>(null);
 
   const t = useTranslation();
 
@@ -42,7 +43,11 @@ export default function Settings() {
     setLanguage(item as AppLanguage);
   }
 
-  function handleNextLanguage() {
+  function handleNextLanguage(event: React.MouseEvent) {
+    const buttonDiv = languageButtonsRef.current;
+    if (buttonDiv && buttonDiv.contains(event.target as Node)) {
+      return;
+    }
     const index = APP_LANGUAGES.indexOf(language);
     setLanguage(APP_LANGUAGES[(index + 1) % APP_LANGUAGES.length]);
   }
@@ -106,7 +111,7 @@ export default function Settings() {
             onChange={handleThemeMode}
           />
         </ListItem>
-        <ListItem onClick={handleNextLanguage}>
+        <ListItem onClick={(event) => handleNextLanguage(event)}>
           <div>
             <div className="text-primary-header sm:text-xl">
               {t(lng.language)}
@@ -115,11 +120,13 @@ export default function Settings() {
               {APP_LANGUAGES_META[language].name}
             </div>
           </div>
-          <ButtonGroup
-            items={APP_LANGUAGES.map((x) => x)}
-            selected={language}
-            onChange={handleLanguageChange}
-          />
+          <div ref={languageButtonsRef}>
+            <ButtonGroup
+              items={APP_LANGUAGES.map((x) => x)}
+              selected={language}
+              onChange={handleLanguageChange}
+            />
+          </div>
         </ListItem>
       </div>
     </div>
