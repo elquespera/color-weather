@@ -1,4 +1,5 @@
 import { APP_TITLE, ROUTES } from "@/consts";
+import useSwipe from "@/hooks/useSwipe";
 import useTranslation from "@/hooks/useTranslation";
 import clsx from "clsx";
 import Link from "next/link";
@@ -14,6 +15,14 @@ export default function NavTabs() {
     ({ route }) => route === router.pathname
   );
   const currentRoute = ROUTES[selectedIndex];
+
+  useSwipe((direction, distance, percentage) => {
+    if (percentage > 50 || distance > 150) {
+      const nextIndex = selectedIndex + (direction === "right" ? 1 : -1);
+      const nextRoute = ROUTES[nextIndex]?.route;
+      if (nextRoute) router.push(nextRoute);
+    }
+  });
 
   useEffect(() => {
     let title = APP_TITLE;
