@@ -16,6 +16,8 @@ export enum lng {
   dark,
   light,
   language,
+
+  outOf,
 }
 
 type LanguageData = {
@@ -38,6 +40,8 @@ export const languageData: LanguageData = {
     [lng.dark]: "Dark",
     [lng.light]: "Light",
     [lng.language]: "Language",
+
+    [lng.outOf]: "out of",
   },
   ru: {
     [lng.currentTab]: "Сейчас",
@@ -54,6 +58,8 @@ export const languageData: LanguageData = {
     [lng.dark]: "Темный",
     [lng.light]: "Светлый",
     [lng.language]: "Язык приложения",
+
+    [lng.outOf]: "из",
   },
   es: {},
 };

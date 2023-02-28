@@ -11,7 +11,7 @@ import { createContext } from "react";
 interface AppContextInterface {
   theme: ThemeType;
   setTheme: (theme: ThemeType) => void;
-  setRandomTheme: () => void;
+  nextTheme: (theme: ThemeType) => void;
   themeMode: ThemeMode;
   setThemeMode: (mode: ThemeMode) => void;
   units: MeasurementUnits;
@@ -23,7 +23,7 @@ interface AppContextInterface {
 export const defaultAppContext: AppContextInterface = {
   theme: DEFAULT_THEME,
   setTheme: () => {},
-  setRandomTheme: () => {},
+  nextTheme: () => {},
   themeMode: DEFAULT_THEME_MODE,
   setThemeMode: () => {},
   units: DEFAULT_UNITS,

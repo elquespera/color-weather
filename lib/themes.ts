@@ -38,13 +38,9 @@ export function setCurrentTheme(current: ThemeType) {
   if (meta) meta.setAttribute("content", THEMES_META[current].color);
 }
 
-export function getRandomTheme(previous: ThemeType): ThemeType {
-  let theme = previous;
-  do {
-    const randomIndex = Math.floor(Math.random() * THEMES.length);
-    theme = THEMES[randomIndex];
-  } while (theme === previous);
-  return theme;
+export function getNextTheme(previous: ThemeType): ThemeType {
+  const themeIndex = THEMES.indexOf(previous);
+  return THEMES[(themeIndex + 1) % THEMES.length];
 }
 
 export function setCurrentThemeMode(themeMode: ThemeMode) {

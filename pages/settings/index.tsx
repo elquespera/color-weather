@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from "react";
 import AppContext from "context/AppContext";
-import { THEMES_META } from "lib/themes";
+import { THEMES, THEMES_META } from "lib/themes";
 import Switch from "components/Switch";
 import Icon from "components/ui/Icon";
 import ListItem from "components/ui/ListItem";
@@ -22,7 +22,7 @@ export default function Settings() {
     themeMode,
     language,
     setUnits,
-    setRandomTheme,
+    nextTheme,
     setThemeMode,
     setLanguage,
   } = useContext(AppContext);
@@ -82,14 +82,16 @@ export default function Settings() {
             <div className="text-primary-header sm:text-xl">
               {t(lng.nextTheme)}
             </div>
-            <div className="opacity-60 text-sm">{THEMES_META[theme].name}</div>
+            <div className="opacity-60 text-sm">{`${THEMES_META[theme].name} (${
+              THEMES.indexOf(theme) + 1
+            } ${t(lng.outOf)} ${THEMES.length})`}</div>
           </div>
           <IconButton
             icon="theme"
             animation="spin"
             ref={themeButtonRef}
             className="text-primary-header"
-            onClick={() => setRandomTheme()}
+            onClick={() => nextTheme(theme)}
           />
         </ListItem>
         <ListItem

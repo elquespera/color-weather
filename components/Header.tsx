@@ -7,7 +7,7 @@ import IconButton from "./ui/IconButton";
 interface HeaderProps {}
 
 export default function Header({}: HeaderProps) {
-  const { setRandomTheme } = useContext(AppContext);
+  const { theme, nextTheme } = useContext(AppContext);
   const themeButtonRef = useRef<HTMLButtonElement>(null);
 
   function handleTitleClick() {
@@ -31,7 +31,7 @@ export default function Header({}: HeaderProps) {
           icon="theme"
           animation="spin"
           ref={themeButtonRef}
-          onClick={setRandomTheme}
+          onClick={() => nextTheme(theme)}
         />
       </h1>
       <NavTabs />

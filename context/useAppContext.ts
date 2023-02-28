@@ -3,7 +3,7 @@ import { getLocalStorage, setLocalStorage } from "lib/storage";
 import {
   DEFAULT_THEME,
   setCurrentTheme,
-  getRandomTheme,
+  getNextTheme,
   ThemeType,
   ThemeMode,
   setCurrentThemeMode,
@@ -17,7 +17,7 @@ export default function useAppContext() {
   const [appContext, setAppContext] = useState({
     ...defaultAppContext,
     setTheme,
-    setRandomTheme,
+    nextTheme,
     setThemeMode,
     setUnits,
     setLanguage,
@@ -31,8 +31,8 @@ export default function useAppContext() {
     setCurrentTheme(theme);
   }
 
-  function setRandomTheme() {
-    setTheme(getRandomTheme(appContext.theme));
+  function nextTheme(theme: ThemeType) {
+    setTheme(getNextTheme(theme));
   }
 
   function setUnits(units: MeasurementUnits) {
