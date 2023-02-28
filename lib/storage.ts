@@ -1,4 +1,4 @@
-import { MeasurementUnits } from "@/types";
+import { AppLanguage, MeasurementUnits } from "@/types";
 import { ThemeMode, ThemeType } from "./themes";
 
 const LOCAL_STORAGE_KEY = "clrw-data";
@@ -7,6 +7,7 @@ interface LocalStorageData {
   theme?: ThemeType;
   themeMode?: ThemeMode;
   units?: MeasurementUnits;
+  language?: AppLanguage;
   location?: {
     lat: number;
     lon: number;

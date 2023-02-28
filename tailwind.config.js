@@ -18,12 +18,13 @@ module.exports = {
         "header": '6rem'
       },
       translate: {
-        "tab-offset": "var(--wapp-tab-offset)"
+        "tab-offset": "var(--wapp-tab-offset)",
+        "button-group-offset": "var(--wapp-button-group-offset)"
       },
 
       animation: {
         'spin-fast': 'spin 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) infinite',
-      },      
+      },
 
       colors: {
         primary: {

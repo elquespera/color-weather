@@ -9,8 +9,8 @@ import {
   setCurrentThemeMode,
   DEFAULT_THEME_MODE,
 } from "lib/themes";
-import { MeasurementUnits } from "types";
-import { DEFAULT_UNITS } from "consts";
+import { AppLanguage, MeasurementUnits } from "types";
+import { DEFAULT_APP_LANGUAGE, DEFAULT_UNITS } from "consts";
 import { defaultAppContext } from "./AppContext";
 
 export default function useAppContext() {
@@ -20,6 +20,7 @@ export default function useAppContext() {
     setRandomTheme,
     setThemeMode,
     setUnits,
+    setLanguage,
   });
 
   function setTheme(theme: ThemeType) {
@@ -49,6 +50,13 @@ export default function useAppContext() {
     setCurrentThemeMode(themeMode);
   }
 
+  function setLanguage(language: AppLanguage) {
+    setAppContext((current) => {
+      return { ...current, language };
+    });
+    setLocalStorage({ language });
+  }
+
   useEffect(() => {
     const stored = getLocalStorage();
     setAppContext({
@@ -56,6 +64,7 @@ export default function useAppContext() {
       theme: stored.theme || DEFAULT_THEME,
       themeMode: stored.themeMode || DEFAULT_THEME_MODE,
       units: stored.units || DEFAULT_UNITS,
+      language: stored.language || DEFAULT_APP_LANGUAGE,
     });
     if (stored.theme) setCurrentTheme(stored.theme);
     if (stored.themeMode) setCurrentThemeMode(stored.themeMode);

@@ -12,11 +12,6 @@ export const THEMES = [
 
 export type ThemeType = typeof THEMES[number];
 
-export type ThemeAction = {
-  type: "set" | "random";
-  newTheme?: ThemeType;
-};
-
 export type ThemeMode = "light" | "dark";
 
 export const DEFAULT_THEME: ThemeType = "hopbush";

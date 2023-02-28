@@ -32,3 +32,15 @@ export type IconSize = "small" | "medium" | "large";
 export type RouteInfo = { route: string; title: string; icon: IconType };
 
 export type MeasurementUnits = "metric" | "imperial";
+
+export const APP_LANGUAGES = ["en", "ru", "es"] as const;
+
+export type AppLanguage = typeof APP_LANGUAGES[number];
+
+export const APP_LANGUAGES_META: {
+  [key in AppLanguage]: { name: string };
+} = {
+  en: { name: "English" },
+  ru: { name: "Русский" },
+  es: { name: "Español" },
+};

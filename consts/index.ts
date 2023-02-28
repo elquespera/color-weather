@@ -1,4 +1,4 @@
-import { MeasurementUnits, RouteInfo } from "@/types";
+import { AppLanguage, MeasurementUnits, RouteInfo } from "@/types";
 
 export const APP_TITLE = "ColorWeather";
 export const APP_DESCRIPTION = "ColorWeather - cool and colorful weather app";
@@ -10,3 +10,5 @@ export const ROUTES: RouteInfo[] = [
 ];
 
 export const DEFAULT_UNITS: MeasurementUnits = "metric";
+
+export const DEFAULT_APP_LANGUAGE: AppLanguage = "en";
