@@ -33,6 +33,11 @@ export default function Search({ open, onClose }: SearchProps) {
     if (event.key === "Escape") handleClose();
   }
 
+  function handleClear() {
+    setValue("");
+    inputRef.current?.focus();
+  }
+
   useEffect(() => {
     if (open) inputRef.current?.focus();
     setValue("");
@@ -69,6 +74,7 @@ export default function Search({ open, onClose }: SearchProps) {
             size={0}
             value={value}
             placeholder={t(lng.searchPlaces)}
+            spellCheck={false}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             className={clsx(
@@ -78,6 +84,7 @@ export default function Search({ open, onClose }: SearchProps) {
             selection:text-primary-dark selection:bg-primary-200`
             )}
           />
+          {value !== "" && <IconButton icon="close" onClick={handleClear} />}
         </div>
       </div>
     </div>
