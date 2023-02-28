@@ -1,55 +1,85 @@
-import LocationContext from "context/LocationContext";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import Icon from "components/ui/Icon";
-import useTranslation from "@/hooks/useTranslation";
-import { lng } from "@/assets/translations";
+import { lng } from "assets/translations";
+import useTranslation from "hooks/useTranslation";
 import clsx from "clsx";
+import React, { useEffect, useRef, useState } from "react";
+import IconButton from "components/ui/IconButton";
 
 interface SearchProps {
   open?: boolean;
+  onClose?: () => void;
 }
 
-export default function Search({ open }: SearchProps) {
+export default function Search({ open, onClose }: SearchProps) {
   const t = useTranslation();
-  const { city } = useContext(LocationContext);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [value, setValue] = useState("");
-  const [hasFocus, setHasFocus] = useState(false);
-  const [placeholder, setPlaceholder] = useState("");
+
+  function handleClose() {
+    if (onClose) onClose();
+  }
+
+  function handleWrapperClick(event: React.MouseEvent) {
+    if (event.target !== wrapperRef.current) return;
+    handleClose();
+  }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
   }
 
+  function handleKeyDown(event: React.KeyboardEvent) {
+    if (event.key === "Escape") handleClose();
+  }
+
   useEffect(() => {
-    setPlaceholder(hasFocus ? t(lng.searchPlaces) : city);
-  }, [city, hasFocus]);
+    if (open) inputRef.current?.focus();
+    setValue("");
+  }, [open]);
 
   return (
-    <label
-      className="flex items-center justify-center gap-2 px-3 pt-1 pb-1
-      bg-primary-800 rounded-full overflow-hidden
-      transition-all
-      hover:bg-primary-700 focus-within:bg-primary-700"
+    <div
+      className={clsx(
+        "inset-0 flex justify-center",
+        open ? "fixed z-10" : "hidden"
+      )}
+      onClick={handleWrapperClick}
     >
-      <Icon type="search" className="text-primary-200 cursor-pointer" />
-      <input
-        type="text"
-        size={0}
-        value={value}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onFocus={() => setHasFocus(true)}
-        onBlur={() => setHasFocus(false)}
+      <div
+        ref={wrapperRef}
         className={clsx(
-          `bg-transparent text-xl text-primary-200
-        w-full min-w-0
-        placeholder:text-primary-200 placeholder:text-center
-        focus:outline-none
-        selection:text-primary-dark selection:bg-primary-200`,
-          hasFocus && "placeholder:text-start"
+          `bg-background w-full p-4 
+          aminate-tr scale-80 opacity-0 origin-top`,
+          open && "animate-appear"
         )}
-      />
-    </label>
+      >
+        <div className="flex gap-2 items-center">
+          <IconButton
+            icon="back"
+            className={clsx(
+              "text-text-secondary rotate-[270deg]",
+              open && "animate-rotate"
+            )}
+            onClick={handleClose}
+          />
+          <input
+            type="text"
+            ref={inputRef}
+            size={0}
+            value={value}
+            placeholder={t(lng.searchPlaces)}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            className={clsx(
+              `bg-transparent text-xl w-full min-w-0
+            placeholder:text-text-secondary
+            focus:outline-none
+            selection:text-primary-dark selection:bg-primary-200`
+            )}
+          />
+        </div>
+      </div>
+    </div>
   );
 }

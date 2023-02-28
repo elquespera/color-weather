@@ -11,20 +11,36 @@ module.exports = {
         "max-app": "768px",
         tab: "8em",
       },
+
       height: {
         header: "6rem",
       },
+
       padding: {
         header: "6rem",
       },
-      translate: {
-        "tab-offset": "var(--wapp-tab-offset)",
-        "button-group-offset": "var(--wapp-button-group-offset)",
+
+      keyframes: {
+        appear: {
+          "0%": { transform: "scale(80%)", opacity: 0 },
+          "100%": { transform: "scale(1)", opacity: 1 },
+        },
+        rotate: {
+          "100%": { transform: "rotate(0)" },
+        },
       },
 
       animation: {
         "spin-fast":
           "spin 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) infinite",
+        appear: "appear 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards",
+        rotate:
+          "rotate 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.2s forwards",
+      },
+
+      translate: {
+        "tab-offset": "var(--wapp-tab-offset)",
+        "button-group-offset": "var(--wapp-button-group-offset)",
       },
 
       colors: {

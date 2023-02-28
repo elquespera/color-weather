@@ -12,7 +12,7 @@ interface IconButtonProps {
   size?: IconSize;
   animation?: IconButtonAnimation;
   className?: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent) => void;
 }
 
 const IconButton = forwardRef(function IconButton(
@@ -22,11 +22,11 @@ const IconButton = forwardRef(function IconButton(
   const [currentAnimation, setCurrentAnimation] =
     useState<IconButtonAnimation>();
 
-  function handleClick() {
+  function handleClick(event: React.MouseEvent) {
     if (animation === "spin") {
       setCurrentAnimation(animation);
     }
-    if (onClick) onClick();
+    if (onClick) onClick(event);
   }
 
   useEffect(() => {
