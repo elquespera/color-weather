@@ -10,6 +10,7 @@ export default function useLocationContext() {
     useState<LocationContextInterface>({
       ...defaultLocationContext,
       setCity,
+      setLocation,
     });
 
   function setLocation(latitude: number, longitude: number) {

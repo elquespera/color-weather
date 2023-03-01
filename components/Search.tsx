@@ -17,6 +17,9 @@ import {
 } from "lib/themes";
 import { AppLanguage, CitySearchResponse } from "types";
 import fetchData from "lib/fetchData";
+import LocationContext from "@/context/LocationContext";
+import ListItem from "./ui/ListItem";
+import Icon from "./ui/Icon";
 
 interface SearchProps {
   open?: boolean;
@@ -47,20 +50,15 @@ function fetchCities() {
 export default function Search({ open, onClose }: SearchProps) {
   const t = useTranslation();
   const { language, theme, themeMode } = useContext(AppContext);
-  const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const fetch = useCallback(fetchCities(), []);
   const [cities, setCities] = useState<CitySearchResponse>([]);
+  const { setLocation } = useContext(LocationContext);
 
   const [value, setValue] = useState("");
 
   function handleClose() {
     if (onClose) onClose();
-  }
-
-  function handleWrapperClick(event: React.MouseEvent) {
-    if (event.target !== wrapperRef.current) return;
-    handleClose();
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -74,6 +72,12 @@ export default function Search({ open, onClose }: SearchProps) {
   function handleClear() {
     setValue("");
     inputRef.current?.focus();
+  }
+
+  function handleCityClick(lat: number, lon: number) {
+    console.log(lat, lon);
+    setLocation(lat, lon);
+    handleClose();
   }
 
   useEffect(() => {
@@ -100,10 +104,8 @@ export default function Search({ open, onClose }: SearchProps) {
         "inset-0 flex justify-center",
         open ? "fixed z-10" : "hidden"
       )}
-      onClick={handleWrapperClick}
     >
       <div
-        ref={wrapperRef}
         className={clsx(
           `bg-background w-full p-4 
           aminate-tr scale-80 opacity-0 origin-top`,
@@ -145,7 +147,16 @@ export default function Search({ open, onClose }: SearchProps) {
         </div>
         <ul>
           {cities.map(({ name, country, lat, lon }, index) => (
-            <li key={index}>{`${name}, ${country} (${lat} ${lon})`}</li>
+            <ListItem
+              key={index}
+              primary={`${name}, ${country}`}
+              secondary={`${lat} ${lon}`}
+              startDecoration={
+                <Icon type="location" className="text-text-secondary" />
+              }
+              hover
+              onClick={() => handleCityClick(lat, lon)}
+            />
           ))}
         </ul>
       </div>

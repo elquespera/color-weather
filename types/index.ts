@@ -37,6 +37,8 @@ const Icons = [
   "search",
   "back",
   "close",
+  "location",
+  "near",
 ] as const;
 
 export type IconType = typeof Icons[number];
