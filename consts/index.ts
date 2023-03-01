@@ -14,4 +14,4 @@ export const DEFAULT_UNITS: MeasurementUnits = "metric";
 
 export const DEFAULT_APP_LANGUAGE: AppLanguage = "en";
 
-export const MAX_FAVORITES = 4;
+export const MAX_FAVORITES = 10;

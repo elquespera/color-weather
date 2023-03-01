@@ -36,7 +36,9 @@ export default function CityList({
   }
 
   return (
-    <ul>
+    <ul
+      className={clsx(type === "current" ? "flex-shrink-0" : "overflow-auto")}
+    >
       {cities.map(({ name, country, lat, lon, weather }, index) => (
         <ListItem
           key={index}

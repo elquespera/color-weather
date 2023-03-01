@@ -1,6 +1,3 @@
-import { lng } from "assets/translations";
-import useTranslation from "hooks/useTranslation";
-import clsx from "clsx";
 import React, {
   useCallback,
   useContext,
@@ -8,6 +5,10 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useRouter } from "next/router";
+import { lng } from "assets/translations";
+import useTranslation from "hooks/useTranslation";
+import clsx from "clsx";
 import IconButton from "components/ui/IconButton";
 import AppContext from "context/AppContext";
 import {
@@ -17,13 +18,10 @@ import {
 } from "lib/themes";
 import { AppLanguage, City, CitySearchResponse, MeasurementUnits } from "types";
 import { fetchCityData, fetchData, fetchWeatherData } from "lib/fetchData";
-import LocationContext from "@/context/LocationContext";
-import ListItem from "./ui/ListItem";
-import Icon from "./ui/Icon";
+import LocationContext from "context/LocationContext";
 import CityList from "./ui/CityList";
-import { getLocalStorage, setLocalStorage } from "@/lib/storage";
-import { useRouter } from "next/router";
-import { MAX_FAVORITES } from "@/consts";
+import { getLocalStorage, setLocalStorage } from "lib/storage";
+import { MAX_FAVORITES } from "consts";
 
 interface SearchProps {
   open?: boolean;
@@ -35,7 +33,7 @@ function fetchCities() {
 
   return async (q: string, lang: AppLanguage): Promise<CitySearchResponse> => {
     if (q === "") return [];
-    const request = { lang, q };
+    const request = { lang, q: q.trim() };
     const key = JSON.stringify(request);
     if (cache.has(key)) return cache.get(key) || [];
 
@@ -176,12 +174,6 @@ export default function Search({ open, onClose }: SearchProps) {
   }, [language, units]);
 
   useEffect(() => {
-    if (open) inputRef.current?.focus();
-    setValue("");
-    setFavoritesEdit(false);
-  }, [open]);
-
-  useEffect(() => {
     setMetaThemeColor(
       open ? THEME_MODE_BACKGROUNDS[themeMode] : THEMES_META[theme].color
     );
@@ -194,6 +186,13 @@ export default function Search({ open, onClose }: SearchProps) {
     getData(value);
   }, [value, language]);
 
+  useEffect(() => {
+    if (open) inputRef.current?.focus();
+    setValue("");
+    setFavoritesEdit(false);
+    document.body.classList.toggle("no-scroll", open);
+  }, [open]);
+
   return (
     <div
       className={clsx(
@@ -204,6 +203,7 @@ export default function Search({ open, onClose }: SearchProps) {
       <div
         className={clsx(
           `bg-background w-full p-2 sm:p-4 
+          overflow-hidden flex flex-col
           aminate-tr scale-80 opacity-0 origin-top`,
           open && "animate-appear"
         )}
@@ -242,6 +242,7 @@ export default function Search({ open, onClose }: SearchProps) {
           )}
         </div>
 
+        {/* <div className="overflow-auto"> */}
         {cities.length === 0 ? (
           value === "" ? (
             <>
@@ -266,6 +267,7 @@ export default function Search({ open, onClose }: SearchProps) {
                   </button>
                 </h3>
               )}
+
               <CityList
                 type="favorites"
                 cities={favorites}
@@ -275,7 +277,9 @@ export default function Search({ open, onClose }: SearchProps) {
               />
             </>
           ) : (
-            <div>Nothing was found</div>
+            <div className="text-text-secondary text-center pt-4 py-2">
+              {t(lng.noCitiesFound)}
+            </div>
           )
         ) : (
           <CityList
@@ -286,6 +290,7 @@ export default function Search({ open, onClose }: SearchProps) {
             isCityFavorite={isCityFavorite}
           />
         )}
+        {/* </div> */}
       </div>
     </div>
   );

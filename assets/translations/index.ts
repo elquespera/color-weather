@@ -20,6 +20,7 @@ export enum lng {
   outOf,
 
   searchPlaces,
+  noCitiesFound,
   yourLocation,
   favorites,
   favoritesEdit,
@@ -50,6 +51,7 @@ export const languageData: LanguageData = {
     [lng.outOf]: "out of",
 
     [lng.searchPlaces]: "Search places",
+    [lng.noCitiesFound]: "No cities were found for your request",
     [lng.yourLocation]: "Your location",
     [lng.favorites]: "Favorite places",
     [lng.favoritesEdit]: "Edit",
@@ -74,6 +76,7 @@ export const languageData: LanguageData = {
     [lng.outOf]: "из",
 
     [lng.searchPlaces]: "Поиск городов",
+    [lng.noCitiesFound]: "По вашему запросу ничего не найдено",
     [lng.yourLocation]: "Ваше местоположение",
 
     [lng.favorites]: "Избранное",
