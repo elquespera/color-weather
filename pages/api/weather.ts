@@ -1,13 +1,13 @@
-import fetchData from "@/lib/fetchData";
-import { CurrentWeatherResponse, ErrorResponse } from "@/types";
-import { OpenWeatherCurrentResponse } from "@/types/openWeatherMap";
+import fetchData from "lib/fetchData";
+import { CurrentWeatherResponse, ErrorResponse } from "types";
+import { OpenWeatherCurrentResponse } from "types/openWeatherMap";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<CurrentWeatherResponse | ErrorResponse>
 ) {
-  const response = await fetchData("weather", req.query, true);
+  const response = await fetchData("open-weather", "weather", req.query);
   if (!response)
     return {
       status: 500,
@@ -16,7 +16,7 @@ export default async function handler(
   const data: OpenWeatherCurrentResponse = await response.json();
 
   if (response.ok) {
-    res.status(200).json({
+    const responseData: CurrentWeatherResponse = {
       state: "ok",
       temp: data.main.temp,
       tempFeelsLike: data.main.feels_like,
@@ -26,7 +26,8 @@ export default async function handler(
       city: data.name,
       icon: data.weather[0].icon,
       updatedAt: data.dt,
-    });
+    };
+    res.status(200).json(responseData);
   } else {
     res
       .status(response.status)

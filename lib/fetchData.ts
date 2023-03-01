@@ -1,15 +1,19 @@
 export default async function fetchData(
+  base: "open-weather" | "open-weather-geo" | "app",
   segment: string,
   query: Partial<{
     [key: string]: string | number | string[];
-  }>,
-  useOpenWeatherMap = false
+  }>
 ): Promise<Response> {
   const baseUrl =
-    (useOpenWeatherMap ? process.env.OPEN_WEATHER_URL : "/api/") || "";
+    (base === "open-weather"
+      ? process.env.OPEN_WEATHER_URL
+      : base === "open-weather-geo"
+      ? process.env.OPEN_WEATHER_GEO_URL
+      : "/api/") || "";
 
   const params = new URLSearchParams({});
-  if (useOpenWeatherMap) {
+  if (base !== "app") {
     const appid = process.env.OPEN_WEATHER_KEY || "";
     params.append("appid", appid);
   }

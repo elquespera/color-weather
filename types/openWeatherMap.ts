@@ -48,3 +48,13 @@ export interface OpenWeatherCurrentResponse {
   cod: number;
   message: string;
 }
+
+interface OpenWeatherCity {
+  name: string;
+  lat: number;
+  lon: number;
+  country: string;
+  local_names: { [key: string]: string };
+}
+
+export type OpenWeatherGeoResponse = OpenWeatherCity[];

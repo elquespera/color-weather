@@ -19,7 +19,7 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchWeatherData() {
-      const response = await fetchData("weather", {
+      const response = await fetchData("app", "weather", {
         lon: location.lon,
         lat: location.lat,
         units,

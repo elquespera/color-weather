@@ -1,7 +1,14 @@
 import { lng } from "assets/translations";
 import useTranslation from "hooks/useTranslation";
 import clsx from "clsx";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import IconButton from "components/ui/IconButton";
 import AppContext from "@/context/AppContext";
 import {
@@ -9,17 +16,42 @@ import {
   THEMES_META,
   THEME_MODE_BACKGROUNDS,
 } from "@/lib/themes";
+import { AppLanguage, CitySearchResponse } from "@/types";
+import fetchData from "@/lib/fetchData";
 
 interface SearchProps {
   open?: boolean;
   onClose?: () => void;
 }
 
+function fetchCities() {
+  const cache = new Map<string, CitySearchResponse>();
+
+  return async (q: string, lang: AppLanguage): Promise<CitySearchResponse> => {
+    if (q === "") return [];
+    const request = { lang, q };
+    const key = JSON.stringify(request);
+    if (cache.has(key)) return cache.get(key) || [];
+
+    const response = await fetchData("app", "search", request);
+
+    if (response.ok) {
+      const data: CitySearchResponse = await response.json();
+      cache.set(key, data);
+      return data;
+    } else {
+      return [];
+    }
+  };
+}
+
 export default function Search({ open, onClose }: SearchProps) {
   const t = useTranslation();
-  const { theme, themeMode } = useContext(AppContext);
+  const { language, theme, themeMode } = useContext(AppContext);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const fetch = useCallback(fetchCities(), []);
+  const [cities, setCities] = useState<CitySearchResponse>([]);
 
   const [value, setValue] = useState("");
 
@@ -55,6 +87,13 @@ export default function Search({ open, onClose }: SearchProps) {
       open ? THEME_MODE_BACKGROUNDS[themeMode] : THEMES_META[theme].color
     );
   }, [theme, themeMode, open]);
+
+  useEffect(() => {
+    async function getData(q: string) {
+      setCities(await fetch(q, language));
+    }
+    getData(value);
+  }, [value, language]);
 
   return (
     <div
@@ -105,6 +144,11 @@ export default function Search({ open, onClose }: SearchProps) {
             />
           )}
         </div>
+        <ul>
+          {cities.map(({ name, country, lat, lon }, index) => (
+            <li key={index}>{`${name}, ${country} (${lat} ${lon})`}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );
