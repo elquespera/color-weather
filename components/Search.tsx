@@ -60,6 +60,7 @@ export default function Search({ open, onClose }: SearchProps) {
   const fetch = useCallback(fetchCities(), []);
   const [cities, setCities] = useState<City[]>([]);
   const [favorites, setFavorites] = useState<City[]>([]);
+  const [favoritesEdit, setFavoritesEdit] = useState(false);
 
   const [value, setValue] = useState("");
 
@@ -69,6 +70,7 @@ export default function Search({ open, onClose }: SearchProps) {
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
+    setFavoritesEdit(false);
   }
 
   function handleKeyDown(event: React.KeyboardEvent) {
@@ -176,6 +178,7 @@ export default function Search({ open, onClose }: SearchProps) {
   useEffect(() => {
     if (open) inputRef.current?.focus();
     setValue("");
+    setFavoritesEdit(false);
   }, [open]);
 
   useEffect(() => {
@@ -249,9 +252,24 @@ export default function Search({ open, onClose }: SearchProps) {
                   onClick={handleCurrentCityClick}
                 />
               )}
+              {favorites.length > 0 && (
+                <h3 className="flex text-text-secondary justify-between mt-6 px-6">
+                  {t(lng.favorites)}
+                  <button
+                    onClick={() => setFavoritesEdit((current) => !current)}
+                  >
+                    {t(
+                      favoritesEdit
+                        ? lng.favoritesEditFinish
+                        : lng.favoritesEdit
+                    )}
+                  </button>
+                </h3>
+              )}
               <CityList
                 type="favorites"
                 cities={favorites}
+                favoritesEdit={favoritesEdit}
                 onClick={handleCityClick}
                 onToggleFavorite={toggleFavoriteCity}
               />

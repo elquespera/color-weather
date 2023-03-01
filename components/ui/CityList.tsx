@@ -11,6 +11,7 @@ import WeatherIcon from "./WeatherIcon";
 interface CityListProps {
   type: "current" | "search" | "favorites";
   cities: City[];
+  favoritesEdit?: boolean;
   isCityFavorite?: (latitude: number, longitude: number) => boolean;
   onClick?: (latitude: number, longitude: number) => void;
   onToggleFavorite?: (latitude: number, longitude: number) => void;
@@ -19,6 +20,7 @@ interface CityListProps {
 export default function CityList({
   type,
   cities,
+  favoritesEdit,
   isCityFavorite,
   onClick,
   onToggleFavorite,
@@ -38,7 +40,7 @@ export default function CityList({
       {cities.map(({ name, country, lat, lon, weather }, index) => (
         <ListItem
           key={index}
-          primary={name}
+          primary={<span className="text-text">{name}</span>}
           secondary={type === "current" ? t(lng.yourLocation) : country}
           startDecoration={
             <Icon
@@ -51,7 +53,7 @@ export default function CityList({
               }
               className={clsx(
                 type === "current"
-                  ? "text-primary-header"
+                  ? "text-blue-500"
                   : type === "favorites"
                   ? "text-yellow-500"
                   : "text-text-secondary"
@@ -63,14 +65,14 @@ export default function CityList({
               <div className="flex items-center">
                 <Temperature
                   value={weather.temp}
-                  className="text-primary-sub-header text-xl sm:text-2xl"
+                  className="text-primary-header text-xl sm:text-2xl"
                 />
                 <WeatherIcon icon={weather.icon} alt={weather.description} />
               </div>
             )
           }
           endDecoration={
-            type !== "current" && (
+            (type === "search" || (type === "favorites" && favoritesEdit)) && (
               <IconButton
                 className={clsx(
                   type === "favorites"

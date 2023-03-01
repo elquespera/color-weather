@@ -21,6 +21,9 @@ export enum lng {
 
   searchPlaces,
   yourLocation,
+  favorites,
+  favoritesEdit,
+  favoritesEditFinish,
 }
 
 type LanguageData = {
@@ -48,6 +51,9 @@ export const languageData: LanguageData = {
 
     [lng.searchPlaces]: "Search places",
     [lng.yourLocation]: "Your location",
+    [lng.favorites]: "Favorite places",
+    [lng.favoritesEdit]: "Edit",
+    [lng.favoritesEditFinish]: "Finish",
   },
   ru: {
     [lng.currentTab]: "Сейчас",
@@ -69,6 +75,10 @@ export const languageData: LanguageData = {
 
     [lng.searchPlaces]: "Поиск городов",
     [lng.yourLocation]: "Ваше местоположение",
+
+    [lng.favorites]: "Избранное",
+    [lng.favoritesEdit]: "Редактировать",
+    [lng.favoritesEditFinish]: "Завершить",
   },
   es: {},
 };
