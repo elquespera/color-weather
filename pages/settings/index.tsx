@@ -12,8 +12,6 @@ import { lng } from "@/assets/translations";
 
 export default function Settings() {
   const themeButtonRef = useRef<HTMLButtonElement>(null);
-  const languageButtonsRef = useRef<HTMLDivElement>(null);
-
   const t = useTranslation();
 
   const {
@@ -43,11 +41,7 @@ export default function Settings() {
     setLanguage(item as AppLanguage);
   }
 
-  function handleNextLanguage(event: React.MouseEvent) {
-    const buttonDiv = languageButtonsRef.current;
-    if (buttonDiv && buttonDiv.contains(event.target as Node)) {
-      return;
-    }
+  function handleNextLanguage() {
     const index = APP_LANGUAGES.indexOf(language);
     setLanguage(APP_LANGUAGES[(index + 1) % APP_LANGUAGES.length]);
   }
@@ -69,6 +63,7 @@ export default function Settings() {
               onChange={handleUnits}
             />
           }
+          ignoreEndDecorationClick
           highlight={units === "imperial"}
           onClick={() => handleUnits(units === "metric")}
         />
@@ -78,7 +73,6 @@ export default function Settings() {
           secondary={`${THEMES_META[theme].name} (${
             THEMES.indexOf(theme) + 1
           } ${t(lng.outOf)} ${THEMES.length})`}
-          onClick={handleNextTheme}
           endDecoration={
             <IconButton
               icon="theme"
@@ -88,13 +82,14 @@ export default function Settings() {
               onClick={() => nextTheme(theme)}
             />
           }
+          ignoreEndDecorationClick
+          onClick={handleNextTheme}
         />
 
         <ListItem
           primary={t(lng.darkMode)}
           secondary={t(themeMode === "dark" ? lng.dark : lng.light)}
           highlight={themeMode === "dark"}
-          onClick={() => handleThemeMode(themeMode === "light")}
           endDecoration={
             <Switch
               checked={themeMode === "dark"}
@@ -103,21 +98,22 @@ export default function Settings() {
               onChange={handleThemeMode}
             />
           }
+          ignoreEndDecorationClick
+          onClick={() => handleThemeMode(themeMode === "light")}
         />
 
         <ListItem
           primary={t(lng.language)}
           secondary={APP_LANGUAGES_META[language].name}
           endDecoration={
-            <div ref={languageButtonsRef}>
-              <ButtonGroup
-                items={APP_LANGUAGES.map((x) => x)}
-                selected={language}
-                onChange={handleLanguageChange}
-              />
-            </div>
+            <ButtonGroup
+              items={APP_LANGUAGES.map((x) => x)}
+              selected={language}
+              onChange={handleLanguageChange}
+            />
           }
-          onClick={(event) => handleNextLanguage(event)}
+          ignoreEndDecorationClick
+          onClick={handleNextLanguage}
         />
       </ul>
     </div>

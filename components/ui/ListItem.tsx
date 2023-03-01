@@ -1,14 +1,14 @@
 import clsx from "clsx";
-import React from "react";
+import React, { useRef } from "react";
 
 interface ListItemProps {
   primary?: string | React.ReactNode;
   secondary?: string | React.ReactNode;
   startDecoration?: string | React.ReactNode;
   endDecoration?: string | React.ReactNode;
-
   hover?: boolean;
   highlight?: boolean;
+  ignoreEndDecorationClick?: boolean;
   onClick?: (event: React.MouseEvent) => void;
 }
 
@@ -19,11 +19,25 @@ export default function ListItem({
   endDecoration,
   hover,
   highlight,
+  ignoreEndDecorationClick,
   onClick,
 }: ListItemProps) {
+  const endDecorationRef = useRef<HTMLDivElement>(null);
+
+  function handleClick(event: React.MouseEvent) {
+    if (!onClick) return;
+    const decorationDiv = endDecorationRef.current;
+    if (ignoreEndDecorationClick && decorationDiv) {
+      if (decorationDiv.contains(event.target as Node)) {
+        return;
+      }
+    }
+    onClick(event);
+  }
+
   return (
     <div
-      onClick={onClick}
+      onClick={handleClick}
       className={clsx(
         `relative isolate px-4 py-3 sm:px-5 sm:py-4
         before:absolute before:inset-1 before:rounded-lg
@@ -43,7 +57,11 @@ export default function ListItem({
           <div className="text-primary-header sm:text-xl">{primary}</div>
           <div className="opacity-60 text-sm">{secondary}</div>
         </div>
-        {endDecoration && <div className="flex-shink-0">{endDecoration}</div>}
+        {endDecoration && (
+          <div ref={endDecorationRef} className="flex-shink-0">
+            {endDecoration}
+          </div>
+        )}
       </div>
     </div>
   );
