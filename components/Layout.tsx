@@ -3,6 +3,7 @@ import useLocationContext from "context/useLocationContext";
 import AppContext from "context/AppContext";
 import useAppContext from "context/useAppContext";
 import Header from "./Header";
+import Main from "./Main";
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -17,9 +18,7 @@ export default function Layout({ children }: LayoutProps) {
       <AppContext.Provider value={appContext}>
         <LocationContext.Provider value={locationContext}>
           <Header />
-          <main className="w-full md:w-max-app min-h-screen pt-header flex">
-            <div className="p-6 md:p-8 w-full">{children}</div>
-          </main>
+          <Main>{children}</Main>
         </LocationContext.Provider>
       </AppContext.Provider>
     </div>

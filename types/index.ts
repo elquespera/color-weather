@@ -18,7 +18,7 @@ export interface CurrentWeatherResponse {
   updatedAt: number;
 }
 
-interface City {
+export interface City {
   name: string;
   lat: number;
   lon: number;

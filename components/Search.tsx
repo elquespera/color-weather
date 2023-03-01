@@ -53,7 +53,7 @@ export default function Search({ open, onClose }: SearchProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const fetch = useCallback(fetchCities(), []);
   const [cities, setCities] = useState<CitySearchResponse>([]);
-  const { setLocation } = useContext(LocationContext);
+  const { currentCity, setLocation } = useContext(LocationContext);
 
   const [value, setValue] = useState("");
 
@@ -75,8 +75,13 @@ export default function Search({ open, onClose }: SearchProps) {
   }
 
   function handleCityClick(lat: number, lon: number) {
-    console.log(lat, lon);
     setLocation(lat, lon);
+    handleClose();
+  }
+
+  function handleCurrentCityClick() {
+    if (!currentCity) return;
+    setLocation(currentCity.lat, currentCity.lon);
     handleClose();
   }
 
@@ -146,18 +151,30 @@ export default function Search({ open, onClose }: SearchProps) {
           )}
         </div>
         <ul>
-          {cities.map(({ name, country, lat, lon }, index) => (
+          {cities.length > 0 ? (
+            cities.map(({ name, country, lat, lon }, index) => (
+              <ListItem
+                key={index}
+                primary={`${name}, ${country}`}
+                secondary={`${lat} ${lon}`}
+                startDecoration={
+                  <Icon type="location" className="text-text-secondary" />
+                }
+                hover
+                onClick={() => handleCityClick(lat, lon)}
+              />
+            ))
+          ) : (
             <ListItem
-              key={index}
-              primary={`${name}, ${country}`}
-              secondary={`${lat} ${lon}`}
+              primary={`${currentCity?.name}, ${currentCity?.country}`}
+              secondary={`${currentCity?.lat}, ${currentCity?.lon}`}
               startDecoration={
-                <Icon type="location" className="text-text-secondary" />
+                <Icon type="near" className="text-primary-header" />
               }
               hover
-              onClick={() => handleCityClick(lat, lon)}
+              onClick={handleCurrentCityClick}
             />
-          ))}
+          )}
         </ul>
       </div>
     </div>

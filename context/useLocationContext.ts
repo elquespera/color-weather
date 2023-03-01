@@ -1,4 +1,5 @@
-import { getLocalStorage, setLocalStorage } from "@/lib/storage";
+import { getLocalStorage, setLocalStorage } from "lib/storage";
+import { City, CurrentWeatherResponse } from "types";
 import { useEffect, useState } from "react";
 import {
   defaultLocationContext,
@@ -11,6 +12,8 @@ export default function useLocationContext() {
       ...defaultLocationContext,
       setCity,
       setLocation,
+      setWeather,
+      setCurrentCity,
     });
 
   function setLocation(latitude: number, longitude: number) {
@@ -23,6 +26,12 @@ export default function useLocationContext() {
     });
   }
 
+  function setWeather(weather?: CurrentWeatherResponse) {
+    setLocationContext((current) => {
+      return { ...current, weather };
+    });
+  }
+
   function setCity(city: string) {
     setLocationContext((current) => {
       setLocalStorage({
@@ -32,15 +41,13 @@ export default function useLocationContext() {
     });
   }
 
-  function getCurrentLocation() {
-    navigator.geolocation.getCurrentPosition(({ coords }) => {
-      setLocation(coords.latitude, coords.longitude);
+  function setCurrentCity(city?: City) {
+    setLocationContext((current) => {
+      return { ...current, currentCity: city };
     });
   }
 
   useEffect(() => {
-    getCurrentLocation();
-
     const { location: storedLocation } = getLocalStorage();
     if (storedLocation) {
       setLocation(storedLocation.lat, storedLocation.lon);
