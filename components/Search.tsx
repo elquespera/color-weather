@@ -242,7 +242,6 @@ export default function Search({ open, onClose }: SearchProps) {
           )}
         </div>
 
-        {/* <div className="overflow-auto"> */}
         {cities.length === 0 ? (
           value === "" ? (
             <>
@@ -290,7 +289,6 @@ export default function Search({ open, onClose }: SearchProps) {
             isCityFavorite={isCityFavorite}
           />
         )}
-        {/* </div> */}
       </div>
     </div>
   );

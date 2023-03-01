@@ -66,7 +66,7 @@ export default function Main({ children }: MainProps) {
   }, []);
 
   return (
-    <main className="w-full md:w-max-app min-h-screen pt-header flex">
+    <main className="w-full md:w-max-app min-h-screen min-h-[100dvh] pt-header flex">
       <div className="p-6 md:p-8 w-full">{children}</div>
     </main>
   );
