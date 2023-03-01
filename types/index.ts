@@ -19,10 +19,10 @@ export interface CurrentWeatherResponse {
 }
 
 export interface City {
-  name: string;
   lat: number;
   lon: number;
-  country: string;
+  name?: string;
+  country?: string;
 }
 
 export type CitySearchResponse = City[];
@@ -39,6 +39,8 @@ const Icons = [
   "close",
   "location",
   "near",
+  "star",
+  "star-filled",
 ] as const;
 
 export type IconType = typeof Icons[number];

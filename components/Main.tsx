@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import AppContext from "context/AppContext";
 import LocationContext from "context/LocationContext";
-import { AppLanguage, City, CurrentWeatherResponse } from "types";
-import fetchData from "lib/fetchData";
+import { fetchCityData, fetchWeatherData } from "lib/fetchData";
 
 interface MainProps {
   children?: React.ReactNode;
@@ -10,76 +9,48 @@ interface MainProps {
 
 export default function Main({ children }: MainProps) {
   const { language, units } = useContext(AppContext);
-  const { city, lon, lat, setLocation, setCity, setWeather, setCurrentCity } =
+  const { lon, lat, setLocation, setCity, setWeather, setCurrentCity } =
     useContext(LocationContext);
 
   const [gpsCoords, setGpsCoord] = useState<{ lat: number; lon: number }>();
 
   useEffect(() => {
-    async function fetchWeatherData() {
-      const response = await fetchData("app", "weather", {
-        lon,
-        lat,
-        units,
-        lang: language,
-      });
-
-      if (response.ok) {
-        const data: CurrentWeatherResponse = await response.json();
-        setWeather(data);
-      } else {
-        setWeather(undefined);
-      }
+    async function fetchWeather() {
+      const weather = await fetchWeatherData(lat, lon, units, language);
+      setWeather(weather);
     }
 
     if (lon === 0 && lat === 0) return;
-    console.log("fetch weather data");
-    fetchWeatherData();
+    // console.log("fetch weather data");
+    fetchWeather();
   }, [lon, lat, units, language]);
 
   useEffect(() => {
-    async function fetchCity() {
-      const response = await fetchData("app", "city", {
-        lang: language,
-        lat,
-        lon,
-      });
-
-      if (response.ok) {
-        const city: City = await response.json();
-        setCity(city.name);
-      }
+    async function fetchCurrentCity() {
+      const city = await fetchCityData(lat, lon, language);
+      setCity(city?.name);
     }
 
     if (lon === 0 && lat === 0) return;
-    console.log("fetch city data");
-    fetchCity();
+    // console.log("fetch city data");
+    fetchCurrentCity();
   }, [lon, lat, language]);
 
   useEffect(() => {
     async function fetchCurrentCity() {
       if (gpsCoords) {
-        const response = await fetchData("app", "city", {
-          lang: language,
-          lat: gpsCoords.lat,
-          lon: gpsCoords.lon,
-        });
-
-        if (response.ok) {
-          const city: City = await response.json();
-          setCurrentCity({
-            name: city.name,
-            country: city.country,
-            lon: city.lon,
-            lat: city.lat,
-          });
-        }
+        const city = await fetchCityData(
+          gpsCoords.lat,
+          gpsCoords.lon,
+          language
+        );
+        setCurrentCity(city);
       } else {
         setCurrentCity(undefined);
       }
     }
 
-    console.log("fetch current city");
+    // console.log("fetch current city");
     fetchCurrentCity();
   }, [gpsCoords, language]);
 

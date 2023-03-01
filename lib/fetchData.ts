@@ -1,4 +1,11 @@
-export default async function fetchData(
+import {
+  AppLanguage,
+  City,
+  CurrentWeatherResponse,
+  MeasurementUnits,
+} from "@/types";
+
+export async function fetchData(
   base: "open-weather" | "open-weather-geo" | "app",
   segment: string,
   query: Partial<{
@@ -30,4 +37,39 @@ export default async function fetchData(
       "Content-Type": "application/json",
     },
   });
+}
+
+export async function fetchCityData(
+  lat: number,
+  lon: number,
+  lang: AppLanguage
+) {
+  const response = await fetchData("app", "city", { lang, lat, lon });
+  if (response.ok) {
+    const city: City = await response.json();
+    return city;
+  } else {
+    return undefined;
+  }
+}
+
+export async function fetchWeatherData(
+  lat: number,
+  lon: number,
+  units: MeasurementUnits,
+  lang: AppLanguage
+) {
+  const response = await fetchData("app", "weather", {
+    lon,
+    lat,
+    units,
+    lang,
+  });
+
+  if (response.ok) {
+    const data: CurrentWeatherResponse = await response.json();
+    return data;
+  } else {
+    return undefined;
+  }
 }

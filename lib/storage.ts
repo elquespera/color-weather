@@ -1,4 +1,4 @@
-import { AppLanguage, MeasurementUnits } from "@/types";
+import { AppLanguage, City, MeasurementUnits } from "types";
 import { ThemeMode, ThemeType } from "./themes";
 
 const LOCAL_STORAGE_KEY = "clrw-data";
@@ -11,8 +11,9 @@ interface LocalStorageData {
   location?: {
     lat: number;
     lon: number;
-    city: string;
+    city?: string;
   };
+  favoriteCities?: City[];
 }
 
 export function getLocalStorage(): LocalStorageData {

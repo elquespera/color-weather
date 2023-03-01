@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import fetchData from "lib/fetchData";
+import { fetchData } from "lib/fetchData";
 import { City, ErrorResponse } from "types";
 import { OpenWeatherGeoResponse } from "types/openWeatherMap";
 

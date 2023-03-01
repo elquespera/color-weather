@@ -32,7 +32,7 @@ export default function useLocationContext() {
     });
   }
 
-  function setCity(city: string) {
+  function setCity(city?: string) {
     setLocationContext((current) => {
       setLocalStorage({
         location: { lat: current.lat, lon: current.lon, city },
@@ -48,10 +48,10 @@ export default function useLocationContext() {
   }
 
   useEffect(() => {
-    const { location: storedLocation } = getLocalStorage();
-    if (storedLocation) {
-      setLocation(storedLocation.lat, storedLocation.lon);
-      setCity(storedLocation.city);
+    const { location } = getLocalStorage();
+    if (location) {
+      setLocation(location.lat, location.lon);
+      setCity(location.city);
     }
   }, []);
 

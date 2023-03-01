@@ -4,29 +4,26 @@ import { City, CurrentWeatherResponse } from "types";
 export interface LocationContextInterface {
   lat: number;
   lon: number;
-  city: string;
+  setLocation: (latitude: number, longitude: number) => void;
+
+  city?: string;
+  setCity: (city?: string) => void;
+
   weather?: CurrentWeatherResponse;
+  setWeather: (weather?: CurrentWeatherResponse) => void;
 
   currentCity?: City;
-  savedCities: City[];
-
-  setLocation: (latitude: number, longitude: number) => void;
-  setCity: (city: string) => void;
-  setWeather: (weather?: CurrentWeatherResponse) => void;
   setCurrentCity: (city?: City) => void;
-  setSavedCities: (cities: City[]) => void;
 }
 
 export const defaultLocationContext: LocationContextInterface = {
   lat: 0,
   lon: 0,
-  city: "",
-  savedCities: [],
   setLocation: () => {},
+  city: "",
   setCity: () => {},
   setWeather: () => {},
   setCurrentCity: () => {},
-  setSavedCities: () => {},
 };
 
 const LocationContext = createContext<LocationContextInterface>(

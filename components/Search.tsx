@@ -15,11 +15,13 @@ import {
   THEMES_META,
   THEME_MODE_BACKGROUNDS,
 } from "lib/themes";
-import { AppLanguage, CitySearchResponse } from "types";
-import fetchData from "lib/fetchData";
+import { AppLanguage, City, CitySearchResponse } from "types";
+import { fetchCityData, fetchData } from "lib/fetchData";
 import LocationContext from "@/context/LocationContext";
 import ListItem from "./ui/ListItem";
 import Icon from "./ui/Icon";
+import CityList from "./ui/CityList";
+import { getLocalStorage, setLocalStorage } from "@/lib/storage";
 
 interface SearchProps {
   open?: boolean;
@@ -50,10 +52,11 @@ function fetchCities() {
 export default function Search({ open, onClose }: SearchProps) {
   const t = useTranslation();
   const { language, theme, themeMode } = useContext(AppContext);
+  const { currentCity, setLocation } = useContext(LocationContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const fetch = useCallback(fetchCities(), []);
-  const [cities, setCities] = useState<CitySearchResponse>([]);
-  const { currentCity, setLocation } = useContext(LocationContext);
+  const [cities, setCities] = useState<City[]>([]);
+  const [favorites, setFavorites] = useState<City[]>([]);
 
   const [value, setValue] = useState("");
 
@@ -84,6 +87,66 @@ export default function Search({ open, onClose }: SearchProps) {
     setLocation(currentCity.lat, currentCity.lon);
     handleClose();
   }
+
+  function findFavoriteIndex(latitude: number, longitude: number) {
+    return favorites.findIndex(
+      ({ lat, lon }) => latitude === lat && longitude === lon
+    );
+  }
+
+  function saveFavorites(cities: City[]) {
+    setLocalStorage({
+      favoriteCities: cities.map(({ lat, lon }) => {
+        return { lat, lon };
+      }),
+    });
+  }
+
+  async function fetchFavoriteData(
+    latitude: number,
+    longitude: number,
+    language: AppLanguage
+  ) {
+    return await fetchCityData(latitude, longitude, language);
+  }
+
+  async function toggleFavoriteCity(latitude: number, longitude: number) {
+    const cities = [...favorites];
+    const favoriteIndex = findFavoriteIndex(latitude, longitude);
+
+    if (favoriteIndex >= 0) {
+      cities.splice(favoriteIndex, 1);
+    } else {
+      const city = await fetchFavoriteData(latitude, longitude, language);
+      if (city) cities.unshift(city);
+    }
+
+    saveFavorites(cities);
+    setFavorites(cities);
+  }
+
+  function isCityFavorite(latitude: number, longitude: number) {
+    return findFavoriteIndex(latitude, longitude) >= 0;
+  }
+
+  useEffect(() => {
+    async function checkFavoriteCities(language: AppLanguage) {
+      const favorites = getLocalStorage().favoriteCities || [];
+      const cities = await Promise.all<City>(
+        favorites.map(async (city) => {
+          const cityData = await fetchFavoriteData(
+            city.lat,
+            city.lon,
+            language
+          );
+          return cityData || city;
+        })
+      );
+      setFavorites(cities);
+    }
+
+    checkFavoriteCities(language);
+  }, [language]);
 
   useEffect(() => {
     if (open) inputRef.current?.focus();
@@ -150,32 +213,36 @@ export default function Search({ open, onClose }: SearchProps) {
             />
           )}
         </div>
-        <ul>
-          {cities.length > 0 ? (
-            cities.map(({ name, country, lat, lon }, index) => (
+
+        {cities.length === 0 ? (
+          <>
+            {currentCity && (
               <ListItem
-                key={index}
-                primary={`${name}, ${country}`}
-                secondary={`${lat} ${lon}`}
+                primary={`${currentCity?.name}, ${currentCity?.country}`}
+                secondary={`${currentCity?.lat}, ${currentCity?.lon}`}
                 startDecoration={
-                  <Icon type="location" className="text-text-secondary" />
+                  <Icon type="near" className="text-primary-header" />
                 }
                 hover
-                onClick={() => handleCityClick(lat, lon)}
+                onClick={handleCurrentCityClick}
               />
-            ))
-          ) : (
-            <ListItem
-              primary={`${currentCity?.name}, ${currentCity?.country}`}
-              secondary={`${currentCity?.lat}, ${currentCity?.lon}`}
-              startDecoration={
-                <Icon type="near" className="text-primary-header" />
-              }
-              hover
-              onClick={handleCurrentCityClick}
+            )}
+            <CityList
+              type="favorites"
+              cities={favorites}
+              onClick={handleCityClick}
+              onToggleFavorite={toggleFavoriteCity}
             />
-          )}
-        </ul>
+          </>
+        ) : (
+          <CityList
+            type="search"
+            cities={cities}
+            onClick={handleCityClick}
+            onToggleFavorite={toggleFavoriteCity}
+            isCityFavorite={isCityFavorite}
+          />
+        )}
       </div>
     </div>
   );
