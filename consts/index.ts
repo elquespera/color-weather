@@ -13,3 +13,5 @@ export const ROUTES: RouteInfo[] = [
 export const DEFAULT_UNITS: MeasurementUnits = "metric";
 
 export const DEFAULT_APP_LANGUAGE: AppLanguage = "en";
+
+export const MAX_FAVORITES = 4;

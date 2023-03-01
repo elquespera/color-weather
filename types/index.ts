@@ -23,6 +23,7 @@ export interface City {
   lon: number;
   name?: string;
   country?: string;
+  weather?: CurrentWeatherResponse;
 }
 
 export type CitySearchResponse = City[];

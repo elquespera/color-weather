@@ -5,6 +5,7 @@ interface ListItemProps {
   primary?: string | React.ReactNode;
   secondary?: string | React.ReactNode;
   startDecoration?: string | React.ReactNode;
+  middleDecoration?: string | React.ReactNode;
   endDecoration?: string | React.ReactNode;
   hover?: boolean;
   highlight?: boolean;
@@ -16,6 +17,7 @@ export default function ListItem({
   primary,
   secondary,
   startDecoration,
+  middleDecoration,
   endDecoration,
   hover,
   highlight,
@@ -49,7 +51,7 @@ export default function ListItem({
           "hover:before:opacity-20 hover:before:bg-primary-400"
       )}
     >
-      <div className="relative flex gap-4 items-center justify-between">
+      <div className="relative flex gap-2 md:gap-4 items-center justify-between">
         {startDecoration && (
           <div className="flex-shrink-0">{startDecoration}</div>
         )}
@@ -57,6 +59,9 @@ export default function ListItem({
           <div className="text-primary-header sm:text-xl">{primary}</div>
           <div className="opacity-60 text-sm">{secondary}</div>
         </div>
+        {middleDecoration && (
+          <div className="flex-shink-0">{middleDecoration}</div>
+        )}
         {endDecoration && (
           <div ref={endDecorationRef} className="flex-shink-0">
             {endDecoration}

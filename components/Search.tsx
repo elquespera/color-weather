@@ -15,13 +15,15 @@ import {
   THEMES_META,
   THEME_MODE_BACKGROUNDS,
 } from "lib/themes";
-import { AppLanguage, City, CitySearchResponse } from "types";
-import { fetchCityData, fetchData } from "lib/fetchData";
+import { AppLanguage, City, CitySearchResponse, MeasurementUnits } from "types";
+import { fetchCityData, fetchData, fetchWeatherData } from "lib/fetchData";
 import LocationContext from "@/context/LocationContext";
 import ListItem from "./ui/ListItem";
 import Icon from "./ui/Icon";
 import CityList from "./ui/CityList";
 import { getLocalStorage, setLocalStorage } from "@/lib/storage";
+import { useRouter } from "next/router";
+import { MAX_FAVORITES } from "@/consts";
 
 interface SearchProps {
   open?: boolean;
@@ -51,8 +53,9 @@ function fetchCities() {
 
 export default function Search({ open, onClose }: SearchProps) {
   const t = useTranslation();
-  const { language, theme, themeMode } = useContext(AppContext);
-  const { currentCity, setLocation } = useContext(LocationContext);
+  const router = useRouter();
+  const { language, units, theme, themeMode } = useContext(AppContext);
+  const { currentCity, weather, setLocation } = useContext(LocationContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const fetch = useCallback(fetchCities(), []);
   const [cities, setCities] = useState<City[]>([]);
@@ -79,6 +82,7 @@ export default function Search({ open, onClose }: SearchProps) {
 
   function handleCityClick(lat: number, lon: number) {
     setLocation(lat, lon);
+    router.push("/");
     handleClose();
   }
 
@@ -105,9 +109,18 @@ export default function Search({ open, onClose }: SearchProps) {
   async function fetchFavoriteData(
     latitude: number,
     longitude: number,
-    language: AppLanguage
+    language: AppLanguage,
+    units: MeasurementUnits
   ) {
-    return await fetchCityData(latitude, longitude, language);
+    const city = await fetchCityData(latitude, longitude, language);
+    if (city)
+      city.weather = await fetchWeatherData(
+        latitude,
+        longitude,
+        units,
+        language
+      );
+    return city;
   }
 
   async function toggleFavoriteCity(latitude: number, longitude: number) {
@@ -117,8 +130,16 @@ export default function Search({ open, onClose }: SearchProps) {
     if (favoriteIndex >= 0) {
       cities.splice(favoriteIndex, 1);
     } else {
-      const city = await fetchFavoriteData(latitude, longitude, language);
-      if (city) cities.unshift(city);
+      const city = await fetchFavoriteData(
+        latitude,
+        longitude,
+        language,
+        units
+      );
+      if (city) {
+        cities.unshift({ ...city, lat: latitude, lon: longitude });
+        if (cities.length > MAX_FAVORITES) cities.pop();
+      }
     }
 
     saveFavorites(cities);
@@ -130,14 +151,18 @@ export default function Search({ open, onClose }: SearchProps) {
   }
 
   useEffect(() => {
-    async function checkFavoriteCities(language: AppLanguage) {
+    async function checkFavoriteCities(
+      language: AppLanguage,
+      units: MeasurementUnits
+    ) {
       const favorites = getLocalStorage().favoriteCities || [];
       const cities = await Promise.all<City>(
         favorites.map(async (city) => {
           const cityData = await fetchFavoriteData(
             city.lat,
             city.lon,
-            language
+            language,
+            units
           );
           return cityData || city;
         })
@@ -145,8 +170,8 @@ export default function Search({ open, onClose }: SearchProps) {
       setFavorites(cities);
     }
 
-    checkFavoriteCities(language);
-  }, [language]);
+    checkFavoriteCities(language, units);
+  }, [language, units]);
 
   useEffect(() => {
     if (open) inputRef.current?.focus();
@@ -175,7 +200,7 @@ export default function Search({ open, onClose }: SearchProps) {
     >
       <div
         className={clsx(
-          `bg-background w-full p-4 
+          `bg-background w-full p-2 sm:p-4 
           aminate-tr scale-80 opacity-0 origin-top`,
           open && "animate-appear"
         )}
@@ -215,25 +240,25 @@ export default function Search({ open, onClose }: SearchProps) {
         </div>
 
         {cities.length === 0 ? (
-          <>
-            {currentCity && (
-              <ListItem
-                primary={`${currentCity?.name}, ${currentCity?.country}`}
-                secondary={`${currentCity?.lat}, ${currentCity?.lon}`}
-                startDecoration={
-                  <Icon type="near" className="text-primary-header" />
-                }
-                hover
-                onClick={handleCurrentCityClick}
+          value === "" ? (
+            <>
+              {currentCity && (
+                <CityList
+                  type="current"
+                  cities={[{ ...currentCity, weather }]}
+                  onClick={handleCurrentCityClick}
+                />
+              )}
+              <CityList
+                type="favorites"
+                cities={favorites}
+                onClick={handleCityClick}
+                onToggleFavorite={toggleFavoriteCity}
               />
-            )}
-            <CityList
-              type="favorites"
-              cities={favorites}
-              onClick={handleCityClick}
-              onToggleFavorite={toggleFavoriteCity}
-            />
-          </>
+            </>
+          ) : (
+            <div>Nothing was found</div>
+          )
         ) : (
           <CityList
             type="search"
