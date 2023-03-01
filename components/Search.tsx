@@ -5,19 +5,18 @@ import React, {
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from "react";
 import IconButton from "components/ui/IconButton";
-import AppContext from "@/context/AppContext";
+import AppContext from "context/AppContext";
 import {
   setMetaThemeColor,
   THEMES_META,
   THEME_MODE_BACKGROUNDS,
-} from "@/lib/themes";
-import { AppLanguage, CitySearchResponse } from "@/types";
-import fetchData from "@/lib/fetchData";
+} from "lib/themes";
+import { AppLanguage, CitySearchResponse } from "types";
+import fetchData from "lib/fetchData";
 
 interface SearchProps {
   open?: boolean;
