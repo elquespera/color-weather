@@ -1,8 +1,9 @@
 export interface OpenWeatherCurrentResponse {
-  coord: {
-    lon: number;
-    lat: number;
-  };
+  dt: number;
+  timezone: number;
+  cod: number;
+  message: string;
+
   weather: [
     {
       id: number;
@@ -11,7 +12,6 @@ export interface OpenWeatherCurrentResponse {
       icon: string;
     }
   ];
-  base: string;
   main: {
     temp: number;
     feels_like: number;
@@ -28,13 +28,12 @@ export interface OpenWeatherCurrentResponse {
     deg: number;
     gust: number;
   };
-  rain: {
+  rain?: {
     "1h": number;
   };
-  clouds: {
+  clouds?: {
     all: number;
   };
-  dt: number;
   sys: {
     type: number;
     id: number;
@@ -42,11 +41,12 @@ export interface OpenWeatherCurrentResponse {
     sunrise: number;
     sunset: number;
   };
-  timezone: number;
-  id: number;
-  name: string;
+}
+
+export interface OpenWeather5DaysResponse {
   cod: number;
   message: string;
+  list: OpenWeatherCurrentResponse[];
 }
 
 interface OpenWeatherCity {

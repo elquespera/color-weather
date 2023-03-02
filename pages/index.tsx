@@ -4,6 +4,7 @@ import WeatherIcon from "components/ui/WeatherIcon";
 import TemperatureRange from "components/TemperatureRange";
 import useConvertDate from "hooks/useConvertDate";
 import LocationContext from "context/LocationContext";
+import TemperatureChart from "@/components/TemperatureChart";
 
 export default function Home() {
   const convertDate = useConvertDate();
@@ -38,6 +39,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <TemperatureChart />
         </div>
       )}
     </>

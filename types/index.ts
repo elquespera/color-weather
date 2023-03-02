@@ -6,6 +6,23 @@ export interface ErrorResponse {
   message: string;
 }
 
+export interface WindData {
+  speed: number;
+  deg: number;
+  gust: number;
+}
+
+export interface WeatherDataPoint {
+  dt: number;
+  temp: number;
+  description: string;
+  pressure: number;
+  humidity: number;
+  icon: string;
+  visibility: number;
+  wind: WindData;
+}
+
 export interface CurrentWeatherResponse {
   state: "ok";
   temp: number;
@@ -13,9 +30,12 @@ export interface CurrentWeatherResponse {
   tempMin: number;
   tempMax: number;
   description: string;
-  city: string;
+  pressure: number;
+  humidity: number;
+  visibility: number;
   icon: string;
   updatedAt: number;
+  extended: WeatherDataPoint[];
 }
 
 export interface City {
