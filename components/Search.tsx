@@ -53,7 +53,7 @@ export default function Search({ open, onClose }: SearchProps) {
   const t = useTranslation();
   const router = useRouter();
   const { language, units, theme, themeMode } = useContext(AppContext);
-  const { currentCity, weather, setLocation } = useContext(LocationContext);
+  const { currentCity, setLocation } = useContext(LocationContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const fetch = useCallback(fetchCities(), []);
   const [cities, setCities] = useState<City[]>([]);
@@ -250,7 +250,7 @@ export default function Search({ open, onClose }: SearchProps) {
               {currentCity && (
                 <CityList
                   type="current"
-                  cities={[{ ...currentCity, weather }]}
+                  cities={[currentCity]}
                   onClick={handleCurrentCityClick}
                 />
               )}

@@ -21,7 +21,6 @@ export default function Main({ children }: MainProps) {
     }
 
     if (lon === 0 && lat === 0) return;
-    // console.log("fetch weather data");
     fetchWeather();
   }, [lon, lat, units, language]);
 
@@ -32,7 +31,6 @@ export default function Main({ children }: MainProps) {
     }
 
     if (lon === 0 && lat === 0) return;
-    // console.log("fetch city data");
     fetchCurrentCity();
   }, [lon, lat, language]);
 
@@ -44,15 +42,22 @@ export default function Main({ children }: MainProps) {
           gpsCoords.lon,
           language
         );
+        if (city) {
+          city.weather = await fetchWeatherData(
+            gpsCoords.lat,
+            gpsCoords.lon,
+            units,
+            language
+          );
+        }
         setCurrentCity(city);
       } else {
         setCurrentCity(undefined);
       }
     }
 
-    // console.log("fetch current city");
     fetchCurrentCity();
-  }, [gpsCoords, language]);
+  }, [gpsCoords, language, units]);
 
   useEffect(() => {
     function defineLocation() {
