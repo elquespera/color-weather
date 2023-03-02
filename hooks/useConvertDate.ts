@@ -14,7 +14,7 @@ export default function useConvertDate() {
 
   function time(dt: number) {
     const dateObj = new Date(dt * 1000);
-    return dateObj.toLocaleString(language, {
+    return dateObj.toLocaleString("ru", {
       hour: "2-digit",
       minute: "2-digit",
     });

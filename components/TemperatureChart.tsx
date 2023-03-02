@@ -71,8 +71,8 @@ export default function TemperatureChart({
           );
         })}
         {data.map(({ icon }, index) => {
-          const x = (points[index + 1].x || 0) - INCREMENT * 0.3;
-          const size = INCREMENT * 0.7;
+          const x = (points[index + 1].x || 0) - INCREMENT * 0.5;
+          const size = INCREMENT;
           return (
             <image
               key={index}
@@ -80,18 +80,18 @@ export default function TemperatureChart({
               height={size}
               href={getWeatherIconURL(icon)}
               x={x}
-              y={viewBox.h - INCREMENT * 0.9}
+              y={viewBox.h - INCREMENT * 1.2}
             />
           );
         })}
         {data.map(({ dt }, index) => {
-          const x = (points[index + 1].x || 0) - INCREMENT * 0.2;
+          const x = (points[index + 1].x || 0) - INCREMENT * 0.3;
           return (
             <text
               key={index}
               x={x}
               y={viewBox.h - INCREMENT * 0.1}
-              className="fill-text-secondary text-[0.6em]"
+              className="fill-text-secondary text-[0.8em]"
             >
               {convertTime(dt)}
             </text>
