@@ -85,7 +85,7 @@ export default function TemperatureChart({
               height={size}
               href={getWeatherIconURL(icon)}
               x={x}
-              y={viewBox.h - INCREMENT * 1.2}
+              y={viewBox.h - INCREMENT * 1.3}
             />
           );
         })}
@@ -95,13 +95,21 @@ export default function TemperatureChart({
             <text
               key={index}
               x={x}
-              y={viewBox.h - INCREMENT * 0.1}
+              y={viewBox.h - INCREMENT * 0.2}
               className="fill-text-secondary text-[0.8em]"
             >
               {convertTime(dt)}
             </text>
           );
         })}
+        <line
+          x1={0}
+          y1={viewBox.h}
+          x2={viewBox.w}
+          y2={viewBox.h}
+          strokeWidth={1}
+          className="stroke-primary-header"
+        />
       </svg>
     </div>
   ) : null;
