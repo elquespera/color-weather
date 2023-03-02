@@ -50,7 +50,7 @@ export default function Home() {
           <TemperatureChart weather={weather.extended} />
 
           <Box title={t(lng.currentDetails)}>
-            <div className="grid grid-cols-[auto,1fr] gap-x-8 sm:gap-x-12 grid-col p-1 sm:p-3">
+            <div className="grid grid-cols-[auto,1fr] gap-x-8 sm:gap-x-12 gap-y-1 grid-col p-2 pt-4 sm:p-4 text-sm sm:text-base">
               <span className="text-text-secondary">{t(lng.humidity)}</span>
               <span>{weather.humidity}%</span>
               <span className="text-text-secondary">{t(lng.pressure)}</span>
