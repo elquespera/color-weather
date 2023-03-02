@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import AppContext from "context/AppContext";
 import LocationContext from "context/LocationContext";
 import { fetchCityData, fetchWeatherData } from "lib/fetchData";
+import Spinner from "./Spinner";
 
 interface MainProps {
   children?: React.ReactNode;
 }
 
 export default function Main({ children }: MainProps) {
-  const { language, units } = useContext(AppContext);
+  const { language, units, setAppState } = useContext(AppContext);
   const { lon, lat, setLocation, setCity, setWeather, setCurrentCity } =
     useContext(LocationContext);
 
@@ -16,8 +17,13 @@ export default function Main({ children }: MainProps) {
 
   useEffect(() => {
     async function fetchWeather() {
-      const weather = await fetchWeatherData(lat, lon, units, language);
-      setWeather(weather);
+      try {
+        setAppState("fetching");
+        const weather = await fetchWeatherData(lat, lon, units, language);
+        setWeather(weather);
+      } finally {
+        setAppState("ready");
+      }
     }
 
     if (lon === 0 && lat === 0) return;
@@ -71,8 +77,9 @@ export default function Main({ children }: MainProps) {
   }, []);
 
   return (
-    <main className="w-full md:w-max-app min-h-screen pt-header flex">
+    <main className="relative w-full md:w-max-app min-h-screen pt-header flex">
       <div className="py-app sm:py-app-lg w-full">{children}</div>
+      <Spinner />
     </main>
   );
 }

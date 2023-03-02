@@ -8,6 +8,11 @@ interface TemperatureChartProps {
   weather?: WeatherDataPoint[];
 }
 
+interface Point {
+  x: number;
+  y: number;
+}
+
 const INCREMENT = 50;
 
 export default function TemperatureChart({
@@ -15,30 +20,30 @@ export default function TemperatureChart({
   maxPoints = 8,
 }: TemperatureChartProps) {
   const [, , convertTime] = useConvertDate();
-
+  const [points, setPoints] = useState<Point[]>([]);
   const length = maxPoints === "all" ? weather?.length || 0 : maxPoints;
   const data = weather?.slice(0, length) || [];
   const viewBox = { w: length * INCREMENT, h: INCREMENT * 3 };
-  const minTemp = Math.min(...data.map(({ temp }) => temp));
-  const maxTemp = Math.max(...data.map(({ temp }) => temp));
-  const tempRange = Math.abs(maxTemp - minTemp);
 
-  const points = data.map(({ temp }, index) => {
-    return {
-      x: INCREMENT * 0.5 + index * INCREMENT,
-      y: INCREMENT * 1.2 - ((temp - minTemp) / tempRange) * (INCREMENT * 0.7),
-    };
-  });
-  if (points.length > 0) {
-    points.unshift({ x: 0, y: points[0].y });
-    points.push({ x: viewBox.w, y: points[points.length - 1].y });
-  }
+  useEffect(() => {
+    const minTemp = Math.min(...data.map(({ temp }) => temp));
+    const maxTemp = Math.max(...data.map(({ temp }) => temp));
+    const tempRange = Math.abs(maxTemp - minTemp);
 
-  function convertPoints(points: Array<{ x: number; y: number }>): string {
-    return points.map(({ x, y }) => `${x},${y}`).join(" ");
-  }
+    const points = data.map(({ temp }, index) => {
+      return {
+        x: INCREMENT * 0.5 + index * INCREMENT,
+        y: INCREMENT * 1.2 - ((temp - minTemp) / tempRange) * (INCREMENT * 0.7),
+      };
+    });
+    if (points.length > 0) {
+      points.unshift({ x: 0, y: points[0].y });
+      points.push({ x: viewBox.w, y: points[points.length - 1].y });
+    }
+    setPoints(points);
+  }, [weather, maxPoints]);
 
-  return weather ? (
+  return weather && points.length > 1 ? (
     <div className="mt-6 sm:mt-10 md:mt-14 w-full-mobile self-center">
       <svg viewBox={`0 0 ${viewBox.w} ${viewBox.h}`}>
         <polyline
@@ -100,4 +105,8 @@ export default function TemperatureChart({
       </svg>
     </div>
   ) : null;
+}
+
+function convertPoints(points: Array<{ x: number; y: number }>): string {
+  return points.map(({ x, y }) => `${x},${y}`).join(" ");
 }

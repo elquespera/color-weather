@@ -9,7 +9,7 @@ import {
   setCurrentThemeMode,
   DEFAULT_THEME_MODE,
 } from "lib/themes";
-import { AppLanguage, MeasurementUnits } from "types";
+import { AppLanguage, AppState, MeasurementUnits } from "types";
 import { DEFAULT_APP_LANGUAGE, DEFAULT_UNITS } from "consts";
 import { defaultAppContext } from "./AppContext";
 
@@ -21,6 +21,7 @@ export default function useAppContext() {
     setThemeMode,
     setUnits,
     setLanguage,
+    setAppState,
   });
 
   function setTheme(theme: ThemeType) {
@@ -55,6 +56,12 @@ export default function useAppContext() {
       return { ...current, language };
     });
     setLocalStorage({ language });
+  }
+
+  function setAppState(state: AppState) {
+    setAppContext((current) => {
+      return { ...current, appState: state };
+    });
   }
 
   useEffect(() => {

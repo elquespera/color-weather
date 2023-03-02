@@ -62,6 +62,7 @@ const Icons = [
   "near",
   "star",
   "star-filled",
+  "loading",
 ] as const;
 
 export type IconType = typeof Icons[number];
@@ -83,3 +84,5 @@ export const APP_LANGUAGES_META: {
   ru: { name: "Русский" },
   es: { name: "Español" },
 };
+
+export type AppState = "ready" | "fetching" | "error";

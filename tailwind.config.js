@@ -31,6 +31,14 @@ module.exports = {
         rotate: {
           "100%": { transform: "rotate(0)" },
         },
+        "spinner-appear": {
+          "0%": { transform: "scale(0)", opacity: 0 },
+          "100%": { transform: "scale(1)", opacity: 1 },
+        },
+        "spinner-disappear": {
+          "0%": { transform: "scale(1)", opacity: 1 },
+          "100%": { transform: "scale(0)", opacity: 0 },
+        },
       },
 
       animation: {
@@ -39,6 +47,14 @@ module.exports = {
         appear: "appear 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards",
         rotate:
           "rotate 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.2s forwards",
+        "spinner-appear":
+          "spinner-appear 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards",
+        "spinner-disappear":
+          "spinner-disappear 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards",
+      },
+
+      boxShadow: {
+        spinner: "rgba(0, 0, 0, 0.24) 0px 2px 8px",
       },
 
       translate: {

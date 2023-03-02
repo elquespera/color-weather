@@ -1,5 +1,5 @@
 import { DEFAULT_APP_LANGUAGE, DEFAULT_UNITS } from "consts";
-import { AppLanguage, MeasurementUnits } from "types";
+import { AppLanguage, AppState, MeasurementUnits } from "types";
 import {
   DEFAULT_THEME,
   DEFAULT_THEME_MODE,
@@ -18,6 +18,8 @@ interface AppContextInterface {
   setUnits: (units: MeasurementUnits) => void;
   language: AppLanguage;
   setLanguage: (language: AppLanguage) => void;
+  appState: AppState;
+  setAppState: (state: AppState) => void;
 }
 
 export const defaultAppContext: AppContextInterface = {
@@ -30,6 +32,8 @@ export const defaultAppContext: AppContextInterface = {
   setUnits: () => {},
   language: DEFAULT_APP_LANGUAGE,
   setLanguage: () => {},
+  appState: "ready",
+  setAppState: () => {},
 };
 
 const AppContext = createContext(defaultAppContext);
