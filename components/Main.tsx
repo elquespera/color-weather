@@ -67,7 +67,7 @@ export default function Main({ children }: MainProps) {
 
   return (
     <main className="w-full md:w-max-app min-h-screen pt-header flex">
-      <div className="p-6 md:p-8 w-full">{children}</div>
+      <div className="py-app sm:py-app-lg w-full">{children}</div>
     </main>
   );
 }

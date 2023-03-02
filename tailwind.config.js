@@ -10,14 +10,17 @@ module.exports = {
       width: {
         "max-app": "768px",
         tab: "8em",
+        "full-mobile": "min(100vw, 640px)",
       },
 
       height: {
         header: "6rem",
       },
 
-      padding: {
+      spacing: {
         header: "6rem",
+        app: "1.5rem",
+        "app-lg": "2rem",
       },
 
       keyframes: {

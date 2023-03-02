@@ -39,7 +39,7 @@ export default function TemperatureChart({
   }
 
   return weather ? (
-    <div className="mt-8">
+    <div className="mt-6 sm:mt-10 md:mt-14 w-full-mobile self-center">
       <svg viewBox={`0 0 ${viewBox.w} ${viewBox.h}`}>
         <polyline
           className="stroke-primary-header fill-none"

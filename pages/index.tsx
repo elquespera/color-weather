@@ -14,12 +14,14 @@ export default function Home() {
     <>
       {weather && (
         <div className="flex flex-col">
-          <div className="text-primary-sub-header">
-            {convertDate(weather.updatedAt)}
+          <div className="px-app sm:px-app-lg">
+            <div className="text-primary-sub-header ">
+              {convertDate(weather.updatedAt)}
+            </div>
+            <TemperatureRange min={weather.tempMin} max={weather.tempMax} />
           </div>
-          <TemperatureRange min={weather.tempMin} max={weather.tempMax} />
 
-          <div className="w-full sm:w-[min(90vw,600px)] self-center">
+          <div className="w-full-mobile self-center">
             <div className="mt-4 sm:mt-8 md:mt-12 grid grid-cols-2 gap-x-2 items-center justify-items-center">
               <Temperature
                 value={weather.temp}

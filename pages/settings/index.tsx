@@ -48,10 +48,10 @@ export default function Settings() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h2 className="text-3xl sm:text-5xl text-primary-header">
+      <h2 className="px-app sm:px-app-lg text-3xl sm:text-5xl text-primary-header">
         {t(lng.settingsTitle)}
       </h2>
-      <ul className="flex flex-col">
+      <ul className="flex flex-col px-app sm:px-app-lg">
         <ListItem
           primary={t(lng.measurementUnits)}
           secondary={t(units === "metric" ? lng.celsius : lng.fahrenheit)}
