@@ -9,6 +9,7 @@ import ButtonGroup from "components/ui/ButtonGroup";
 import { APP_LANGUAGES, APP_LANGUAGES_META, AppLanguage } from "types";
 import useTranslation from "@/hooks/useTranslation";
 import { lng } from "@/assets/translations";
+import Heading from "@/components/ui/Heading";
 
 export default function Settings() {
   const themeButtonRef = useRef<HTMLButtonElement>(null);
@@ -48,9 +49,7 @@ export default function Settings() {
 
   return (
     <div className="flex flex-col gap-8">
-      <h2 className="px-app sm:px-app-lg text-3xl sm:text-5xl text-primary-header">
-        {t(lng.settingsTitle)}
-      </h2>
+      <Heading>{t(lng.settingsTitle)}</Heading>
       <ul className="flex flex-col px-app sm:px-app-lg">
         <ListItem
           primary={t(lng.measurementUnits)}

@@ -21,6 +21,8 @@ export enum lng {
   mSec,
   mph,
 
+  fiveDaysTitle,
+
   settingsTitle,
   measurementUnits,
   celsius,
@@ -67,6 +69,8 @@ export const languageData: LanguageData = {
     [lng.mSec]: "m/s",
     [lng.mph]: "mph",
 
+    [lng.fiveDaysTitle]: "5 days forecast",
+
     [lng.settingsTitle]: "Settings",
     [lng.measurementUnits]: "Measurement units",
     [lng.celsius]: "Celsius",
@@ -103,6 +107,8 @@ export const languageData: LanguageData = {
     [lng.wind]: "Ветер",
     [lng.meters]: "м",
     [lng.mBar]: "mBar",
+
+    [lng.fiveDaysTitle]: "Прогноз на 5 дней",
 
     [lng.settingsTitle]: "Настройки",
     [lng.measurementUnits]: "Единицы измерения",

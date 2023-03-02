@@ -1,3 +1,9 @@
+import { lng } from "@/assets/translations";
+import useTranslation from "@/hooks/useTranslation";
+import Heading from "components/ui/Heading";
+
 export default function Tomorrow() {
-  return <h2>5 days Forecast</h2>;
+  const t = useTranslation();
+
+  return <Heading>{t(lng.fiveDaysTitle)}</Heading>;
 }
