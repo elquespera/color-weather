@@ -5,7 +5,7 @@ import Icon from "./ui/Icon";
 
 interface SpinnerProps {}
 
-const SLOW_DELAY = 700;
+const SLOW_DELAY = 500;
 
 export default function Spinner({}: SpinnerProps) {
   const { appState } = useContext(AppContext);

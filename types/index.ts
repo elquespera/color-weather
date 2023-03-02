@@ -33,6 +33,9 @@ export interface CurrentWeatherResponse {
   pressure: number;
   humidity: number;
   visibility: number;
+  wind: WindData;
+  sunrise: number;
+  sunset: number;
   icon: string;
   updatedAt: number;
   extended: WeatherDataPoint[];
