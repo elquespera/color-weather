@@ -38,68 +38,66 @@ export default function TemperatureChart({
     return points.map(({ x, y }) => `${x},${y}`).join(" ");
   }
 
-  return (
-    weather && (
-      <div className="mt-8">
-        <svg viewBox={`0 0 ${viewBox.w} ${viewBox.h}`}>
-          <polyline
-            className="stroke-primary-header fill-none"
-            strokeWidth="2"
-            strokeLinejoin="round"
-            points={convertPoints(points)}
-          />
-          <polygon
-            className="stroke-none fill-primary-400 opacity-20"
-            fill="none"
-            strokeWidth="1"
-            strokeLinejoin="round"
-            points={`${convertPoints([
-              { x: 0, y: viewBox.h },
-              ...points,
-              { x: viewBox.w, y: viewBox.h },
-            ])}`}
-          />
-          {data.map(({ temp }, index) => {
-            const x = (points[index + 1].x || 0) - INCREMENT * 0.05;
-            const y = (points[index + 1].y || 0) - INCREMENT * 0.15;
-            return (
-              <text
-                key={index}
-                x={x}
-                y={y}
-                className="fill-primary-sub-header"
-              >{`${Math.round(temp)}°`}</text>
-            );
-          })}
-          {data.map(({ icon }, index) => {
-            const x = (points[index + 1].x || 0) - INCREMENT * 0.3;
-            const size = INCREMENT * 0.7;
-            return (
-              <image
-                key={index}
-                width={size}
-                height={size}
-                href={getWeatherIconURL(icon)}
-                x={x}
-                y={viewBox.h - INCREMENT * 0.9}
-              />
-            );
-          })}
-          {data.map(({ dt }, index) => {
-            const x = (points[index + 1].x || 0) - INCREMENT * 0.2;
-            return (
-              <text
-                key={index}
-                x={x}
-                y={viewBox.h - INCREMENT * 0.1}
-                className="fill-text-secondary text-[0.6em]"
-              >
-                {convertTime(dt)}
-              </text>
-            );
-          })}
-        </svg>
-      </div>
-    )
-  );
+  return weather ? (
+    <div className="mt-8">
+      <svg viewBox={`0 0 ${viewBox.w} ${viewBox.h}`}>
+        <polyline
+          className="stroke-primary-header fill-none"
+          strokeWidth="2"
+          strokeLinejoin="round"
+          points={convertPoints(points)}
+        />
+        <polygon
+          className="stroke-none fill-primary-400 opacity-20"
+          fill="none"
+          strokeWidth="1"
+          strokeLinejoin="round"
+          points={`${convertPoints([
+            { x: 0, y: viewBox.h },
+            ...points,
+            { x: viewBox.w, y: viewBox.h },
+          ])}`}
+        />
+        {data.map(({ temp }, index) => {
+          const x = (points[index + 1].x || 0) - INCREMENT * 0.05;
+          const y = (points[index + 1].y || 0) - INCREMENT * 0.15;
+          return (
+            <text
+              key={index}
+              x={x}
+              y={y}
+              className="fill-primary-sub-header"
+            >{`${Math.round(temp)}°`}</text>
+          );
+        })}
+        {data.map(({ icon }, index) => {
+          const x = (points[index + 1].x || 0) - INCREMENT * 0.3;
+          const size = INCREMENT * 0.7;
+          return (
+            <image
+              key={index}
+              width={size}
+              height={size}
+              href={getWeatherIconURL(icon)}
+              x={x}
+              y={viewBox.h - INCREMENT * 0.9}
+            />
+          );
+        })}
+        {data.map(({ dt }, index) => {
+          const x = (points[index + 1].x || 0) - INCREMENT * 0.2;
+          return (
+            <text
+              key={index}
+              x={x}
+              y={viewBox.h - INCREMENT * 0.1}
+              className="fill-text-secondary text-[0.6em]"
+            >
+              {convertTime(dt)}
+            </text>
+          );
+        })}
+      </svg>
+    </div>
+  ) : null;
 }
