@@ -144,6 +144,7 @@ export default function Search({ open, onClose }: SearchProps) {
 
     saveFavorites(cities);
     setFavorites(cities);
+    inputRef.current?.focus();
   }
 
   function isCityFavorite(latitude: number, longitude: number) {

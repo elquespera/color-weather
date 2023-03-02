@@ -137,3 +137,94 @@ body.turquoise-blue-theme {
   --color-primary-800: #13575c;
   --color-primary-900: #144a4d;
 }
+
+body.nandor-theme {
+  --color-primary-50: #f6f7f7;
+  --color-primary-100: #e0e7e3;
+  --color-primary-200: #c1cec7;
+  --color-primary-300: #9bada4;
+  --color-primary-400: #768b82;
+  --color-primary-500: #5b7167;
+  --color-primary-600: #51655d;
+  --color-primary-700: #3c4944;
+  --color-primary-800: #323d39;
+  --color-primary-900: #2d3432;
+}
+
+body.governor-bay-theme {
+  --color-primary-50: #f3f6ff;
+  --color-primary-100: #eaeffd;
+  --color-primary-200: #d7e0fd;
+  --color-primary-300: #b7c5fb;
+  --color-primary-400: #8e9ef7;
+  --color-primary-500: #606ff2;
+  --color-primary-600: #3f46e8;
+  --color-primary-700: #2d30d4;
+  --color-primary-800: #292cc3;
+  --color-primary-900: #212391;
+}
+
+body.denim-theme {
+  --color-primary-50: #eefaff;
+  --color-primary-100: #d9f3ff;
+  --color-primary-200: #bbecff;
+  --color-primary-300: #8ce1ff;
+  --color-primary-400: #56cdff;
+  --color-primary-500: #2fb2ff;
+  --color-primary-600: #1895f8;
+  --color-primary-700: #117be2;
+  --color-primary-800: #1563b8;
+  --color-primary-900: #175591;
+}
+
+body.deluge-theme {
+  --color-primary-50: #f3f2fb;
+  --color-primary-100: #e9e7f8;
+  --color-primary-200: #d8d3f2;
+  --color-primary-300: #c1b8e9;
+  --color-primary-400: #ad9bde;
+  --color-primary-500: #9c81d3;
+  --color-primary-600: #8d68c3;
+  --color-primary-700: #7d5aac;
+  --color-primary-800: #64498a;
+  --color-primary-900: #53406f;
+}
+
+body.amaranth-theme {
+  --color-primary-50: #fef2f2;
+  --color-primary-100: #fee5e6;
+  --color-primary-200: #fccfd3;
+  --color-primary-300: #f9a8b0;
+  --color-primary-400: #f67686;
+  --color-primary-500: #eb344f;
+  --color-primary-600: #d92548;
+  --color-primary-700: #b7193c;
+  --color-primary-800: #991839;
+  --color-primary-900: #831836;
+}
+
+body.golden-sand-theme {
+  --color-primary-50: #fef9ee;
+  --color-primary-100: #fdf2d7;
+  --color-primary-200: #f9e0af;
+  --color-primary-300: #f5c97c;
+  --color-primary-400: #f0a847;
+  --color-primary-500: #ec8e23;
+  --color-primary-600: #dd7519;
+  --color-primary-700: #b75917;
+  --color-primary-800: #92471a;
+  --color-primary-900: #763c18;
+}
+
+body.blue-gem-theme {
+  --color-primary-50: #f2f3ff;
+  --color-primary-100: #e6e6ff;
+  --color-primary-200: #d1d1ff;
+  --color-primary-300: #afacff;
+  --color-primary-400: #877eff;
+  --color-primary-500: #614aff;
+  --color-primary-600: #4b25ff;
+  --color-primary-700: #3d13ee;
+  --color-primary-800: #330fc8;
+  --color-primary-900: #3010b3;
+}

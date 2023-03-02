@@ -8,6 +8,14 @@ export const THEMES = [
   "shakespeare",
   "broom",
   "turquoise-blue",
+  "nandor",
+  "governor-bay",
+  "denim",
+  "deluge",
+  "amaranth",
+  "golden-sand",
+  "blue-gem",
+  "eastern-blue",
 ] as const;
 
 export type ThemeType = typeof THEMES[number];
@@ -27,6 +35,15 @@ export const THEMES_META: {
   shakespeare: { name: "Shakespeare", color: "#244c66" },
   broom: { name: "Broom", color: "#87670c" },
   "turquoise-blue": { name: "Turquoise blue", color: "#13575c" },
+  nandor: { name: "Nandor", color: "#323d39" },
+  "governor-bay": { name: "Governor bay", color: "#292cc3" },
+  denim: { name: "Denim", color: "#1563b8" },
+  deluge: { name: "Deluge", color: "#64498a" },
+
+  amaranth: { name: "Amaranth", color: "#991839" },
+  "golden-sand": { name: "Golden sand", color: "#92471a" },
+  "blue-gem": { name: "Blue gem", color: "#330fc8" },
+  "eastern-blue": { name: "Eastern blue", color: "#1e5f6c" },
 } as const;
 
 export const THEME_MODE_BACKGROUNDS: { [key in ThemeMode]: string } = {
