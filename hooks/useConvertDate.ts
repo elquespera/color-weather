@@ -4,17 +4,25 @@ import { useContext } from "react";
 export default function useConvertDate() {
   const { language } = useContext(AppContext);
 
-  return function (dt: number) {
+  function date(dt: number) {
     const dateObj = new Date(dt * 1000);
-    const date = dateObj.toLocaleString(language, {
+    return dateObj.toLocaleString(language, {
       month: "long",
       day: "numeric",
     });
-    const time = dateObj.toLocaleString(language, {
+  }
+
+  function time(dt: number) {
+    const dateObj = new Date(dt * 1000);
+    return dateObj.toLocaleString(language, {
       hour: "2-digit",
       minute: "2-digit",
     });
+  }
 
-    return `${date}, ${time}`;
-  };
+  function dateTime(dt: number) {
+    return `${date(dt)}, ${time(dt)}`;
+  }
+
+  return [dateTime, date, time];
 }

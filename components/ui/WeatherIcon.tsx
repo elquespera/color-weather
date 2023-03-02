@@ -11,7 +11,11 @@ export default function WeatherIcon({ icon, alt, large }: WeatherIconProps) {
       alt={alt}
       width={size}
       height={size}
-      src={`https://openweathermap.org/img/wn/${icon}@${large ? 4 : 2}x.png`}
+      src={getWeatherIconURL(icon, large)}
     />
   );
+}
+
+export function getWeatherIconURL(icon: string, large = true): string {
+  return `https://openweathermap.org/img/wn/${icon}@${large ? 4 : 2}x.png`;
 }

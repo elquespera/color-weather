@@ -25,7 +25,7 @@ export default function Header({}: HeaderProps) {
     <>
       <header
         className={`
-        fixed w-full h-header px-2 pt-2 pb-0
+        fixed w-full h-header px-2 pt-2 pb-0 z-10
         flex flex-col gap-1 items-center justify-between
         bg-primary-800 text-white
         shadow-lg transition-colors`}

@@ -7,7 +7,7 @@ import LocationContext from "context/LocationContext";
 import TemperatureChart from "@/components/TemperatureChart";
 
 export default function Home() {
-  const convertDate = useConvertDate();
+  const [convertDate] = useConvertDate();
   const { weather } = useContext(LocationContext);
 
   return (
@@ -39,7 +39,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <TemperatureChart />
+          <TemperatureChart weather={weather.extended} />
         </div>
       )}
     </>
