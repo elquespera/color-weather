@@ -1,5 +1,6 @@
+import { lng } from "@/assets/translations";
+import useTranslation from "@/hooks/useTranslation";
 import Temperature from "./Temperature";
-import Icon from "./ui/Icon";
 
 interface TemperatureRangeProps {
   min?: number;
@@ -7,16 +8,18 @@ interface TemperatureRangeProps {
 }
 
 export default function TemperatureRange({ min, max }: TemperatureRangeProps) {
+  const t = useTranslation();
+
   return (
     <div className="flex gap-2">
-      <div className="flex gap-1 items-center">
-        Day↑
-        <Temperature className="font-semibold" value={max} />
+      <div className="flex gap-1">
+        {t(lng.tempMin)}↓
+        <Temperature className="font-semibold" value={min} />
       </div>
       <div>•</div>
-      <div className="flex gap-1">
-        Night↓
-        <Temperature className="font-semibold" value={min} />
+      <div className="flex gap-1 items-center">
+        {t(lng.tempMax)}↑
+        <Temperature className="font-semibold" value={max} />
       </div>
     </div>
   );

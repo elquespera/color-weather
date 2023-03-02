@@ -16,13 +16,17 @@ export default async function handler(
   const data: OpenWeatherCurrentResponse = await response.json();
 
   if (response.ok) {
+    let description = data.weather[0].description;
+    if (description && description.length > 0) {
+      description = description[0].toLocaleUpperCase() + description.slice(1);
+    }
     const responseData: CurrentWeatherResponse = {
       state: "ok",
       temp: data.main.temp,
       tempFeelsLike: data.main.feels_like,
       tempMin: data.main.temp_min,
       tempMax: data.main.temp_max,
-      description: data.weather[0].description,
+      description,
       city: data.name,
       icon: data.weather[0].icon,
       updatedAt: data.dt,

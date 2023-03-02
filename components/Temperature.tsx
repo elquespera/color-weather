@@ -23,18 +23,24 @@ export default function Temperature({
   return value ? (
     <span
       className={clsx(
-        "inline-flex",
-        large &&
-          "tracking-tighter text-7xl sm:text-9xl drop-shadow-md select-none",
+        "inline-flex justify-center overflow-hidden",
+        large
+          ? "tracking-tighter text-7xl sm:text-9xl drop-shadow-md select-none"
+          : "flex-wrap",
         className
       )}
     >
-      {feelsLike && <span className="mr-2">{t(lng.feelsLike)}</span>}
-      {`${Math.round(value)}`}
-      <span className={clsx(large && "text-5xl md:text-7xl")}>°</span>
+      {feelsLike && (
+        <span className="mr-2 overflow-hidden text-ellipsis whitespace-nowrap">
+          {t(lng.feelsLike)}
+        </span>
+      )}
+      <span className="whitespace-nowrap">{`${Math.round(value)}${
+        large ? "" : "°"
+      }`}</span>
       {large && (
         <span className="text-5xl sm:text-7xl">
-          {units === "metric" ? "C" : "F"}
+          °{units === "metric" ? "C" : "F"}
         </span>
       )}
     </span>

@@ -6,6 +6,8 @@ export enum lng {
   settingsTab,
 
   feelsLike,
+  tempMin,
+  tempMax,
 
   settingsTitle,
   measurementUnits,
@@ -36,7 +38,10 @@ export const languageData: LanguageData = {
     [lng.currentTab]: "Current",
     [lng.fiveDaysTab]: "5 Days",
     [lng.settingsTab]: "Settings",
+
     [lng.feelsLike]: "Feels like",
+    [lng.tempMin]: "Min",
+    [lng.tempMax]: "Max",
 
     [lng.settingsTitle]: "Settings",
     [lng.measurementUnits]: "Measurement units",
@@ -61,7 +66,10 @@ export const languageData: LanguageData = {
     [lng.currentTab]: "Сейчас",
     [lng.fiveDaysTab]: "5 Дней",
     [lng.settingsTab]: "Настройки",
+
     [lng.feelsLike]: "По ощущениям",
+    [lng.tempMin]: "Минимум",
+    [lng.tempMax]: "Максимум",
 
     [lng.settingsTitle]: "Настройки",
     [lng.measurementUnits]: "Единицы измерения",

@@ -18,15 +18,19 @@ export default function Home() {
             {convertDate(weather.updatedAt)}
           </div>
           <TemperatureRange min={weather.tempMin} max={weather.tempMax} />
-          <div className="mt-4 grid grid-cols-2 items-center justify-items-center">
+          <div className="mt-4 sm:mt-8 md:mt-12 grid grid-cols-2 gap-x-2 items-center justify-items-center">
             <Temperature
               value={weather.temp}
               large
               className="text-primary-header"
             />
             <WeatherIcon icon={weather.icon} alt={weather.description} large />
-            <Temperature feelsLike value={weather.tempFeelsLike} />
-            <div className="capitalize">{weather.description}</div>
+            <div className="overflow-hidden self-end">
+              <Temperature feelsLike value={weather.tempFeelsLike} />
+            </div>
+            <div className="text-center self-end overflow-hidden">
+              {weather.description}
+            </div>
           </div>
         </div>
       )}
