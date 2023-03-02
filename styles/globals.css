@@ -228,3 +228,16 @@ body.blue-gem-theme {
   --color-primary-800: #330fc8;
   --color-primary-900: #3010b3;
 }
+
+body.eastern-blue-theme {
+  --color-primary-50: #eefdfd;
+  --color-primary-100: #d3f9fa;
+  --color-primary-200: #adf3f4;
+  --color-primary-300: #74e8ec;
+  --color-primary-400: #35d3db;
+  --color-primary-500: #19b7c1;
+  --color-primary-600: #1896a6;
+  --color-primary-700: #1a7684;
+  --color-primary-800: #1e5f6c;
+  --color-primary-900: #1d505c;
+}
