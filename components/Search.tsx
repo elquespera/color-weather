@@ -89,6 +89,7 @@ export default function Search({ open, onClose }: SearchProps) {
   function handleCurrentCityClick() {
     if (!currentCity) return;
     setLocation(currentCity.lat, currentCity.lon);
+    router.push("/");
     handleClose();
   }
 
