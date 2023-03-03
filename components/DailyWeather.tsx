@@ -40,6 +40,15 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
               visibility={currentWeather.visibility}
               wind={currentWeather.wind}
             />
+            <ul className="flex gap-1 overflow-x-auto text-sm text-text-secondary mt-2 isolate">
+              {weather.map(({ dt, icon, description, temp }) => (
+                <li className="flex flex-col items-center shrink-0">
+                  <Temperature value={temp} className="z-10 translate-y-1" />
+                  <WeatherIcon icon={icon} alt={description} />
+                  <span className="z-10 translate-y--1">{convertTime(dt)}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         )
       }

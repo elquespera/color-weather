@@ -4,12 +4,11 @@ import WeatherIcon from "components/ui/WeatherIcon";
 import TemperatureRange from "components/TemperatureRange";
 import useConvertDate from "hooks/useConvertDate";
 import LocationContext from "context/LocationContext";
-import TemperatureChart from "@/components/TemperatureChart";
+import TemperatureChart from "components/TemperatureChart";
 import Box from "components/ui/Box";
 import useTranslation from "hooks/useTranslation";
 import { lng } from "assets/translations";
-import AppContext from "context/AppContext";
-import WeatherDetails from "@/components/ui/WeatherDetails";
+import WeatherDetails from "components/WeatherDetails";
 
 export default function Home() {
   const t = useTranslation();
