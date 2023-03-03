@@ -256,8 +256,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #aaa7;
-  opacity: 0.4;
+  background-color: #ccc7;
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {

@@ -4,7 +4,8 @@ import { useContext } from "react";
 export default function useConvertDate() {
   const { language } = useContext(AppContext);
 
-  function date(dt: number) {
+  function date(dt?: number) {
+    if (dt === undefined) return;
     const dateObj = new Date(dt * 1000);
     return dateObj.toLocaleString(language, {
       month: "long",
@@ -12,7 +13,8 @@ export default function useConvertDate() {
     });
   }
 
-  function time(dt: number) {
+  function time(dt?: number) {
+    if (dt === undefined) return;
     const dateObj = new Date(dt * 1000);
     return dateObj.toLocaleString("ru", {
       hour: "2-digit",
@@ -20,7 +22,8 @@ export default function useConvertDate() {
     });
   }
 
-  function dateTime(dt: number) {
+  function dateTime(dt?: number) {
+    if (dt === undefined) return;
     return `${date(dt)}, ${time(dt)}`;
   }
 

@@ -13,7 +13,7 @@ export default function Box({
   className,
   horizontal,
 }: BoxProps) {
-  const boxClass = "px-app sm:px-app-lg";
+  const boxClass = "mx-app sm:mx-app-lg";
   const titleClass = "text-lg sm:text-xl text-primary-header";
 
   return title && !children ? (

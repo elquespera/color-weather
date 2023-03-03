@@ -38,6 +38,7 @@ export interface CurrentWeatherResponse {
   sunset: number;
   icon: string;
   updatedAt: number;
+  timezone: number;
   extended: WeatherDataPoint[];
 }
 

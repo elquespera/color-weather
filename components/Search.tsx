@@ -21,7 +21,7 @@ import { fetchCityData, fetchData, fetchWeatherData } from "lib/fetchData";
 import LocationContext from "context/LocationContext";
 import CityList from "./ui/CityList";
 import { getLocalStorage, setLocalStorage } from "lib/storage";
-import { MAX_FAVORITES } from "consts";
+import { MAX_FAVORITES, ROUTES } from "consts";
 
 interface SearchProps {
   open?: boolean;
@@ -82,7 +82,9 @@ export default function Search({ open, onClose }: SearchProps) {
 
   function handleCityClick(lat: number, lon: number) {
     setLocation(lat, lon);
-    router.push("/");
+    if (!["/", "/5-days"].includes(router.pathname)) {
+      router.push("/");
+    }
     handleClose();
   }
 

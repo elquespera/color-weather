@@ -69,6 +69,7 @@ function convertWeatherData(
     sunset: data.sys.sunset,
     icon: data.weather[0].icon,
     updatedAt: data.dt,
+    timezone: data.timezone,
     extended: [],
   };
 }
