@@ -26,6 +26,8 @@ export default function CityList({
   onToggleFavorite,
 }: CityListProps) {
   const t = useTranslation();
+  const asButton =
+    type === "current" || (type === "favorites" && !favoritesEdit);
 
   function handleCityClick(latitude: number, longitude: number) {
     if (onClick) onClick(latitude, longitude);
@@ -92,6 +94,7 @@ export default function CityList({
               />
             )
           }
+          asButton={asButton}
           ignoreEndDecorationClick
           hover
           onClick={() => handleCityClick(lat, lon)}

@@ -10,6 +10,7 @@ interface ListItemProps {
   collapsedElement?: string | React.ReactNode;
   hover?: boolean;
   highlight?: boolean;
+  asButton?: boolean;
   ignoreEndDecorationClick?: boolean;
   onClick?: (event: React.MouseEvent) => void;
 }
@@ -23,11 +24,13 @@ export default function ListItem({
   collapsedElement,
   hover,
   highlight,
+  asButton,
   ignoreEndDecorationClick,
   onClick,
 }: ListItemProps) {
   const [collapsed, setCollapsed] = useState(true);
   const endDecorationRef = useRef<HTMLDivElement>(null);
+  const renderButton = collapsedElement !== undefined || asButton;
 
   function handleClick(event: React.MouseEvent) {
     setCollapsed((current) => !current);
@@ -50,15 +53,15 @@ export default function ListItem({
           `relative flex flex-col isolate px-4 py-3 sm:px-5 sm:py-4
         before:absolute before:inset-1 before:rounded-lg
         focus-within:before:bg-primary-400 focus-within:before:opacity-30`,
-          (onClick || collapsedElement) && "cursor-pointer select-none",
+          (onClick || renderButton) && "cursor-pointer select-none",
           highlight && "before:opacity-20 before:bg-primary-400",
           hover &&
-            (onClick || collapsedElement) &&
+            (onClick || renderButton) &&
             "hover:before:opacity-20 hover:before:bg-primary-400"
         )}
       >
         <ButtonOrDiv
-          collapsedElement={collapsedElement}
+          asButton={renderButton}
           className="relative flex text-start focus:outline-none gap-2 md:gap-4 items-center justify-between"
         >
           {startDecoration && (
@@ -93,15 +96,15 @@ export default function ListItem({
 }
 
 function ButtonOrDiv({
-  collapsedElement,
+  asButton,
   children,
   className,
 }: {
-  collapsedElement?: ReactNode;
+  asButton?: boolean;
   children?: ReactNode;
   className?: string;
 }) {
-  return collapsedElement ? (
+  return asButton ? (
     <button className={className}>{children}</button>
   ) : (
     <div className={className}>{children}</div>
