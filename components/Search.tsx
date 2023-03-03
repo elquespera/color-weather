@@ -80,18 +80,22 @@ export default function Search({ open, onClose }: SearchProps) {
     inputRef.current?.focus();
   }
 
-  function handleCityClick(lat: number, lon: number) {
-    setLocation(lat, lon);
+  function checkRoute() {
     if (!["/", "/5-days"].includes(router.pathname)) {
       router.push("/");
     }
+  }
+
+  function handleCityClick(lat: number, lon: number) {
+    setLocation(lat, lon);
+    checkRoute();
     handleClose();
   }
 
   function handleCurrentCityClick() {
     if (!currentCity) return;
     setLocation(currentCity.lat, currentCity.lon);
-    router.push("/");
+    checkRoute();
     handleClose();
   }
 

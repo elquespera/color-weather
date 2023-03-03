@@ -33,6 +33,8 @@ export enum lng {
   light,
   language,
 
+  today,
+  tomorrow,
   outOf,
 
   searchPlaces,
@@ -81,6 +83,8 @@ export const languageData: LanguageData = {
     [lng.light]: "Light",
     [lng.language]: "Language",
 
+    [lng.today]: "Today",
+    [lng.tomorrow]: "Tomorrow",
     [lng.outOf]: "out of",
 
     [lng.searchPlaces]: "Search places",
@@ -120,6 +124,8 @@ export const languageData: LanguageData = {
     [lng.light]: "Светлый",
     [lng.language]: "Язык приложения",
 
+    [lng.today]: "Сегодня",
+    [lng.tomorrow]: "Завтра",
     [lng.outOf]: "из",
 
     [lng.searchPlaces]: "Поиск городов",

@@ -9,7 +9,11 @@ export default function Tomorrow() {
   const [weather, setWeather] = useState<Array<WeatherDataPoint[]>>([]);
 
   useEffect(() => {
-    const allWeather = currentWeather?.extended || [];
+    const timezone = currentWeather?.timezone || 0;
+    const allWeather =
+      currentWeather?.extended.map((point) => {
+        return { ...point, dt: point.dt + timezone };
+      }) || [];
     if (allWeather.length === 0) return;
     let date = new Date(allWeather[0].dt * 1000).getUTCDate();
     let slice: WeatherDataPoint[] = [];

@@ -1,12 +1,29 @@
+import { lng } from "@/assets/translations";
 import AppContext from "@/context/AppContext";
+import capitalizeStr from "@/lib/capitalizeStr";
 import { useContext } from "react";
+import useTranslation from "./useTranslation";
 
 export default function useConvertDate() {
+  const t = useTranslation();
   const { language } = useContext(AppContext);
 
-  function date(dt?: number) {
+  function date(dt?: number, humanReadable = false) {
     if (dt === undefined) return;
     const dateObj = new Date(dt * 1000);
+    if (humanReadable) {
+      const today = new Date();
+      let weekDay = dateObj.toLocaleString(language, { weekday: "long" });
+
+      if (today.getDate() === dateObj.getDate()) weekDay = t(lng.today);
+      if (today.getDate() + 1 === dateObj.getDate()) weekDay = t(lng.tomorrow);
+
+      const dateProper = dateObj.toLocaleString(language, {
+        month: "long",
+        day: "numeric",
+      });
+      return capitalizeStr(`${weekDay}, ${dateProper}`);
+    }
     return dateObj.toLocaleString(language, {
       month: "long",
       day: "numeric",

@@ -5,6 +5,7 @@ import {
   OpenWeather5DaysResponse,
 } from "types/openWeatherMap";
 import type { NextApiRequest, NextApiResponse } from "next";
+import capitalizeStr from "@/lib/capitalizeStr";
 
 export default async function handler(
   req: NextApiRequest,
@@ -44,16 +45,10 @@ export default async function handler(
   }
 }
 
-function capitalize(str?: string): string {
-  if (str && str.length > 0) {
-    return str[0].toLocaleUpperCase() + str.slice(1);
-  } else return "";
-}
-
 function convertWeatherData(
   data: OpenWeatherCurrentResponse
 ): CurrentWeatherResponse {
-  const description = capitalize(data.weather[0].description);
+  const description = capitalizeStr(data.weather[0].description);
   return {
     state: "ok",
     temp: data.main.temp,
@@ -80,7 +75,7 @@ function convertWeatherDataPoints(
   if (!data?.list) return [];
 
   return data.list.map<WeatherDataPoint>((entry) => {
-    const description = capitalize(entry.weather[0].description);
+    const description = capitalizeStr(entry.weather[0].description);
     return {
       dt: entry.dt,
       temp: entry.main.temp,
