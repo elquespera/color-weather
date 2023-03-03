@@ -35,8 +35,7 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
 
   const minTemp = Math.round(Math.min(...temps));
   const maxTemp = Math.round(Math.max(...temps));
-
-  weather?.forEach(({ dt, temp }) => {});
+  console.log(minTemp, maxTemp);
 
   return (
     <ListItem

@@ -20,7 +20,7 @@ export default function Temperature({
   const { units } = useContext(AppContext);
   const t = useTranslation();
 
-  return value ? (
+  return value !== undefined ? (
     <span
       className={clsx(
         "inline-flex justify-center overflow-hidden",

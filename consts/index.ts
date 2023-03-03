@@ -1,5 +1,5 @@
-import { lng } from "@/assets/translations";
-import { AppLanguage, MeasurementUnits, RouteInfo } from "@/types";
+import { lng } from "assets/translations";
+import { AppLanguage, MeasurementUnits, RouteInfo } from "types";
 
 export const APP_TITLE = "ColorWeather";
 export const APP_DESCRIPTION = "ColorWeather - cool and colorful weather app";

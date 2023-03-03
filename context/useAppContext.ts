@@ -9,7 +9,7 @@ import {
   setCurrentThemeMode,
   DEFAULT_THEME_MODE,
 } from "lib/themes";
-import { AppLanguage, AppState, MeasurementUnits } from "types";
+import { AppLanguage, AppState, APP_LANGUAGES, MeasurementUnits } from "types";
 import { DEFAULT_APP_LANGUAGE, DEFAULT_UNITS } from "consts";
 import { defaultAppContext } from "./AppContext";
 
@@ -69,9 +69,17 @@ export default function useAppContext() {
     setAppContext({
       ...appContext,
       theme: stored.theme || DEFAULT_THEME,
-      themeMode: stored.themeMode || DEFAULT_THEME_MODE,
+      themeMode:
+        stored.themeMode || matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light",
       units: stored.units || DEFAULT_UNITS,
-      language: stored.language || DEFAULT_APP_LANGUAGE,
+      language:
+        stored.language ||
+        APP_LANGUAGES.find((language) =>
+          navigator.language.startsWith(language)
+        ) ||
+        DEFAULT_APP_LANGUAGE,
     });
     if (stored.theme) setCurrentTheme(stored.theme);
     if (stored.themeMode) setCurrentThemeMode(stored.themeMode);

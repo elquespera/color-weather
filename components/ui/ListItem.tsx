@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { useRef, useState } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 
 interface ListItemProps {
   primary?: string | React.ReactNode;
@@ -57,7 +57,10 @@ export default function ListItem({
             "hover:before:opacity-20 hover:before:bg-primary-400"
         )}
       >
-        <button className="relative flex text-start focus:outline-none gap-2 md:gap-4 items-center justify-between">
+        <ButtonOrDiv
+          collapsedElement={collapsedElement}
+          className="relative flex text-start focus:outline-none gap-2 md:gap-4 items-center justify-between"
+        >
           {startDecoration && (
             <div className="flex-shrink-0">{startDecoration}</div>
           )}
@@ -73,7 +76,7 @@ export default function ListItem({
               {endDecoration}
             </div>
           )}
-        </button>
+        </ButtonOrDiv>
       </div>
       {collapsedElement && (
         <div
@@ -86,5 +89,21 @@ export default function ListItem({
         </div>
       )}
     </>
+  );
+}
+
+function ButtonOrDiv({
+  collapsedElement,
+  children,
+  className,
+}: {
+  collapsedElement?: ReactNode;
+  children?: ReactNode;
+  className?: string;
+}) {
+  return collapsedElement ? (
+    <button className={className}>{children}</button>
+  ) : (
+    <div className={className}>{children}</div>
   );
 }
