@@ -21,7 +21,7 @@ export default function Home() {
         <div className="flex flex-col gap-8 sm:gap-12">
           <Box>
             <div className="text-primary-sub-header ">
-              {convertDate(weather.updatedAt)}
+              {convertDate(weather.updatedAt + weather.timezone)}
             </div>
             <TemperatureRange min={weather.tempMin} max={weather.tempMax} />
           </Box>

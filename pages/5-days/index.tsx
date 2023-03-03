@@ -15,11 +15,11 @@ export default function Tomorrow() {
         return { ...point, dt: point.dt + timezone };
       }) || [];
     if (allWeather.length === 0) return;
-    let date = new Date(allWeather[0].dt * 1000).getUTCDate();
+    let date = new Date(allWeather[0].dt).getUTCDate();
     let slice: WeatherDataPoint[] = [];
     const newWeather: Array<WeatherDataPoint[]> = [];
     allWeather.forEach((point, index) => {
-      const newDate = new Date(point.dt * 1000).getUTCDate();
+      const newDate = new Date(point.dt).getUTCDate();
       if (date !== newDate || index === allWeather.length - 1) {
         date = newDate;
         newWeather.push(slice);

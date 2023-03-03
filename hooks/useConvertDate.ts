@@ -1,4 +1,5 @@
 import { lng } from "@/assets/translations";
+import { TIMEZONE_OFFSET } from "@/consts";
 import AppContext from "@/context/AppContext";
 import capitalizeStr from "@/lib/capitalizeStr";
 import { useContext } from "react";
@@ -10,7 +11,7 @@ export default function useConvertDate() {
 
   function date(dt?: number, humanReadable = false) {
     if (dt === undefined) return;
-    const dateObj = new Date(dt * 1000);
+    const dateObj = new Date(dt + TIMEZONE_OFFSET);
     if (humanReadable) {
       const today = new Date();
       let weekDay = dateObj.toLocaleString(language, { weekday: "long" });
@@ -32,7 +33,7 @@ export default function useConvertDate() {
 
   function time(dt?: number) {
     if (dt === undefined) return;
-    const dateObj = new Date(dt * 1000);
+    const dateObj = new Date(dt + TIMEZONE_OFFSET);
     return dateObj.toLocaleString("ru", {
       hour: "2-digit",
       minute: "2-digit",

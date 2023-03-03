@@ -5,21 +5,33 @@ import Temperature from "./Temperature";
 import ListItem from "./ui/ListItem";
 import WeatherDetails from "./WeatherDetails";
 import WeatherIcon from "./ui/WeatherIcon";
-// import { useContext } from "react";
-// import LocationContext from "@/context/LocationContext";
-
 interface DailyWeatherProps {
   weather?: WeatherDataPoint[];
 }
 
+const MIN_MIDDAY_HOUR = 11;
+const MAX_MIDDAY_HOUR = 14;
+
 export default function DailyWeather({ weather }: DailyWeatherProps) {
   const [, convertDate, convertTime] = useConvertDate();
-  const currentWeather = weather?.[0];
+
+  const initialDate = new Date(weather?.[0].dt || 0).getUTCDate();
+
+  let currentWeather =
+    weather?.find(({ dt }) => {
+      const date = new Date(dt).getUTCDate();
+      const hours = new Date(dt).getUTCHours();
+      return (
+        date === initialDate &&
+        hours > MIN_MIDDAY_HOUR &&
+        hours <= MAX_MIDDAY_HOUR
+      );
+    }) || weather?.[0];
 
   return (
     <ListItem
       hover
-      primary={convertDate(currentWeather?.dt, true)}
+      primary={convertDate(currentWeather?.dt || 0, true)}
       secondary={currentWeather?.description}
       endDecoration={
         currentWeather && (
@@ -41,7 +53,7 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
               wind={currentWeather.wind}
             />
             <ul className="flex gap-1 overflow-x-auto text-sm text-text-secondary mt-2 isolate">
-              {weather.map(({ dt, icon, description, temp }) => (
+              {weather?.map(({ dt, icon, description, temp }) => (
                 <li key={dt} className="flex flex-col items-center shrink-0">
                   <Temperature
                     value={temp}

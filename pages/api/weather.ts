@@ -63,8 +63,8 @@ function convertWeatherData(
     sunrise: data.sys.sunrise,
     sunset: data.sys.sunset,
     icon: data.weather[0].icon,
-    updatedAt: data.dt,
-    timezone: data.timezone,
+    updatedAt: data.dt * 1000,
+    timezone: data.timezone * 1000,
     extended: [],
   };
 }
@@ -77,7 +77,7 @@ function convertWeatherDataPoints(
   return data.list.map<WeatherDataPoint>((entry) => {
     const description = capitalizeStr(entry.weather[0].description);
     return {
-      dt: entry.dt,
+      dt: entry.dt * 1000,
       temp: entry.main.temp,
       description,
       humidity: entry.main.humidity,
