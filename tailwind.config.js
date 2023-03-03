@@ -86,6 +86,10 @@ module.exports = {
           contrast: "var(--color-text-contrast)",
         },
 
+        divider: {
+          DEFAULT: "var(--color-divider)",
+        },
+
         background: {
           DEFAULT: "var(--color-background)",
         },

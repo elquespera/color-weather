@@ -33,7 +33,7 @@ export default function WeatherDetails({
   return (
     <div
       className={clsx(
-        "grid grid-cols-[auto,1fr] gap-x-8 sm:gap-x-12 gap-y-1 grid-col p-2 pt-4 sm:p-4 text-sm sm:text-base",
+        "grid grid-cols-[auto,1fr] gap-x-8 sm:gap-x-12 gap-y-1 grid-col text-sm sm:text-base",
         className
       )}
     >

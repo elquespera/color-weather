@@ -52,6 +52,7 @@ export default function Home() {
 
           <Box title={t(lng.currentDetails)}>
             <WeatherDetails
+              className="p-2 pt-4 sm:p-4"
               humidity={weather.humidity}
               pressure={weather.pressure}
               visibility={weather.visibility}

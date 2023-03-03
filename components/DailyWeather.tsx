@@ -46,8 +46,9 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
       }
       collapsedElement={
         currentWeather && (
-          <div className="flex flex-col">
+          <div className="flex flex-col pb-6 gap-2 sm:gap-4 px-2 sm:px-4 sm:pb-4 border-b-[1px] border-divider">
             <WeatherDetails
+              className="text-sm sm:text-sm"
               pressure={currentWeather.pressure}
               humidity={currentWeather.humidity}
               wind={currentWeather.wind}

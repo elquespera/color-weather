@@ -43,46 +43,48 @@ export default function ListItem({
   }
 
   return (
-    <div
-      onClick={handleClick}
-      className={clsx(
-        `relative isolate px-4 py-3 sm:px-5 sm:py-4
+    <>
+      <div
+        onClick={handleClick}
+        className={clsx(
+          `relative flex flex-col isolate px-4 py-3 sm:px-5 sm:py-4
         before:absolute before:inset-1 before:rounded-lg
         focus-within:before:bg-primary-400 focus-within:before:opacity-30`,
-        (onClick || collapsedElement) && "cursor-pointer select-none",
-        highlight && "before:opacity-20 before:bg-primary-400",
-        hover &&
-          (onClick || collapsedElement) &&
-          "hover:before:opacity-20 hover:before:bg-primary-400"
-      )}
-    >
-      <div className="relative flex gap-2 md:gap-4 items-center justify-between">
-        {startDecoration && (
-          <div className="flex-shrink-0">{startDecoration}</div>
+          (onClick || collapsedElement) && "cursor-pointer select-none",
+          highlight && "before:opacity-20 before:bg-primary-400",
+          hover &&
+            (onClick || collapsedElement) &&
+            "hover:before:opacity-20 hover:before:bg-primary-400"
         )}
-        <div className="flex-1">
-          <div className="text-primary-header sm:text-xl">{primary}</div>
-          <div className="opacity-60 text-sm">{secondary}</div>
-        </div>
-        {middleDecoration && (
-          <div className="flex-shink-0">{middleDecoration}</div>
-        )}
-        {endDecoration && (
-          <div ref={endDecorationRef} className="flex-shink-0">
-            {endDecoration}
+      >
+        <button className="relative flex text-start focus:outline-none gap-2 md:gap-4 items-center justify-between">
+          {startDecoration && (
+            <div className="flex-shrink-0">{startDecoration}</div>
+          )}
+          <div className="flex-1">
+            <div className="text-primary-header sm:text-xl">{primary}</div>
+            <div className="opacity-60 text-sm">{secondary}</div>
           </div>
-        )}
+          {middleDecoration && (
+            <div className="flex-shink-0">{middleDecoration}</div>
+          )}
+          {endDecoration && (
+            <div ref={endDecorationRef} className="flex-shink-0">
+              {endDecoration}
+            </div>
+          )}
+        </button>
       </div>
       {collapsedElement && (
         <div
           className={clsx(
-            "overflow-hidden transition-all",
+            "px-4 sm:px-5 overflow-hidden transition-all ",
             collapsed ? "max-h-0" : "max-h-60"
           )}
         >
           {collapsedElement}
         </div>
       )}
-    </div>
+    </>
   );
 }

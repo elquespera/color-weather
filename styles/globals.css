@@ -20,6 +20,7 @@ body {
 
   --color-primary-header: var(--color-primary-800);
   --color-primary-subheader: var(--color-primary-600);
+  --color-divider: #c5c5c5;
 
   --color-text: #000;
   --color-text-disabled: #777;
@@ -42,6 +43,7 @@ body.dark-mode {
   --color-text: #fff;
   --color-text-secondary: #aaa;
   --color-background: #000;
+  --color-divider: #666;
 
   --color-checked: var(--color-primary-500);
   --color-unchecked: #aaa;
