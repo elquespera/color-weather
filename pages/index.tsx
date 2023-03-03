@@ -14,6 +14,7 @@ export default function Home() {
   const t = useTranslation();
   const [convertDate] = useConvertDate();
   const { weather } = useContext(LocationContext);
+  const timezone = weather?.timezone || 0;
 
   return (
     <>
@@ -56,8 +57,8 @@ export default function Home() {
               humidity={weather.humidity}
               pressure={weather.pressure}
               visibility={weather.visibility}
-              sunrise={weather.sunrise}
-              sunset={weather.sunset}
+              sunrise={weather.sunrise + timezone}
+              sunset={weather.sunset + timezone}
               wind={weather.wind}
             />
           </Box>
