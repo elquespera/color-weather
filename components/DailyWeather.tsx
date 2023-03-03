@@ -15,9 +15,9 @@ const MAX_MIDDAY_HOUR = 14;
 export default function DailyWeather({ weather }: DailyWeatherProps) {
   const [, convertDate, convertTime] = useConvertDate();
 
-  const initialDate = new Date(weather?.[0].dt || 0).getUTCDate();
+  const initialDate = new Date(weather?.[0]?.dt || 0).getUTCDate();
 
-  let currentWeather =
+  const currentWeather =
     weather?.find(({ dt }) => {
       const date = new Date(dt).getUTCDate();
       const hours = new Date(dt).getUTCHours();
@@ -28,6 +28,16 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
       );
     }) || weather?.[0];
 
+  const temps =
+    weather
+      ?.filter(({ dt }) => new Date(dt).getUTCDate() === initialDate)
+      .map(({ temp }) => temp) || [];
+
+  const minTemp = Math.round(Math.min(...temps));
+  const maxTemp = Math.round(Math.max(...temps));
+
+  weather?.forEach(({ dt, temp }) => {});
+
   return (
     <ListItem
       hover
@@ -36,7 +46,15 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
       endDecoration={
         currentWeather && (
           <div className="flex items-center">
-            <Temperature value={currentWeather.temp} />
+            <Temperature value={maxTemp} />
+            {minTemp !== maxTemp && (
+              <>
+                <span className="hidden sm:inline-block pl-2">/</span>
+                <span className="hidden sm:inline-block pl-2">
+                  <Temperature value={minTemp} />
+                </span>
+              </>
+            )}
             <WeatherIcon
               icon={currentWeather.icon}
               alt={currentWeather.description}

@@ -4,6 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { WeatherDataPoint } from "types";
 import DailyWeather from "components/DailyWeather";
 
+const DATA_POINTS_PER_DAY = 8;
+
 export default function Tomorrow() {
   const { weather: currentWeather } = useContext(LocationContext);
   const [weather, setWeather] = useState<Array<WeatherDataPoint[]>>([]);
@@ -16,16 +18,17 @@ export default function Tomorrow() {
       }) || [];
     if (allWeather.length === 0) return;
     let date = new Date(allWeather[0].dt).getUTCDate();
-    let slice: WeatherDataPoint[] = [];
+    let startIndex = 0;
     const newWeather: Array<WeatherDataPoint[]> = [];
     allWeather.forEach((point, index) => {
       const newDate = new Date(point.dt).getUTCDate();
       if (date !== newDate || index === allWeather.length - 1) {
         date = newDate;
-        newWeather.push(slice);
-        slice = [];
+        newWeather.push(
+          allWeather.slice(startIndex, startIndex + DATA_POINTS_PER_DAY)
+        );
+        startIndex = index;
       }
-      slice.push(point);
     });
 
     setWeather(newWeather);
