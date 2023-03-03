@@ -7,9 +7,8 @@ import ListItem from "components/ui/ListItem";
 import IconButton from "components/ui/IconButton";
 import ButtonGroup from "components/ui/ButtonGroup";
 import { APP_LANGUAGES, APP_LANGUAGES_META, AppLanguage } from "types";
-import useTranslation from "@/hooks/useTranslation";
-import { lng } from "@/assets/translations";
-import Heading from "@/components/ui/Heading";
+import useTranslation from "hooks/useTranslation";
+import { lng } from "assets/translations";
 
 export default function Settings() {
   const themeButtonRef = useRef<HTMLButtonElement>(null);
@@ -48,73 +47,70 @@ export default function Settings() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <Heading>{t(lng.settingsTitle)}</Heading>
-      <ul className="flex flex-col px-app sm:px-app-lg">
-        <ListItem
-          primary={t(lng.measurementUnits)}
-          secondary={t(units === "metric" ? lng.celsius : lng.fahrenheit)}
-          endDecoration={
-            <Switch
-              checked={units === "imperial"}
-              uncheckedDecoration="C°"
-              checkedDecoration="F°"
-              onChange={handleUnits}
-            />
-          }
-          ignoreEndDecorationClick
-          highlight={units === "imperial"}
-          onClick={() => handleUnits(units === "metric")}
-        />
+    <ul>
+      <ListItem
+        primary={t(lng.measurementUnits)}
+        secondary={t(units === "metric" ? lng.celsius : lng.fahrenheit)}
+        endDecoration={
+          <Switch
+            checked={units === "imperial"}
+            uncheckedDecoration="C°"
+            checkedDecoration="F°"
+            onChange={handleUnits}
+          />
+        }
+        ignoreEndDecorationClick
+        highlight={units === "imperial"}
+        onClick={() => handleUnits(units === "metric")}
+      />
 
-        <ListItem
-          primary={t(lng.nextTheme)}
-          secondary={`${THEMES_META[theme].name} (${
-            THEMES.indexOf(theme) + 1
-          } ${t(lng.outOf)} ${THEMES.length})`}
-          endDecoration={
-            <IconButton
-              icon="theme"
-              animation="spin"
-              ref={themeButtonRef}
-              className="text-primary-header"
-              onClick={() => nextTheme(theme)}
-            />
-          }
-          ignoreEndDecorationClick
-          onClick={handleNextTheme}
-        />
+      <ListItem
+        primary={t(lng.nextTheme)}
+        secondary={`${THEMES_META[theme].name} (${
+          THEMES.indexOf(theme) + 1
+        } ${t(lng.outOf)} ${THEMES.length})`}
+        endDecoration={
+          <IconButton
+            icon="theme"
+            animation="spin"
+            ref={themeButtonRef}
+            className="text-primary-header"
+            onClick={() => nextTheme(theme)}
+          />
+        }
+        ignoreEndDecorationClick
+        onClick={handleNextTheme}
+      />
 
-        <ListItem
-          primary={t(lng.darkMode)}
-          secondary={t(themeMode === "dark" ? lng.dark : lng.light)}
-          highlight={themeMode === "dark"}
-          endDecoration={
-            <Switch
-              checked={themeMode === "dark"}
-              uncheckedDecoration={<Icon type="sunny" size="small" />}
-              checkedDecoration={<Icon type="moon" size="small" />}
-              onChange={handleThemeMode}
-            />
-          }
-          ignoreEndDecorationClick
-          onClick={() => handleThemeMode(themeMode === "light")}
-        />
+      <ListItem
+        primary={t(lng.darkMode)}
+        secondary={t(themeMode === "dark" ? lng.dark : lng.light)}
+        highlight={themeMode === "dark"}
+        endDecoration={
+          <Switch
+            checked={themeMode === "dark"}
+            uncheckedDecoration={<Icon type="sunny" size="small" />}
+            checkedDecoration={<Icon type="moon" size="small" />}
+            onChange={handleThemeMode}
+          />
+        }
+        ignoreEndDecorationClick
+        onClick={() => handleThemeMode(themeMode === "light")}
+      />
 
-        <ListItem
-          primary={t(lng.language)}
-          secondary={APP_LANGUAGES_META[language].name}
-          endDecoration={
-            <ButtonGroup
-              items={APP_LANGUAGES.map((x) => x)}
-              selected={language}
-              onChange={handleLanguageChange}
-            />
-          }
-          ignoreEndDecorationClick
-          onClick={handleNextLanguage}
-        />
-      </ul>
-    </div>
+      <ListItem
+        primary={t(lng.language)}
+        secondary={APP_LANGUAGES_META[language].name}
+        endDecoration={
+          <ButtonGroup
+            items={APP_LANGUAGES.map((x) => x)}
+            selected={language}
+            onChange={handleLanguageChange}
+          />
+        }
+        ignoreEndDecorationClick
+        onClick={handleNextLanguage}
+      />
+    </ul>
   );
 }

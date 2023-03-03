@@ -32,10 +32,10 @@ export default function Tomorrow() {
   }, [currentWeather]);
 
   return (
-    <Box>
+    <>
       {weather.map((point, index) => (
         <DailyWeather key={index} weather={point} />
       ))}
-    </Box>
+    </>
   );
 }
