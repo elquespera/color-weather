@@ -43,9 +43,7 @@ export default function Header({}: HeaderProps) {
         </h1>
         <NavTabs />
       </header>
-      <FocusTrap>
-        <Search open={searchOpen} onClose={() => setSearchOpen(false)} />
-      </FocusTrap>
+      <Search open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }

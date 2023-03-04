@@ -73,3 +73,23 @@ export async function fetchWeatherData(
     return undefined;
   }
 }
+
+export async function fetchCityAndWeatherData(
+  lat: number,
+  lon: number,
+  lang: AppLanguage,
+  units: MeasurementUnits
+) {
+  const [cityResults, weatherResults] = await Promise.allSettled([
+    fetchCityData(lat, lon, lang),
+    fetchWeatherData(lat, lon, units, lang),
+  ]);
+
+  const city =
+    cityResults.status === "fulfilled" ? cityResults.value : undefined;
+
+  if (city && weatherResults.status === "fulfilled")
+    city.weather = weatherResults.value;
+
+  return city;
+}

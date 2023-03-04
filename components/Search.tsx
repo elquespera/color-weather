@@ -17,7 +17,7 @@ import {
   THEME_MODE_BACKGROUNDS,
 } from "lib/themes";
 import { AppLanguage, City, CitySearchResponse, MeasurementUnits } from "types";
-import { fetchCityData, fetchData, fetchWeatherData } from "lib/fetchData";
+import { fetchCityAndWeatherData, fetchData } from "lib/fetchData";
 import LocationContext from "context/LocationContext";
 import CityList from "./ui/CityList";
 import { getLocalStorage, setLocalStorage } from "lib/storage";
@@ -113,23 +113,6 @@ export default function Search({ open, onClose }: SearchProps) {
     });
   }
 
-  async function fetchFavoriteData(
-    latitude: number,
-    longitude: number,
-    language: AppLanguage,
-    units: MeasurementUnits
-  ) {
-    const city = await fetchCityData(latitude, longitude, language);
-    if (city)
-      city.weather = await fetchWeatherData(
-        latitude,
-        longitude,
-        units,
-        language
-      );
-    return city;
-  }
-
   async function toggleFavoriteCity(latitude: number, longitude: number) {
     const cities = [...favorites];
     const favoriteIndex = findFavoriteIndex(latitude, longitude);
@@ -137,7 +120,7 @@ export default function Search({ open, onClose }: SearchProps) {
     if (favoriteIndex >= 0) {
       cities.splice(favoriteIndex, 1);
     } else {
-      const city = await fetchFavoriteData(
+      const city = await fetchCityAndWeatherData(
         latitude,
         longitude,
         language,
@@ -166,7 +149,7 @@ export default function Search({ open, onClose }: SearchProps) {
       const favorites = getLocalStorage().favoriteCities || [];
       const cities = await Promise.all<City>(
         favorites.map(async (city) => {
-          const cityData = await fetchFavoriteData(
+          const cityData = await fetchCityAndWeatherData(
             city.lat,
             city.lon,
             language,
@@ -175,6 +158,7 @@ export default function Search({ open, onClose }: SearchProps) {
           return cityData || city;
         })
       );
+
       setFavorites(cities);
     }
 

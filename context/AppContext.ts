@@ -20,6 +20,7 @@ interface AppContextInterface {
   setLanguage: (language: AppLanguage) => void;
   appState: AppState;
   setAppState: (state: AppState) => void;
+  fetchingCount: number;
 }
 
 export const defaultAppContext: AppContextInterface = {
@@ -34,6 +35,7 @@ export const defaultAppContext: AppContextInterface = {
   setLanguage: () => {},
   appState: "ready",
   setAppState: () => {},
+  fetchingCount: 0,
 };
 
 const AppContext = createContext(defaultAppContext);

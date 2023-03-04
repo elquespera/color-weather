@@ -32,8 +32,13 @@ export default function Main({ children }: MainProps) {
 
   useEffect(() => {
     async function fetchCurrentCity() {
-      const city = await fetchCityData(lat, lon, language);
-      setCity(city?.name);
+      try {
+        setAppState("fetching");
+        const city = await fetchCityData(lat, lon, language);
+        setCity(city?.name);
+      } finally {
+        setAppState("ready");
+      }
     }
 
     if (lon === 0 && lat === 0) return;
@@ -42,23 +47,28 @@ export default function Main({ children }: MainProps) {
 
   useEffect(() => {
     async function fetchCurrentCity() {
-      if (gpsCoords) {
-        const city = await fetchCityData(
-          gpsCoords.lat,
-          gpsCoords.lon,
-          language
-        );
-        if (city) {
-          city.weather = await fetchWeatherData(
+      try {
+        setAppState("fetching");
+        if (gpsCoords) {
+          const city = await fetchCityData(
             gpsCoords.lat,
             gpsCoords.lon,
-            units,
             language
           );
+          if (city) {
+            city.weather = await fetchWeatherData(
+              gpsCoords.lat,
+              gpsCoords.lon,
+              units,
+              language
+            );
+          }
+          setCurrentCity(city);
+        } else {
+          setCurrentCity(undefined);
         }
-        setCurrentCity(city);
-      } else {
-        setCurrentCity(undefined);
+      } finally {
+        setAppState("ready");
       }
     }
 

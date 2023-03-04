@@ -7,7 +7,6 @@ import {
   ThemeType,
   ThemeMode,
   setCurrentThemeMode,
-  DEFAULT_THEME_MODE,
 } from "lib/themes";
 import { AppLanguage, AppState, APP_LANGUAGES, MeasurementUnits } from "types";
 import { DEFAULT_APP_LANGUAGE, DEFAULT_UNITS } from "consts";
@@ -60,7 +59,21 @@ export default function useAppContext() {
 
   function setAppState(state: AppState) {
     setAppContext((current) => {
-      return { ...current, appState: state };
+      let fetching = current.fetchingCount;
+
+      let newState: AppState | null = null;
+      if (state === "fetching") {
+        if (fetching === 0) newState = "fetching";
+        fetching += 1;
+      } else if (state === "ready") {
+        if (fetching === 1) newState = "ready";
+        fetching -= 1;
+      }
+      return {
+        ...current,
+        fetchingCount: fetching,
+        appState: newState || current.appState,
+      };
     });
   }
 
