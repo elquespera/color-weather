@@ -47,6 +47,7 @@ export interface City {
   lon: number;
   name?: string;
   country?: string;
+  countryCode?: string;
   weather?: CurrentWeatherResponse;
 }
 

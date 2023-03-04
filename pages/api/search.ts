@@ -2,6 +2,7 @@ import { fetchData } from "lib/fetchData";
 import { CitySearchResponse, ErrorResponse } from "types";
 import { OpenWeatherGeoResponse } from "types/openWeatherMap";
 import type { NextApiRequest, NextApiResponse } from "next";
+import findCountryName from "@/lib/findCountryName";
 
 export default async function handler(
   req: NextApiRequest,
@@ -29,7 +30,8 @@ export default async function handler(
           name: cityName,
           lat,
           lon,
-          country,
+          countryCode: country,
+          country: findCountryName(country, lang),
         };
       }
     );

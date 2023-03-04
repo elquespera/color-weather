@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { fetchData } from "lib/fetchData";
 import { City, ErrorResponse } from "types";
 import { OpenWeatherGeoResponse } from "types/openWeatherMap";
+import { fetchData } from "lib/fetchData";
+import findCountryName from "lib/findCountryName";
 
 export default async function handler(
   req: NextApiRequest,
@@ -31,7 +32,8 @@ export default async function handler(
       name: cityName,
       lat: city.lat,
       lon: city.lon,
-      country: city.country,
+      countryCode: city.country,
+      country: findCountryName(city.country, lang),
     };
 
     res.status(200).json(responseData);
