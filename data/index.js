@@ -11,4 +11,7 @@ const filtered = countries.map((country) => {
   return result;
 });
 
-fs.writeFileSync("countries.json", JSON.stringify(filtered));
+fs.writeFileSync(
+  "../assets/countries/countries.json",
+  JSON.stringify(filtered)
+);
