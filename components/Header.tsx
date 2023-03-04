@@ -5,6 +5,7 @@ import IconButton from "components/ui/IconButton";
 import Logo from "./Logo";
 import Search from "./Search";
 import SearchPlaceholder from "./SearchPlaceholder";
+import FocusTrap from "focus-trap-react";
 
 interface HeaderProps {}
 
@@ -42,7 +43,9 @@ export default function Header({}: HeaderProps) {
         </h1>
         <NavTabs />
       </header>
-      <Search open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <FocusTrap>
+        <Search open={searchOpen} onClose={() => setSearchOpen(false)} />
+      </FocusTrap>
     </>
   );
 }

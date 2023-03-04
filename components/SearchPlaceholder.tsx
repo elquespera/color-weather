@@ -15,8 +15,8 @@ export default function SearchPlaceholder({ onClick }: SearchPlaceholderProps) {
       text-lg sm:text-xl text-primary-200
       bg-primary-800 rounded-full overflow-hidden
       min-w-[8rem] max-w-[60vw]
-      transition-all
-      hover:bg-primary-700`}
+      focus:outline-none transition-all
+      hover:bg-primary-700 focus-visible:bg-primary-700`}
       onClick={onClick}
     >
       <Icon type="search" className="text-primary-200 flex-shrink-0" />
