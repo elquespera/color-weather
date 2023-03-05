@@ -36,7 +36,7 @@ export default function ButtonGroup({
       ref={wrapperRef}
       className="
         relative flex bg-switch-unchecked
-        overflow-hidden rounded-xl shadow-inner
+        overflow-hidden rounded-xl shadow-inset-switch
         text-sm sm:text-base
         transition-opacity opacity-80
         focus-within:opacity-100

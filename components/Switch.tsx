@@ -29,7 +29,7 @@ export default function Switch({
     <label
       className={clsx(
         `relative inline-block overflow-hidden
-        w-12 h-6 rounded-xl shadow-inner cursor-pointer
+        w-12 h-6 rounded-xl shadow-inset-switch cursor-pointer
         transition-opacity opacity-80
         focus-within:opacity-100
         active:opacity-100

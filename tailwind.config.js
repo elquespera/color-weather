@@ -54,7 +54,8 @@ module.exports = {
       },
 
       boxShadow: {
-        spinner: "rgba(0, 0, 0, 0.24) 0px 2px 8px",
+        spinner: "0px 2px 8px var(--color-shadow)",
+        "inset-switch": "inset 2px 2px 0.3rem var(--color-shadow)",
       },
 
       translate: {

@@ -27,6 +27,7 @@ body {
   --color-text-secondary: #666;
   --color-text-contrast: #fff;
   --color-background: #fff;
+  --color-shadow: rgba(0, 0, 0, 0.25);
 
   --color-checked: var(--color-primary-900);
   --color-unchecked: #aaa;
@@ -44,6 +45,7 @@ body.dark-mode {
   --color-text-secondary: #aaa;
   --color-background: #000;
   --color-divider: #666;
+  --color-shadow: rgba(0, 0, 0, 0.4);
 
   --color-checked: var(--color-primary-500);
   --color-unchecked: #aaa;
