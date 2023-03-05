@@ -1,4 +1,4 @@
-// import useTranslation from "hooks/useTranslation";
+import { useEffect, useState } from "react";
 import useConvertDate from "hooks/useConvertDate";
 import { WeatherDataPoint } from "types";
 import Temperature from "./Temperature";
@@ -14,31 +14,40 @@ const MAX_MIDDAY_HOUR = 14;
 
 export default function DailyWeather({ weather }: DailyWeatherProps) {
   const [, convertDate, convertTime] = useConvertDate();
+  const [currentWeather, setCurrentWeather] = useState<WeatherDataPoint>();
+  const [minTemp, setMinTemp] = useState(0);
+  const [maxTemp, setMaxTemp] = useState(0);
+  const [expanded, setExpanded] = useState(false);
 
-  const initialDate = new Date(weather?.[0]?.dt || 0).getUTCDate();
+  useEffect(() => {
+    const initialDate = new Date(weather?.[0]?.dt || 0).getUTCDate();
+    const temps =
+      weather
+        ?.filter(({ dt }) => new Date(dt).getUTCDate() === initialDate)
+        .map(({ temp }) => temp) || [];
 
-  const currentWeather =
-    weather?.find(({ dt }) => {
-      const date = new Date(dt).getUTCDate();
-      const hours = new Date(dt).getUTCHours();
-      return (
-        date === initialDate &&
-        hours > MIN_MIDDAY_HOUR &&
-        hours <= MAX_MIDDAY_HOUR
-      );
-    }) || weather?.[0];
+    setMinTemp(Math.round(Math.min(...temps)));
+    setMaxTemp(Math.round(Math.max(...temps)));
 
-  const temps =
-    weather
-      ?.filter(({ dt }) => new Date(dt).getUTCDate() === initialDate)
-      .map(({ temp }) => temp) || [];
+    setCurrentWeather(
+      weather?.find(({ dt }) => {
+        const date = new Date(dt).getUTCDate();
+        const hours = new Date(dt).getUTCHours();
+        return (
+          date === initialDate &&
+          hours > MIN_MIDDAY_HOUR &&
+          hours <= MAX_MIDDAY_HOUR
+        );
+      }) || weather?.[0]
+    );
 
-  const minTemp = Math.round(Math.min(...temps));
-  const maxTemp = Math.round(Math.max(...temps));
+    setExpanded(false);
+  }, [weather]);
 
   return (
     <ListItem
       hover
+      expanded={expanded}
       primary={convertDate(currentWeather?.dt || 0, true)}
       secondary={currentWeather?.description}
       endDecoration={
@@ -84,6 +93,7 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
           </div>
         )
       }
+      onClick={() => setExpanded(!expanded)}
     />
   );
 }

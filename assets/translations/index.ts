@@ -8,6 +8,7 @@ export enum lng {
   feelsLike,
   tempMin,
   tempMax,
+  updatedAt,
   currentDetails,
   humidity,
   pressure,
@@ -62,8 +63,9 @@ export const languageData: LanguageData = {
     [lng.currentTab]: "Current",
     [lng.fiveDaysTab]: "5 Days",
     [lng.settingsTab]: "Settings",
-
+    [lng.updatedAt]: "Updated at",
     [lng.feelsLike]: "Feels like",
+
     [lng.tempMin]: "Min",
     [lng.tempMax]: "Max",
     [lng.currentDetails]: "Current conditions",
@@ -117,6 +119,7 @@ export const languageData: LanguageData = {
     [lng.settingsTab]: "Настройки",
 
     [lng.feelsLike]: "По ощущениям",
+    [lng.updatedAt]: "Обновлено в",
     [lng.tempMin]: "Минимум",
     [lng.tempMax]: "Максимум",
     [lng.currentDetails]: "Текущие условия",

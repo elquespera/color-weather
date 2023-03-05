@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { ReactNode, useRef, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 
 interface ListItemProps {
   primary?: string | React.ReactNode;
@@ -8,6 +8,7 @@ interface ListItemProps {
   middleDecoration?: string | React.ReactNode;
   endDecoration?: string | React.ReactNode;
   collapsedElement?: string | React.ReactNode;
+  expanded?: boolean;
   hover?: boolean;
   highlight?: boolean;
   asButton?: boolean;
@@ -21,6 +22,7 @@ export default function ListItem({
   startDecoration,
   middleDecoration,
   endDecoration,
+  expanded,
   collapsedElement,
   hover,
   highlight,
@@ -28,12 +30,10 @@ export default function ListItem({
   ignoreEndDecorationClick,
   onClick,
 }: ListItemProps) {
-  const [collapsed, setCollapsed] = useState(true);
   const endDecorationRef = useRef<HTMLDivElement>(null);
   const renderButton = collapsedElement !== undefined || asButton;
 
   function handleClick(event: React.MouseEvent) {
-    setCollapsed((current) => !current);
     if (!onClick) return;
     const decorationDiv = endDecorationRef.current;
     if (
@@ -85,7 +85,7 @@ export default function ListItem({
         <div
           className={clsx(
             "px-4 sm:px-5 overflow-hidden transition-all ",
-            collapsed ? "max-h-0" : "max-h-60"
+            expanded ? "max-h-60" : "max-h-0"
           )}
         >
           {collapsedElement}

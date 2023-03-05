@@ -9,10 +9,11 @@ import Box from "components/ui/Box";
 import useTranslation from "hooks/useTranslation";
 import { lng } from "assets/translations";
 import WeatherDetails from "components/WeatherDetails";
+import { TIMEZONE_OFFSET } from "@/consts";
 
 export default function Home() {
   const t = useTranslation();
-  const [convertDate] = useConvertDate();
+  const [convertDate, , convertTime] = useConvertDate();
   const { weather } = useContext(LocationContext);
   const timezone = weather?.timezone || 0;
 
@@ -22,7 +23,9 @@ export default function Home() {
         <div className="flex flex-col gap-8 sm:gap-12">
           <Box>
             <div className="text-primary-sub-header ">
-              {convertDate(weather.updatedAt + weather.timezone)}
+              {`${t(lng.updatedAt)} ${convertTime(
+                weather.updatedAt - TIMEZONE_OFFSET
+              )}`}
             </div>
             <TemperatureRange min={weather.tempMin} max={weather.tempMax} />
           </Box>
