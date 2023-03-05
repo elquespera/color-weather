@@ -6,6 +6,7 @@ import Spinner from "./Spinner";
 import LocationHint from "./LocationHint";
 import { getLocalStorage } from "@/lib/storage";
 import { DEFAULT_LOCATION } from "@/consts";
+import getApproximateLocation from "@/lib/getApproximateLocation";
 
 interface MainProps {
   children?: React.ReactNode;
@@ -84,12 +85,22 @@ export default function Main({ children }: MainProps) {
   }, [gpsCoords, language, units]);
 
   useEffect(() => {
-    const { location } = getLocalStorage();
-    if (location) {
-      setLocation(location.lat, location.lon);
-    } else {
-      setLocation(...DEFAULT_LOCATION);
+    async function loadLocation() {
+      const { location } = getLocalStorage();
+      if (location) {
+        setLocation(location.lat, location.lon);
+      } else {
+        const approximate = await getApproximateLocation();
+        if (approximate) {
+          console.log(approximate);
+          setLocation(approximate.lat, approximate.lon);
+        } else {
+          setLocation(...DEFAULT_LOCATION);
+        }
+      }
     }
+
+    loadLocation();
   }, []);
 
   return (
