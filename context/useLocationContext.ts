@@ -1,3 +1,5 @@
+const LOCATION_PRECISION = 100000;
+
 import {
   City,
   CurrentWeatherResponse,
@@ -24,12 +26,13 @@ export default function useLocationContext() {
     });
 
   function setLocation(latitude: number, longitude: number) {
-    const precision = 10000;
-    const lat = Math.round(latitude * precision) / precision;
-    const lon = Math.round(longitude * precision) / precision;
+    const location = {
+      lat: Math.round(latitude * LOCATION_PRECISION) / LOCATION_PRECISION,
+      lon: Math.round(longitude * LOCATION_PRECISION) / LOCATION_PRECISION,
+    };
     setLocationContext((current) => {
-      setLocalStorage({ location: { lat, lon } });
-      return { ...current, lat, lon };
+      setLocalStorage({ location });
+      return { ...current, ...location };
     });
   }
 

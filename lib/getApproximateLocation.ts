@@ -1,19 +1,18 @@
 import { GPSCoordinates } from "types";
 
+const GEOLOCATION_DB_URL = "https://geolocation-db.com/json/";
+
 export default async function getApproximateLocation(): Promise<
   GPSCoordinates | undefined
 > {
   try {
-    const response = await fetch("/api/approximate", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(GEOLOCATION_DB_URL);
 
     if (response.ok) {
-      const location: GPSCoordinates = await response.json();
+      const location: { longitude: number; latitude: number } =
+        await response.json();
       if (location) {
-        return location;
+        return { lat: location.latitude, lon: location.longitude };
       }
     }
   } catch {

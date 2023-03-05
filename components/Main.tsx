@@ -92,7 +92,6 @@ export default function Main({ children }: MainProps) {
       } else {
         const approximate = await getApproximateLocation();
         if (approximate) {
-          console.log(approximate);
           setLocation(approximate.lat, approximate.lon);
         } else {
           setLocation(...DEFAULT_LOCATION);
