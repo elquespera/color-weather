@@ -15,12 +15,14 @@ export default function useSwipe(callback: SwipeCallback) {
       setStartCoord(event.changedTouches[0].screenX);
     }
     function handleTouchEnd(this: HTMLElement, event: TouchEvent) {
+      if (!callback || isScrollable(event.target as HTMLElement)) return;
+
       let distance = event.changedTouches[0].screenX - startCoord;
       const direction = distance > 0 ? "right" : "left";
       distance = Math.abs(distance);
       const percentage = distance / window.innerWidth;
 
-      if (callback) callback(direction, distance, percentage);
+      if (callback && distance !== 0) callback(direction, distance, percentage);
     }
 
     document.body.addEventListener("touchstart", handleTouchStart);
@@ -31,4 +33,12 @@ export default function useSwipe(callback: SwipeCallback) {
       document.body.removeEventListener("touchend", handleTouchEnd);
     };
   }, [callback]);
+}
+
+function isScrollable(element: HTMLElement | null): boolean {
+  if (!element) return false;
+  const scrollable =
+    element.scrollWidth > element.clientWidth &&
+    ["scroll", "auto"].includes(getComputedStyle(element).overflowY);
+  return scrollable || isScrollable(element.parentElement);
 }

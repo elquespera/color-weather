@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import Icon from "./Icon";
 
+const MIN_SWIPE_DISTANCE = 100;
+
 export default function NavTabs() {
   const navRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -18,7 +20,7 @@ export default function NavTabs() {
 
   useSwipe((direction, distance, percentage) => {
     console.log("swipe", direction, distance, percentage);
-    if (percentage > 50 || distance > 200) {
+    if (percentage > 50 || distance >= MIN_SWIPE_DISTANCE) {
       const nextIndex = selectedIndex + (direction === "left" ? 1 : -1);
       console.log(selectedIndex, nextIndex);
       const nextRoute = ROUTES[nextIndex]?.route;

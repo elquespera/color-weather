@@ -13,7 +13,7 @@ export default function useConvertDate() {
     if (dt === undefined) return;
     const dateObj = new Date(dt + TIMEZONE_OFFSET);
     if (humanReadable) {
-      const today = new Date();
+      const today = new Date(Date.now());
       let weekDay = dateObj.toLocaleString(language, { weekday: "long" });
 
       if (today.getDate() === dateObj.getDate()) weekDay = t(lng.today);
