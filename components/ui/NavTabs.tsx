@@ -1,10 +1,11 @@
 import { APP_TITLE, ROUTES } from "@/consts";
+import AppContext from "@/context/AppContext";
 import useSwipe from "@/hooks/useSwipe";
 import useTranslation from "@/hooks/useTranslation";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import Icon from "./Icon";
 
 const MIN_SWIPE_DISTANCE = 100;
@@ -13,13 +14,13 @@ export default function NavTabs() {
   const navRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const t = useTranslation();
+  const { language } = useContext(AppContext);
   const selectedIndex = ROUTES.findIndex(
     ({ route }) => route === router.pathname
   );
   const currentRoute = ROUTES[selectedIndex];
 
   useSwipe((direction, distance, percentage) => {
-    console.log("swipe", direction, distance, percentage);
     if (percentage > 50 || distance >= MIN_SWIPE_DISTANCE) {
       const nextIndex = selectedIndex + (direction === "left" ? 1 : -1);
       console.log(selectedIndex, nextIndex);
@@ -32,7 +33,7 @@ export default function NavTabs() {
     let title = APP_TITLE;
     if (currentRoute) title += ` | ${t(currentRoute.title)}`;
     document.title = title;
-  }, [currentRoute, router]);
+  }, [currentRoute, router, language]);
 
   useEffect(() => {
     const tabWidth = 8;
