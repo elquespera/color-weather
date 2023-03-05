@@ -1,11 +1,17 @@
 import { fetchData } from "lib/fetchData";
-import { CurrentWeatherResponse, ErrorResponse, WeatherDataPoint } from "types";
+import {
+  CurrentWeatherResponse,
+  ErrorResponse,
+  PollutionComponents,
+  WeatherDataPoint,
+} from "types";
 import {
   OpenWeatherCurrentResponse,
   OpenWeather5DaysResponse,
+  OpenWeatherAirPollutionResponse,
 } from "types/openWeatherMap";
 import type { NextApiRequest, NextApiResponse } from "next";
-import capitalizeStr from "@/lib/capitalizeStr";
+import capitalizeStr from "lib/capitalizeStr";
 
 export default async function handler(
   req: NextApiRequest,
@@ -30,11 +36,24 @@ export default async function handler(
     data5Days = undefined;
   }
 
+  let airPollution: OpenWeatherAirPollutionResponse | undefined;
+  try {
+    const responseAirPollution = await fetchData(
+      "open-weather",
+      "air_pollution",
+      req.query
+    );
+    if (responseAirPollution) airPollution = await responseAirPollution.json();
+  } catch (error) {
+    airPollution = undefined;
+  }
+
   const data: OpenWeatherCurrentResponse = await responseCurrent.json();
 
   if (responseCurrent.ok) {
     const responseData = convertWeatherData(data);
     responseData.extended = convertWeatherDataPoints(data5Days);
+    responseData.airPollution = airPollution?.list[0].components;
     res.status(200).json(responseData);
   } else {
     res.status(responseCurrent.status).json({

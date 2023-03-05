@@ -1,3 +1,5 @@
+import { PollutionComponents } from "types";
+
 export interface OpenWeatherCurrentResponse {
   dt: number;
   timezone: number;
@@ -58,3 +60,12 @@ interface OpenWeatherCity {
 }
 
 export type OpenWeatherGeoResponse = OpenWeatherCity[];
+
+interface OpenWeatherAirPollution {
+  components: PollutionComponents;
+  dt: number;
+}
+
+export interface OpenWeatherAirPollutionResponse {
+  list: OpenWeatherAirPollution[];
+}

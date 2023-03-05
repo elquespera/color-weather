@@ -23,6 +23,17 @@ export interface WeatherDataPoint {
   wind: WindData;
 }
 
+export interface PollutionComponents {
+  co?: number;
+  no?: number;
+  no2?: number;
+  o3?: number;
+  so2?: number;
+  pm2_5?: number;
+  pm10?: number;
+  nh3?: number;
+}
+
 export interface CurrentWeatherResponse {
   state: "ok";
   temp: number;
@@ -40,6 +51,7 @@ export interface CurrentWeatherResponse {
   updatedAt: number;
   timezone: number;
   extended: WeatherDataPoint[];
+  airPollution?: PollutionComponents;
 }
 
 export interface City {
