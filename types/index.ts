@@ -24,15 +24,15 @@ export interface WeatherDataPoint {
 }
 
 export interface PollutionComponents {
-  co?: number;
-  no?: number;
-  no2?: number;
-  o3?: number;
-  so2?: number;
-  pm2_5?: number;
-  pm10?: number;
-  nh3?: number;
+  [key: string]: number;
 }
+
+export type PollutantLevel =
+  | "good"
+  | "fair"
+  | "moderate"
+  | "poor"
+  | "very-poor";
 
 export interface CurrentWeatherResponse {
   state: "ok";
@@ -83,6 +83,7 @@ const Icons = [
   "star",
   "star-filled",
   "loading",
+  "info",
 ] as const;
 
 export type LocationState =

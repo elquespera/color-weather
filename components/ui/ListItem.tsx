@@ -84,7 +84,7 @@ export default function ListItem({
       {collapsedElement && (
         <div
           className={clsx(
-            "px-4 sm:px-5 overflow-hidden transition-all ",
+            "px-4 sm:px-5 overflow-hidden transition-all",
             expanded ? "max-h-60" : "max-h-0"
           )}
         >

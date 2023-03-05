@@ -53,6 +53,21 @@ export enum lng {
   locationError,
   locationTryAgain,
   locationImprove,
+
+  airQuality,
+  currentLevel,
+  good,
+  fair,
+  moderate,
+  poor,
+  veryPoor,
+
+  pm25Description,
+  pm10Description,
+  so2Description,
+  no2Description,
+  coDescription,
+  hide,
 }
 
 type LanguageData = {
@@ -114,6 +129,26 @@ export const languageData: LanguageData = {
     [lng.locationTryAgain]:
       "Please provide access to geolocation to see weather at current location",
     [lng.locationImprove]: "Location might be approximate, click to improve.",
+
+    [lng.airQuality]: "Air Quality",
+    [lng.currentLevel]: "Current level",
+    [lng.good]: "good",
+    [lng.fair]: "fair",
+    [lng.moderate]: "moderate",
+    [lng.poor]: "poor",
+    [lng.veryPoor]: "very poor",
+
+    [lng.pm25Description]:
+      "Particulate matter of a diameter of 2.5 microns (<i>PM<sub>2.5</sub></i>) can be inhaled into the lungs and induce adverse health effects. Exposure to high levels of <i>PM<sub>2.5</sub></i> can cause respiratory and cardiovascular problems.",
+    [lng.pm10Description]:
+      "Particulate matter of a diameter of 10 microns (<i>PM<sub>10</sub></i>) are less dangerous than <i>PM<sub>2.5</sub></i>, but prolonged exposure might be harmful.",
+    [lng.so2Description]:
+      "Sulfur dioxide (<i>SO<sub>2</sub></i>) is emitted by burning fossil fuels. It can cause respiratory problems such as bronchoconstriction and asthma.",
+    [lng.no2Description]:
+      "Nitrogen dioxide(<i>NO<sub>2</sub></i>) is mosty produced by car emissions. <i>NO<sub>2</sub></i> inhalation can lead to lung inflammation and reduced lung function.",
+    [lng.coDescription]:
+      "Carbon monoxide (<i>CO</i>) is a poisonous gas produced by burning different substances. ",
+    [lng.hide]: "Hide",
   },
   ru: {
     [lng.currentTab]: "Сейчас",

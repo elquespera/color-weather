@@ -11,6 +11,7 @@ import { lng } from "assets/translations";
 import WeatherDetails from "components/WeatherDetails";
 import { TIMEZONE_OFFSET } from "@/consts";
 import LocalTime from "@/components/LocalTime";
+import AirQuality from "@/components/AirQuality";
 
 export default function Home() {
   const t = useTranslation();
@@ -65,6 +66,12 @@ export default function Home() {
               sunrise={weather.sunrise + timezone}
               sunset={weather.sunset + timezone}
               wind={weather.wind}
+            />
+          </Box>
+          <Box title={t(lng.airQuality)}>
+            <AirQuality
+              className="p-2 pt-4 sm:p-4"
+              data={weather.airPollution}
             />
           </Box>
         </div>
