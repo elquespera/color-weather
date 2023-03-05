@@ -39,7 +39,9 @@ export default function LocalTime({ timezone }: LocalTimeProps) {
           <span className="text-sm">{convertDate(time, false, true)}</span>
         )}
       </div>
-      <span className="text-text-secondary">{t(lng.localTime)}</span>
+      <span className="text-text-secondary text-sm sm:text-base">
+        {t(lng.localTime)}
+      </span>
     </div>
   );
 }

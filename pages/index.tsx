@@ -34,25 +34,23 @@ export default function Home() {
             </div>
           </Box>
 
-          <Box>
-            <div className="w-full-mobile self-center overflow-hidden">
-              <div className="grid grid-cols-2 gap-x-2 items-center justify-items-center">
-                <Temperature
-                  value={weather.temp}
-                  large
-                  className="text-primary-header"
-                />
-                <WeatherIcon
-                  icon={weather.icon}
-                  alt={weather.description}
-                  large
-                />
-                <div className="overflow-hidden self-start">
-                  <Temperature feelsLike value={weather.tempFeelsLike} />
-                </div>
-                <div className="text-center self-start overflow-hidden">
-                  {weather.description}
-                </div>
+          <Box className="overflow-hidden">
+            <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-x-2 items-center justify-items-center">
+              <Temperature
+                value={weather.temp}
+                large
+                className="text-primary-header"
+              />
+              <WeatherIcon
+                icon={weather.icon}
+                alt={weather.description}
+                large
+              />
+              <div className="overflow-hidden self-start">
+                <Temperature feelsLike value={weather.tempFeelsLike} />
+              </div>
+              <div className="text-center self-start overflow-hidden text-ellipsis">
+                {weather.description}
               </div>
             </div>
           </Box>
