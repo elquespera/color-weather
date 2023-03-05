@@ -51,7 +51,7 @@ export default function ListItem({
         onClick={handleClick}
         className={clsx(
           `relative flex flex-col isolate px-4 py-3 sm:px-5 sm:py-4
-        before:absolute before:inset-1 before:rounded-lg
+        before:absolute before:inset-1 before:rounded-2xl
         focus-within:before:bg-primary-400 focus-within:before:opacity-30`,
           (onClick || renderButton) && "cursor-pointer select-none",
           highlight && "before:opacity-20 before:bg-primary-400",
