@@ -29,7 +29,8 @@ export default function Switch({
     <label
       className={clsx(
         `relative inline-block overflow-hidden
-        w-12 h-6 rounded-xl shadow-inset-switch cursor-pointer
+        w-10 h-5 sm:w-12 sm:h-6 
+        rounded-xl shadow-inset-switch cursor-pointer
         transition-opacity opacity-80
         focus-within:opacity-100
         active:opacity-100
@@ -40,23 +41,25 @@ export default function Switch({
       )}
     >
       <input
-        className="opacity-0 translate-x-[-100%]"
+        className="opacity-0 translate-x-[-100%] w-0 h-0"
         type="checkbox"
         checked={inputChecked}
         onChange={handleChange}
       />
       <span
         className={clsx(
-          "absolute overflow-hidden inset-0 w-5 flex items-center text-text-contrast transition-all",
-          inputChecked ? "translate-x-2" : "translate-x-7"
+          "absolute overflow-hidden inset-0 w-4 sm:w-5 flex items-center text-text-contrast transition-all scale-75",
+          inputChecked
+            ? "translate-x-1 sm:translate-x-2"
+            : "translate-x-5 sm:translate-x-6"
         )}
       >
         {inputChecked ? checkedDecoration : uncheckedDecoration}
       </span>
       <span
         className={clsx(
-          "absolute rounded-full inset-1 w-4 bg-switch-knob transition-all",
-          inputChecked && "translate-x-6"
+          "absolute rounded-full inset-1 w-3 sm:w-4 bg-switch-knob transition-all",
+          inputChecked && "translate-x-5 sm:translate-x-6"
         )}
       />
     </label>

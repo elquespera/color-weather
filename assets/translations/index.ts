@@ -174,7 +174,10 @@ export const languageData: LanguageData = {
     [lng.dayLength]: "Световой день",
     [lng.wind]: "Ветер",
     [lng.meters]: "м",
-    [lng.mBar]: "mBar",
+    [lng.mBar]: "миллибар",
+    [lng.km]: "км",
+    [lng.mSec]: "м/с",
+    [lng.mph]: "миль/ч",
 
     [lng.fiveDaysTitle]: "Прогноз на 5 дней",
 
@@ -321,7 +324,7 @@ export const languageData: LanguageData = {
     [lng.humidity]: "Luftfeuchtigkeit",
     [lng.pressure]: "Luftdruck",
     [lng.visibility]: "Sichtweite",
-    [lng.sunriseSunset]: "Sonnenaufgang/Sonnenuntergang",
+    [lng.sunriseSunset]: "Sonnenaufg./Sonnenuntg.",
     [lng.dayLength]: "Tageslänge",
     [lng.wind]: "Wind",
     [lng.meters]: "m",
@@ -413,8 +416,8 @@ export const languageData: LanguageData = {
 
     [lng.settingsTitle]: "Nastavení",
     [lng.measurementUnits]: "Jednotky měření",
-    [lng.celsius]: "Celsia",
-    [lng.fahrenheit]: "Fahrenheita",
+    [lng.celsius]: "Stupně Celsia",
+    [lng.fahrenheit]: "Stupně Fahrenheita",
     [lng.nextTheme]: "Další téma",
     [lng.darkMode]: "Tmavý režim",
     [lng.dark]: "Tmavý",
@@ -442,7 +445,7 @@ export const languageData: LanguageData = {
     [lng.locationImprove]: "Poloha může být přibližná, klikněte pro vylepšení.",
 
     [lng.airQuality]: "Kvalita ovzduší",
-    [lng.pollutant]: "Znečišťující látka",
+    [lng.pollutant]: "Látka",
     [lng.level]: "Úroveň",
     [lng.concentration]: "Koncentrace",
     [lng.currentLevel]: "Aktuální úroveň",
