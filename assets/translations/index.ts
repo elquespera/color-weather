@@ -9,6 +9,7 @@ export enum lng {
   tempMin,
   tempMax,
   updatedAt,
+  localTime,
   currentDetails,
   humidity,
   pressure,
@@ -65,6 +66,7 @@ export const languageData: LanguageData = {
     [lng.settingsTab]: "Settings",
     [lng.updatedAt]: "Updated at",
     [lng.feelsLike]: "Feels like",
+    [lng.localTime]: "Local time",
 
     [lng.tempMin]: "Min",
     [lng.tempMax]: "Max",
@@ -122,6 +124,7 @@ export const languageData: LanguageData = {
     [lng.updatedAt]: "Обновлено в",
     [lng.tempMin]: "Минимум",
     [lng.tempMax]: "Максимум",
+    [lng.localTime]: "Местное время",
     [lng.currentDetails]: "Текущие условия",
     [lng.humidity]: "Влажность",
     [lng.pressure]: "Давление",

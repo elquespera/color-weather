@@ -11,7 +11,7 @@ export default function TemperatureRange({ min, max }: TemperatureRangeProps) {
   const t = useTranslation();
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 text-text-secondary">
       <div className="flex gap-1">
         {t(lng.tempMin)}↓
         <Temperature className="font-semibold" value={min} />

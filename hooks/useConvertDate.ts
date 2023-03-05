@@ -9,7 +9,7 @@ export default function useConvertDate() {
   const t = useTranslation();
   const { language } = useContext(AppContext);
 
-  function date(dt?: number, humanReadable = false) {
+  function date(dt?: number, humanReadable = false, shortMonth = false) {
     if (dt === undefined) return;
     const dateObj = new Date(dt + TIMEZONE_OFFSET);
     if (humanReadable) {
@@ -26,7 +26,7 @@ export default function useConvertDate() {
       return capitalizeStr(`${weekDay}, ${dateProper}`);
     }
     return dateObj.toLocaleString(language, {
-      month: "long",
+      month: shortMonth ? "short" : "long",
       day: "numeric",
     });
   }

@@ -10,6 +10,7 @@ import useTranslation from "hooks/useTranslation";
 import { lng } from "assets/translations";
 import WeatherDetails from "components/WeatherDetails";
 import { TIMEZONE_OFFSET } from "@/consts";
+import LocalTime from "@/components/LocalTime";
 
 export default function Home() {
   const t = useTranslation();
@@ -21,13 +22,16 @@ export default function Home() {
     <>
       {weather && (
         <div className="flex flex-col gap-8 sm:gap-12">
-          <Box>
-            <div className="text-primary-sub-header ">
-              {`${t(lng.updatedAt)} ${convertTime(
-                weather.updatedAt - TIMEZONE_OFFSET
-              )}`}
+          <Box horizontal className="justify-between gap-x-6 gap-y-2 flex-wrap">
+            <LocalTime timezone={timezone} />
+            <div>
+              <div className="text-primary-sub-header ">
+                {`${t(lng.updatedAt)} ${convertTime(
+                  weather.updatedAt - TIMEZONE_OFFSET
+                )}`}
+              </div>
+              <TemperatureRange min={weather.tempMin} max={weather.tempMax} />
             </div>
-            <TemperatureRange min={weather.tempMin} max={weather.tempMax} />
           </Box>
 
           <Box>
