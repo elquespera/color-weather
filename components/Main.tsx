@@ -1,8 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import AppContext from "context/AppContext";
 import LocationContext from "context/LocationContext";
 import { fetchCityData, fetchWeatherData } from "lib/fetchData";
 import Spinner from "./Spinner";
+import LocationHint from "./LocationHint";
+import { getLocalStorage } from "@/lib/storage";
+import { DEFAULT_LOCATION } from "@/consts";
 
 interface MainProps {
   children?: React.ReactNode;
@@ -10,10 +13,15 @@ interface MainProps {
 
 export default function Main({ children }: MainProps) {
   const { language, units, setAppState } = useContext(AppContext);
-  const { lon, lat, setLocation, setCity, setWeather, setCurrentCity } =
-    useContext(LocationContext);
-
-  const [gpsCoords, setGpsCoord] = useState<{ lat: number; lon: number }>();
+  const {
+    lon,
+    lat,
+    gpsCoords,
+    setLocation,
+    setCity,
+    setWeather,
+    setCurrentCity,
+  } = useContext(LocationContext);
 
   useEffect(() => {
     async function fetchWeather() {
@@ -76,14 +84,12 @@ export default function Main({ children }: MainProps) {
   }, [gpsCoords, language, units]);
 
   useEffect(() => {
-    function defineLocation() {
-      navigator.geolocation.getCurrentPosition(async ({ coords }) => {
-        setGpsCoord({ lat: coords.latitude, lon: coords.longitude });
-        setLocation(coords.latitude, coords.longitude);
-      });
+    const { location } = getLocalStorage();
+    if (location) {
+      setLocation(location.lat, location.lon);
+    } else {
+      setLocation(...DEFAULT_LOCATION);
     }
-
-    defineLocation();
   }, []);
 
   return (

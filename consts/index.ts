@@ -14,6 +14,8 @@ export const DEFAULT_UNITS: MeasurementUnits = "metric";
 
 export const DEFAULT_APP_LANGUAGE: AppLanguage = "en";
 
+export const DEFAULT_LOCATION = [50.0755, 14.4378] as const;
+
 export const MAX_FAVORITES = 10;
 
 export const TIMEZONE_OFFSET = new Date().getTimezoneOffset() * 60 * 1000;

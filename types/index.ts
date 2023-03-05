@@ -53,6 +53,8 @@ export interface City {
 
 export type CitySearchResponse = City[];
 
+export type GPSCoordinates = { lat: number; lon: number };
+
 const Icons = [
   "settings",
   "theme",
@@ -64,11 +66,19 @@ const Icons = [
   "back",
   "close",
   "location",
+  "location-off",
   "near",
   "star",
   "star-filled",
   "loading",
 ] as const;
+
+export type LocationState =
+  | "not-requested"
+  | "granted"
+  | "denied"
+  | "unavailable"
+  | "timeout";
 
 export type IconType = typeof Icons[number];
 

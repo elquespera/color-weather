@@ -1,10 +1,15 @@
-import { getLocalStorage, setLocalStorage } from "lib/storage";
-import { City, CurrentWeatherResponse } from "types";
-import { useEffect, useState } from "react";
+import {
+  City,
+  CurrentWeatherResponse,
+  GPSCoordinates,
+  LocationState,
+} from "types";
+import { useState } from "react";
 import {
   defaultLocationContext,
   LocationContextInterface,
 } from "./LocationContext";
+import { setLocalStorage } from "lib/storage";
 
 export default function useLocationContext() {
   const [locationContext, setLocationContext] =
@@ -12,6 +17,8 @@ export default function useLocationContext() {
       ...defaultLocationContext,
       setCity,
       setLocation,
+      defineLocation,
+      setLocationState,
       setWeather,
       setCurrentCity,
     });
@@ -21,8 +28,20 @@ export default function useLocationContext() {
     const lat = Math.round(latitude * precision) / precision;
     const lon = Math.round(longitude * precision) / precision;
     setLocationContext((current) => {
-      setLocalStorage({ location: { lat, lon, city: current.city } });
+      setLocalStorage({ location: { lat, lon } });
       return { ...current, lat, lon };
+    });
+  }
+
+  function setGpsCoord(gpsCoords?: GPSCoordinates) {
+    setLocationContext((current) => {
+      return { ...current, gpsCoords };
+    });
+  }
+
+  function setLocationState(locationState: LocationState) {
+    setLocationContext((current) => {
+      return { ...current, locationState };
     });
   }
 
@@ -34,9 +53,6 @@ export default function useLocationContext() {
 
   function setCity(city?: string) {
     setLocationContext((current) => {
-      setLocalStorage({
-        location: { lat: current.lat, lon: current.lon, city },
-      });
       return { ...current, city };
     });
   }
@@ -47,13 +63,27 @@ export default function useLocationContext() {
     });
   }
 
-  useEffect(() => {
-    const { location } = getLocalStorage();
-    if (location) {
-      setLocation(location.lat, location.lon);
-      setCity(location.city);
-    }
-  }, []);
+  function defineLocation() {
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        setGpsCoord({ lat: coords.latitude, lon: coords.longitude });
+        setLocation(coords.latitude, coords.longitude);
+        setLocationState("granted");
+      },
+      (e) => {
+        const code = e.code;
+        setGpsCoord(undefined);
+        setLocationState(
+          code === e.PERMISSION_DENIED
+            ? "denied"
+            : code === e.POSITION_UNAVAILABLE
+            ? "unavailable"
+            : "timeout"
+        );
+      },
+      { timeout: 10000 }
+    );
+  }
 
   return locationContext;
 }

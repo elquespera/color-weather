@@ -43,6 +43,14 @@ export enum lng {
   favorites,
   favoritesEdit,
   favoritesEditFinish,
+
+  locationNotRequested,
+  locationDenied,
+  locationUnavailable,
+  locationTimeout,
+  locationError,
+  locationTryAgain,
+  locationImprove,
 }
 
 type LanguageData = {
@@ -93,6 +101,15 @@ export const languageData: LanguageData = {
     [lng.favorites]: "Favorite places",
     [lng.favoritesEdit]: "Edit",
     [lng.favoritesEditFinish]: "Finish",
+
+    [lng.locationNotRequested]: "Location is approximate",
+    [lng.locationDenied]: "Location use was denied",
+    [lng.locationUnavailable]: "Location not available",
+    [lng.locationTimeout]: "Location timeout",
+    [lng.locationError]: "Location error",
+    [lng.locationTryAgain]:
+      "Please provide access to geolocation to see weather at current location",
+    [lng.locationImprove]: "Location might be approximate, click to improve.",
   },
   ru: {
     [lng.currentTab]: "Сейчас",
@@ -135,6 +152,11 @@ export const languageData: LanguageData = {
     [lng.favorites]: "Избранное",
     [lng.favoritesEdit]: "Редактировать",
     [lng.favoritesEditFinish]: "Завершить",
+
+    [lng.locationDenied]: "Геолокация запрещена пользователем",
+    [lng.locationUnavailable]: "Геолокация недоступна",
+    [lng.locationTimeout]: "Геолокация недоступна",
+    [lng.locationError]: "Ошибка геолокации",
   },
   es: {},
 };

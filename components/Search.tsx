@@ -22,6 +22,8 @@ import LocationContext from "context/LocationContext";
 import CityList from "./ui/CityList";
 import { getLocalStorage, setLocalStorage } from "lib/storage";
 import { MAX_FAVORITES, ROUTES } from "consts";
+import ListItem from "./ui/ListItem";
+import Icon from "./ui/Icon";
 
 interface SearchProps {
   open?: boolean;
@@ -53,7 +55,8 @@ export default function Search({ open, onClose }: SearchProps) {
   const t = useTranslation();
   const router = useRouter();
   const { language, units, theme, themeMode } = useContext(AppContext);
-  const { currentCity, setLocation } = useContext(LocationContext);
+  const { currentCity, setLocation, locationState, defineLocation } =
+    useContext(LocationContext);
   const inputRef = useRef<HTMLInputElement>(null);
   const fetch = useCallback(fetchCities(), []);
   const [cities, setCities] = useState<City[]>([]);
@@ -189,7 +192,7 @@ export default function Search({ open, onClose }: SearchProps) {
     <div
       className={clsx(
         "inset-0 flex justify-center",
-        open ? "fixed z-10" : "hidden"
+        open ? "fixed z-20" : "hidden"
       )}
     >
       <div
@@ -237,12 +240,40 @@ export default function Search({ open, onClose }: SearchProps) {
         {cities.length === 0 ? (
           value === "" ? (
             <>
-              {currentCity && (
+              {currentCity ? (
                 <CityList
                   type="current"
                   cities={[currentCity]}
                   onClick={handleCurrentCityClick}
                 />
+              ) : (
+                locationState !== "granted" && (
+                  <ListItem
+                    primary={t(
+                      locationState === "not-requested"
+                        ? lng.locationUnavailable
+                        : locationState === "denied"
+                        ? lng.locationDenied
+                        : locationState === "unavailable"
+                        ? lng.locationUnavailable
+                        : lng.locationTimeout
+                    )}
+                    secondary={t(
+                      locationState === "not-requested"
+                        ? lng.locationImprove
+                        : lng.locationTryAgain
+                    )}
+                    onClick={
+                      locationState === "not-requested"
+                        ? defineLocation
+                        : undefined
+                    }
+                    startDecoration={
+                      <Icon type="location-off" className="text-red-500" />
+                    }
+                    asButton={locationState === "not-requested"}
+                  />
+                )
               )}
               {favorites.length > 0 && (
                 <h3 className="flex text-text-secondary justify-between mt-6 px-6">

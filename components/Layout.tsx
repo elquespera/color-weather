@@ -7,6 +7,7 @@ import Main from "./Main";
 
 import { Roboto_Flex } from "next/font/google";
 import clsx from "clsx";
+import LocationHint from "./LocationHint";
 
 const robotoFlex = Roboto_Flex({ subsets: ["latin", "cyrillic"] });
 
@@ -28,6 +29,7 @@ export default function Layout({ children }: LayoutProps) {
       <AppContext.Provider value={appContext}>
         <LocationContext.Provider value={locationContext}>
           <Header />
+          <LocationHint />
           <Main>{children}</Main>
         </LocationContext.Provider>
       </AppContext.Provider>
