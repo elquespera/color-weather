@@ -9,7 +9,6 @@ export default async function handler(
   res: NextApiResponse<City | ErrorResponse>
 ) {
   const lang = typeof req.query.lang === "string" ? req.query.lang : "en";
-
   const response = await fetchData("open-weather-geo", "reverse", {
     ...req.query,
     limit: 1,

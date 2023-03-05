@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import IconButton from "./ui/IconButton";
 
 const AUTO_HIDE_INTERVAL = 5000;
-const SHOW_INTERVAL = 1000;
+const SHOW_INTERVAL = 3000;
 
 export default function LocationHint() {
   const {
@@ -85,7 +85,7 @@ export default function LocationHint() {
       >
         <button
           className="relative z-10 outline-none hover:text-text-contrast text-start"
-          onClick={defineLocation}
+          onClick={handleClick}
         >
           {t(
             state === "not-requested"
