@@ -79,20 +79,23 @@ export default function useAppContext() {
 
   useEffect(() => {
     const stored = getLocalStorage();
-    setAppContext({
-      ...appContext,
-      theme: stored.theme || DEFAULT_THEME,
-      themeMode:
-        stored.themeMode || matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light",
-      units: stored.units || DEFAULT_UNITS,
-      language:
-        stored.language ||
-        APP_LANGUAGES.find((language) =>
-          navigator.language.startsWith(language)
-        ) ||
-        DEFAULT_APP_LANGUAGE,
+    setAppContext((current) => {
+      return {
+        ...current,
+        theme: stored.theme || DEFAULT_THEME,
+        themeMode:
+          stored.themeMode ||
+          (matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light"),
+        units: stored.units || DEFAULT_UNITS,
+        language:
+          stored.language ||
+          APP_LANGUAGES.find((language) =>
+            navigator.language.startsWith(language)
+          ) ||
+          DEFAULT_APP_LANGUAGE,
+      };
     });
     if (stored.theme) setCurrentTheme(stored.theme);
     if (stored.themeMode) setCurrentThemeMode(stored.themeMode);
