@@ -1,5 +1,10 @@
 import { lng } from "assets/translations";
-import { AppLanguage, MeasurementUnits, RouteInfo } from "types";
+import {
+  AppLanguage,
+  MeasurementUnits,
+  PollutantLevel,
+  RouteInfo,
+} from "types";
 
 export const APP_TITLE = "ColorWeather";
 export const APP_DESCRIPTION = "ColorWeather - cool and colorful weather app";
@@ -19,3 +24,11 @@ export const DEFAULT_LOCATION = [50.0755, 14.4378] as const;
 export const MAX_FAVORITES = 10;
 
 export const TIMEZONE_OFFSET = new Date().getTimezoneOffset() * 60 * 1000;
+
+export const POLLUTION_LEVEL_TRANSLATIONS: { [key in PollutantLevel]: lng } = {
+  good: lng.good,
+  fair: lng.fair,
+  moderate: lng.moderate,
+  poor: lng.poor,
+  "very-poor": lng.veryPoor,
+};

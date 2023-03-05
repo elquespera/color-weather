@@ -1,3 +1,5 @@
+import { POLLUTION_LEVEL_TRANSLATIONS } from "@/consts";
+import useTranslation from "@/hooks/useTranslation";
 import { PollutantLevel } from "types";
 import Icon from "./ui/Icon";
 
@@ -8,16 +10,21 @@ interface AirQualityLevelProps {
 const LEVELS: { [key in PollutantLevel]: number } = {
   "very-poor": 0,
   poor: 1,
-  fair: 2,
-  moderate: 3,
+  moderate: 2,
+  fair: 3,
   good: 4,
 };
 
 export default function AirQualityLevel({
   level = "good",
 }: AirQualityLevelProps) {
+  const t = useTranslation();
+
   return (
-    <span className="flex sm:gap-[0.15em]" title={level}>
+    <span
+      className="flex sm:gap-[0.15em]"
+      title={t(POLLUTION_LEVEL_TRANSLATIONS[level || "good"])}
+    >
       {Object.values(LEVELS).map((value) => {
         return (
           <Icon

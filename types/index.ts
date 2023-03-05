@@ -101,7 +101,7 @@ export type RouteInfo = { route: string; title: lng; icon: IconType };
 
 export type MeasurementUnits = "metric" | "imperial";
 
-export const APP_LANGUAGES = ["en", "ru", "es"] as const;
+export const APP_LANGUAGES = ["en", "ru", "es", "de", "cs"] as const;
 
 export type AppLanguage = typeof APP_LANGUAGES[number];
 
@@ -111,6 +111,8 @@ export const APP_LANGUAGES_META: {
   en: { name: "English" },
   ru: { name: "Русский" },
   es: { name: "Español" },
+  de: { name: "Deutsch" },
+  cs: { name: "Čeština" },
 };
 
 export type AppState = "ready" | "fetching" | "error";

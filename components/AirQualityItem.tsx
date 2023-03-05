@@ -5,7 +5,9 @@ import AirQualityLevel from "./AirQualityLevel";
 import IconButton from "./ui/IconButton";
 import clsx from "clsx";
 import { lng } from "assets/translations";
-import useTranslation from "@/hooks/useTranslation";
+import useTranslation from "hooks/useTranslation";
+import { POLLUTION_LEVEL_TRANSLATIONS } from "consts";
+import Icon from "./ui/Icon";
 
 type PollutantInfo = {
   name: string;
@@ -67,14 +69,6 @@ interface AirQualityItemProps {
   value: number;
 }
 
-const LEVELS: { [key in PollutantLevel]: lng } = {
-  good: lng.good,
-  fair: lng.fair,
-  moderate: lng.moderate,
-  poor: lng.poor,
-  "very-poor": lng.veryPoor,
-};
-
 export default function AirQualityItem({ name, value }: AirQualityItemProps) {
   const { weather } = useContext(LocationContext);
   const t = useTranslation();
@@ -99,15 +93,17 @@ export default function AirQualityItem({ name, value }: AirQualityItemProps) {
           {pollutant.component || pollutant.name}
         </td>
         <td>
-          <div className="flex items-center gap-1">
+          <button
+            className="flex items-center gap-1"
+            onClick={() => setCollapsed((current) => !current)}
+          >
             <AirQualityLevel level={level} />
-            <IconButton
+            <Icon
+              type="info"
               size="small"
-              className="scale-[0.6] text-text-secondary"
-              icon="info"
-              onClick={() => setCollapsed((current) => !current)}
+              className="scale-[0.8] text-text-secondary"
             />
-          </div>
+          </button>
         </td>
         <td className="flex gap-1">
           <span className="font-">{value}</span>
@@ -129,7 +125,7 @@ export default function AirQualityItem({ name, value }: AirQualityItemProps) {
                 lng.currentLevel
               )} -`}</span>
               <span className="font-semibold">
-                {t(LEVELS[level || "good"])}
+                {t(POLLUTION_LEVEL_TRANSLATIONS[level || "good"])}
               </span>
               <button
                 className="ml-auto text-text-secondary text-sm"
