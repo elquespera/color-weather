@@ -51,7 +51,7 @@ export interface OpenWeather5DaysResponse {
   list: OpenWeatherCurrentResponse[];
 }
 
-interface OpenWeatherCity {
+export interface OpenWeatherCity {
   name: string;
   lat: number;
   lon: number;

@@ -4,6 +4,7 @@ import { OpenWeatherGeoResponse } from "types/openWeatherMap";
 import { fetchData } from "lib/fetchData";
 import findCountryName from "lib/findCountryName";
 import convertLanguageCode from "@/lib/convertLanguageCode";
+import findCityLocalName from "@/lib/findCityLocalName";
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,13 +24,8 @@ export default async function handler(
   const city = data[0];
 
   if (response.ok && city) {
-    let cityName = city.name;
-    if (city.local_names && city.local_names[lang]) {
-      cityName = city.local_names[lang];
-    }
-
     const responseData: City = {
-      name: cityName,
+      name: findCityLocalName(city, lang),
       lat: city.lat,
       lon: city.lon,
       countryCode: city.country,

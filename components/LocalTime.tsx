@@ -18,7 +18,7 @@ export default function LocalTime({ timezone }: LocalTimeProps) {
   function calculateTime() {
     const today = new Date();
     const local = Date.now() + (timezone || 0);
-    setShowDate(today.getUTCDate() !== new Date(local).getUTCDate());
+    setShowDate(today.getDate() !== new Date(local).getDate());
     setTime(local);
   }
 
