@@ -3,12 +3,13 @@ import { City, ErrorResponse } from "types";
 import { OpenWeatherGeoResponse } from "types/openWeatherMap";
 import { fetchData } from "lib/fetchData";
 import findCountryName from "lib/findCountryName";
+import convertLanguageCode from "@/lib/convertLanguageCode";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<City | ErrorResponse>
 ) {
-  const lang = typeof req.query.lang === "string" ? req.query.lang : "en";
+  const lang = convertLanguageCode(req);
   const response = await fetchData("open-weather-geo", "reverse", {
     ...req.query,
     limit: 1,

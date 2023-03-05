@@ -12,12 +12,18 @@ import {
 } from "types/openWeatherMap";
 import type { NextApiRequest, NextApiResponse } from "next";
 import capitalizeStr from "lib/capitalizeStr";
+import convertLanguageCode from "@/lib/convertLanguageCode";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<CurrentWeatherResponse | ErrorResponse>
 ) {
-  const responseCurrent = await fetchData("open-weather", "weather", req.query);
+  const lang = convertLanguageCode(req);
+
+  const responseCurrent = await fetchData("open-weather", "weather", {
+    ...req.query,
+    lang,
+  });
 
   if (!responseCurrent)
     return {
@@ -26,11 +32,10 @@ export default async function handler(
     };
   let data5Days: OpenWeather5DaysResponse | undefined;
   try {
-    const response5Days = await fetchData(
-      "open-weather",
-      "forecast",
-      req.query
-    );
+    const response5Days = await fetchData("open-weather", "forecast", {
+      ...req.query,
+      lang,
+    });
     if (response5Days) data5Days = await response5Days.json();
   } catch {
     data5Days = undefined;
@@ -41,7 +46,7 @@ export default async function handler(
     const responseAirPollution = await fetchData(
       "open-weather",
       "air_pollution",
-      req.query
+      { ...req.query, lang }
     );
     if (responseAirPollution) airPollution = await responseAirPollution.json();
   } catch (error) {

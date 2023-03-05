@@ -22,7 +22,7 @@ export default function ButtonGroup({
   }
 
   useEffect(() => {
-    const buttonWidth = 2.5;
+    const buttonWidth = 2;
     wrapperRef.current?.style.setProperty(
       "--wapp-button-group-offset",
       `${buttonWidth * (selectedIndex === undefined ? -1 : selectedIndex)}em`
@@ -46,7 +46,7 @@ export default function ButtonGroup({
     >
       <span
         className="
-        absolute inset-0 w-[2.5em] bg-switch 
+        absolute inset-0 w-[2em] bg-switch 
         translate-x-button-group-offset
         transition-transform"
       />
@@ -55,7 +55,7 @@ export default function ButtonGroup({
         items.map((item) => (
           <button
             className={clsx(
-              `relative text-text-contrast leading-none pt-[0.4em] pb-[0.6em] w-[2.5em] focus:outline-none focus-visible:bg-primary-sub-header`
+              `relative text-text-contrast leading-none pt-[0.3em] pb-[0.4em] w-[2em] focus:outline-none focus-visible:bg-primary-sub-header`
             )}
             key={item}
             onClick={() => handleClick(item)}

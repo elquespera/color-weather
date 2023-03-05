@@ -186,7 +186,7 @@ export const languageData: LanguageData = {
     [lng.darkMode]: "Темный режим",
     [lng.dark]: "Темный",
     [lng.light]: "Светлый",
-    [lng.language]: "Язык приложения",
+    [lng.language]: "Язык",
 
     [lng.today]: "Сегодня",
     [lng.tomorrow]: "Завтра",
@@ -311,7 +311,7 @@ export const languageData: LanguageData = {
   de: {
     [lng.currentTab]: "Aktuell",
     [lng.fiveDaysTab]: "5 Tage",
-    [lng.settingsTab]: "Einstellungen",
+    [lng.settingsTab]: "Einst.",
     [lng.updatedAt]: "Aktualisiert um",
     [lng.feelsLike]: "Gefühlt wie",
     [lng.localTime]: "Lokale Zeit",

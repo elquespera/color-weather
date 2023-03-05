@@ -7,7 +7,7 @@ export default function useTranslation() {
   const { language } = useContext(AppContext);
 
   return (translationKey: lng) => {
-    let translation = languageData[language][translationKey];
+    let translation = languageData[language]?.[translationKey];
     if (!translation) {
       translation = languageData[DEFAULT_APP_LANGUAGE][translationKey];
     }
