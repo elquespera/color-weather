@@ -40,7 +40,7 @@ export default async function handler(
     res.status(200).json({
       lat,
       lon,
-      name: data.city,
+      name: data.city || data.locality,
       countryCode: data.countryCode,
       country: findCountryName(data.countryCode, lang),
     });

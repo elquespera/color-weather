@@ -1,7 +1,11 @@
 import { useContext, useEffect } from "react";
 import AppContext from "context/AppContext";
 import LocationContext from "context/LocationContext";
-import { fetchCityData, fetchWeatherData } from "lib/fetchData";
+import {
+  fetchCityAndWeatherData,
+  fetchCityData,
+  fetchWeatherData,
+} from "lib/fetchData";
 import Spinner from "./Spinner";
 import LocationHint from "./LocationHint";
 import { getLocalStorage } from "@/lib/storage";
@@ -59,19 +63,12 @@ export default function Main({ children }: MainProps) {
       try {
         setAppState("fetching");
         if (gpsCoords) {
-          const city = await fetchCityData(
+          const city = await fetchCityAndWeatherData(
             gpsCoords.lat,
             gpsCoords.lon,
-            language
+            language,
+            units
           );
-          if (city) {
-            city.weather = await fetchWeatherData(
-              gpsCoords.lat,
-              gpsCoords.lon,
-              units,
-              language
-            );
-          }
           setCurrentCity(city);
         } else {
           setCurrentCity(undefined);

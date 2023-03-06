@@ -63,6 +63,7 @@ export type OpenWeatherGeoResponse = OpenWeatherCity[];
 
 export interface BigDataCloudGeoResponse {
   city: string;
+  locality: string;
   countryCode: string;
   countryName: string;
 }
