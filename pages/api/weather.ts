@@ -107,7 +107,18 @@ function convertWeatherDataPoints(
       pressure: entry.main.pressure,
       visibility: entry.visibility,
       icon: entry.weather[0].icon,
+      precipitation: {
+        probability: entry.pop,
+        volume:
+          entry.rain?.["1h"] ||
+          entry.rain?.["3h"] ||
+          entry.show?.["1h"] ||
+          entry.show?.["3h"] ||
+          0,
+      },
       wind: entry.wind,
+      sunrise: data.city?.sunrise ? data.city.sunrise * 1000 : undefined,
+      sunset: data.city?.sunset ? data.city.sunset * 1000 : undefined,
     };
   });
 }

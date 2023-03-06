@@ -25,6 +25,7 @@ export interface OpenWeatherCurrentResponse {
     grnd_level: number;
   };
   visibility: number;
+  pop: number;
   wind: {
     speed: number;
     deg: number;
@@ -32,7 +33,14 @@ export interface OpenWeatherCurrentResponse {
   };
   rain?: {
     "1h": number;
+    "3h": number;
   };
+
+  show?: {
+    "1h": number;
+    "3h": number;
+  };
+
   clouds?: {
     all: number;
   };
@@ -49,6 +57,10 @@ export interface OpenWeather5DaysResponse {
   cod: number;
   message: string;
   list: OpenWeatherCurrentResponse[];
+  city?: {
+    sunrise: number;
+    sunset: number;
+  };
 }
 
 export interface OpenWeatherCity {

@@ -11,6 +11,11 @@ export interface WindData {
   gust: number;
 }
 
+export interface PrecipitationData {
+  probability: number;
+  volume: number;
+}
+
 export interface WeatherDataPoint {
   dt: number;
   temp: number;
@@ -19,7 +24,10 @@ export interface WeatherDataPoint {
   humidity: number;
   icon: string;
   visibility: number;
+  precipitation: PrecipitationData;
   wind: WindData;
+  sunrise?: number;
+  sunset?: number;
 }
 
 export interface PollutionComponents {
