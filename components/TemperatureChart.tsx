@@ -105,6 +105,21 @@ export default function TemperatureChart({
             </text>
           );
         })}
+        {data.map(({ dt, precipitation }, index) => {
+          const x = (points[index + 1].x || 0) - INCREMENT * 0.1;
+          const chance = Math.round(precipitation?.probability * 100);
+          if (chance === 0) return null;
+          return (
+            <text
+              key={index}
+              x={x}
+              y={viewBox.h - INCREMENT * 1.2}
+              className="fill-primary-sub-header text-[0.7em] opacity-85"
+            >
+              {`${chance}%`}
+            </text>
+          );
+        })}
         <line
           x1={0}
           y1={viewBox.h}
