@@ -37,6 +37,7 @@ export default async function handler(
     responseData = responseData.filter((city, index) => {
       const foundIndex = responseData.findIndex(
         ({ lat, lon, name, countryCode }) => {
+          if (lat === city.lat && lon === city.lon) return true;
           return (
             city.name === name &&
             city.countryCode === countryCode &&
