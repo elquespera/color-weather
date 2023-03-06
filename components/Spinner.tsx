@@ -25,7 +25,7 @@ export default function Spinner({}: SpinnerProps) {
     <div
       className={clsx(
         `
-      absolute left-0 right-0 w-8 h-8 mt-4 mx-auto z-10
+      fixed left-0 right-0 w-8 h-8 mt-4 mx-auto
       overflow-hidden rounded-full shadow-spinner
       before:absolute before:inset-0 before:opacity-20
       before:bg-primary-600
