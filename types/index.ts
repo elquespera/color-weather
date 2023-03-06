@@ -94,6 +94,7 @@ const Icons = [
   "star-filled",
   "loading",
   "info",
+  "wind",
 ] as const;
 
 export type LocationState =
@@ -126,3 +127,10 @@ export const APP_LANGUAGES_META: {
 };
 
 export type AppState = "ready" | "fetching" | "error";
+
+export interface Range<T> {
+  range: [number, number];
+  value: T;
+}
+
+export type RangeList<T> = Range<T>[];

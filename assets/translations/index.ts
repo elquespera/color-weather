@@ -71,6 +71,15 @@ export enum lng {
   no2Description,
   coDescription,
   hide,
+
+  north,
+  northEast,
+  east,
+  southEast,
+  south,
+  southWest,
+  west,
+  northWest,
 }
 
 type LanguageData = {
@@ -155,6 +164,15 @@ export const languageData: LanguageData = {
     [lng.coDescription]:
       "Carbon monoxide (<i>CO</i>) is a poisonous gas produced by burning different substances. ",
     [lng.hide]: "Hide",
+
+    [lng.north]: "from north",
+    [lng.northEast]: "from northeast",
+    [lng.east]: "from east",
+    [lng.southEast]: "from southeast",
+    [lng.south]: "from south",
+    [lng.southWest]: "from southwest",
+    [lng.west]: "from west",
+    [lng.northWest]: "from northwest",
   },
   ru: {
     [lng.currentTab]: "Сейчас",

@@ -54,7 +54,7 @@ export default function TemperatureChart({
             dx="0"
             dy="0"
             stdDeviation="0.5"
-            flood-color="var(--color-background)"
+            floodColor="var(--color-background)"
           />
         </filter>
         <polyline

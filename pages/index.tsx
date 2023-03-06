@@ -14,6 +14,7 @@ import LocalTime from "components/LocalTime";
 import AirQuality from "components/AirQuality";
 import AirQualityLevel from "@/components/AirQualityLevel";
 import { PollutantLevels } from "@/types";
+import Wind from "@/components/Wind";
 
 export default function Home() {
   const t = useTranslation();
@@ -67,8 +68,10 @@ export default function Home() {
               visibility={weather.visibility}
               sunrise={weather.sunrise + timezone}
               sunset={weather.sunset + timezone}
-              wind={weather.wind}
             />
+          </Box>
+          <Box title={t(lng.wind)}>
+            <Wind className="p-2 pt-4 sm:p-4" data={weather.wind} />
           </Box>
           <Box
             title={

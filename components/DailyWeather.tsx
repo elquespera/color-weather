@@ -78,17 +78,30 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
               humidity={currentWeather.humidity}
               wind={currentWeather.wind}
             />
-            <ul className="flex gap-1 overflow-x-auto text-sm text-text-secondary mt-2 isolate">
-              {weather?.map(({ dt, icon, description, temp }) => (
-                <li key={dt} className="flex flex-col items-center shrink-0">
-                  <Temperature
-                    value={temp}
-                    className="z-10 translate-y-1 translate-x-1"
-                  />
-                  <WeatherIcon icon={icon} alt={description} />
-                  <span className="z-10 translate-y--1">{convertTime(dt)}</span>
-                </li>
-              ))}
+            <ul className="flex items-end gap-1 overflow-x-auto text-sm text-text-secondary mt-2 isolate">
+              {weather?.map(
+                ({ dt, icon, description, temp, precipitation }) => {
+                  const chance = Math.round(precipitation?.probability * 100);
+                  return (
+                    <li
+                      key={dt}
+                      className="flex flex-col items-center shrink-0"
+                    >
+                      {chance !== 0 && (
+                        <span className="translate-x-2 font-light text-blue-500">{`${chance}%`}</span>
+                      )}
+                      <Temperature
+                        value={temp}
+                        className="z-10 translate-y-1 translate-x-1"
+                      />
+                      <WeatherIcon icon={icon} alt={description} />
+                      <span className="z-10 translate-y--1">
+                        {convertTime(dt)}
+                      </span>
+                    </li>
+                  );
+                }
+              )}
             </ul>
           </div>
         )
