@@ -54,6 +54,8 @@ export interface OpenWeather5DaysResponse {
 export interface OpenWeatherCity {
   name: string;
   country: string;
+  lat: number;
+  lon: number;
   local_names: { [key: string]: string };
 }
 

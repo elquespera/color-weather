@@ -51,7 +51,6 @@ export default async function handler(
     res.status(200).json(responseData);
   } else {
     res.status(response.status).json({
-      state: "error",
       status: response.status,
       message: "Failed to fetch city data",
     });

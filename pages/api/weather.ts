@@ -57,7 +57,6 @@ export default async function handler(
     res.status(200).json(responseData);
   } else {
     res.status(responseCurrent.status).json({
-      state: "error",
       status: responseCurrent.status,
       message: data.message,
     });
