@@ -44,6 +44,7 @@ export default function CityList({
       {cities.map(({ name, country, lat, lon, weather }, index) => (
         <ListItem
           key={index}
+          responsive
           primary={<span className="text-text">{name}</span>}
           secondary={type === "current" ? t(lng.yourLocation) : country}
           startDecoration={

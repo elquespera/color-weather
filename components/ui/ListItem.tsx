@@ -11,6 +11,7 @@ interface ListItemProps {
   expanded?: boolean;
   hover?: boolean;
   highlight?: boolean;
+  responsive?: boolean;
   asButton?: boolean;
   ignoreEndDecorationClick?: boolean;
   onClick?: (event: React.MouseEvent) => void;
@@ -26,6 +27,7 @@ export default function ListItem({
   collapsedElement,
   hover,
   highlight,
+  responsive,
   asButton,
   ignoreEndDecorationClick,
   onClick,
@@ -68,7 +70,14 @@ export default function ListItem({
             <div className="flex-shrink-0">{startDecoration}</div>
           )}
           <div className="flex-1">
-            <div className="text-primary-header sm:text-xl">{primary}</div>
+            <div
+              className={clsx(
+                "text-primary-header",
+                responsive ? "sm:text-xl" : "text-xl"
+              )}
+            >
+              {primary}
+            </div>
             <div className="opacity-60 text-sm">{secondary}</div>
           </div>
           {middleDecoration && (

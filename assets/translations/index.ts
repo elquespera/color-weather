@@ -163,8 +163,8 @@ export const languageData: LanguageData = {
 
     [lng.feelsLike]: "По ощущениям",
     [lng.updatedAt]: "Обновлено в",
-    [lng.tempMin]: "Минимум",
-    [lng.tempMax]: "Максимум",
+    [lng.tempMin]: "Мин.",
+    [lng.tempMax]: "Макс.",
     [lng.localTime]: "Местное время",
     [lng.currentDetails]: "Текущие условия",
     [lng.humidity]: "Влажность",

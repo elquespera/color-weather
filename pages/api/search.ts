@@ -24,7 +24,7 @@ export default async function handler(
   const data: OpenWeatherGeoResponse = await response.json();
 
   if (response.ok) {
-    const responseData: CitySearchResponse = data.map((city) => {
+    let responseData: CitySearchResponse = data.map((city) => {
       return {
         name: findCityLocalName(city, lang),
         lat: city.lat,
@@ -32,6 +32,20 @@ export default async function handler(
         countryCode: city.country,
         country: findCountryName(city.country, lang),
       };
+    });
+
+    responseData = responseData.filter((city, index) => {
+      const foundIndex = responseData.findIndex(
+        ({ lat, lon, name, countryCode }) => {
+          return (
+            city.name === name &&
+            city.countryCode === countryCode &&
+            Math.round(city.lat) === Math.round(lat) &&
+            Math.round(city.lon) === Math.round(lon)
+          );
+        }
+      );
+      return index === foundIndex;
     });
 
     res.status(200).json(responseData);

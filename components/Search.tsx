@@ -249,6 +249,7 @@ export default function Search({ open, onClose }: SearchProps) {
               ) : (
                 locationState !== "granted" && (
                   <ListItem
+                    responsive
                     primary={t(
                       locationState === "not-requested"
                         ? lng.locationUnavailable

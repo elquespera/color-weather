@@ -259,7 +259,7 @@ body {
   background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb {
+:hover::-webkit-scrollbar-thumb {
   background-color: #ccc7;
   border-radius: 6px;
 }

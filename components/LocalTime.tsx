@@ -34,7 +34,9 @@ export default function LocalTime({ timezone }: LocalTimeProps) {
   return (
     <div className="flex flex-col">
       <div className="flex gap-1 text-primary-sub-header">
-        <span className="font-semibold sm:text-2xl">{convertTime(time)}</span>
+        <span className="font-semibold text-xl sm:text-2xl">
+          {convertTime(time)}
+        </span>
         {showDate && (
           <span className="text-sm">{convertDate(time, false, true)}</span>
         )}
