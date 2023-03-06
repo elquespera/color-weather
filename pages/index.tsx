@@ -9,9 +9,11 @@ import Box from "components/ui/Box";
 import useTranslation from "hooks/useTranslation";
 import { lng } from "assets/translations";
 import WeatherDetails from "components/WeatherDetails";
-import { TIMEZONE_OFFSET } from "consts";
+import { POLLUTION_LEVELS, TIMEZONE_OFFSET } from "consts";
 import LocalTime from "components/LocalTime";
 import AirQuality from "components/AirQuality";
+import AirQualityLevel from "@/components/AirQualityLevel";
+import { PollutantLevels } from "@/types";
 
 export default function Home() {
   const t = useTranslation();
@@ -68,7 +70,16 @@ export default function Home() {
               wind={weather.wind}
             />
           </Box>
-          <Box title={t(lng.airQuality)}>
+          <Box
+            title={
+              <div className="flex flex-wrap gap-x-4 items-center">
+                <span>{t(lng.airQuality)}</span>
+                <AirQualityLevel
+                  level={PollutantLevels[weather.airPollution?.["aqi"] || 0]}
+                />
+              </div>
+            }
+          >
             <AirQuality
               className="p-2 pt-4 sm:p-4"
               data={weather.airPollution}

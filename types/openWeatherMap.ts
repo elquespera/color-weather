@@ -71,6 +71,9 @@ export interface BigDataCloudGeoResponse {
 interface OpenWeatherAirPollution {
   components: PollutionComponents;
   dt: number;
+  main: {
+    aqi: number;
+  };
 }
 
 export interface OpenWeatherAirPollutionResponse {

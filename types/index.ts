@@ -26,12 +26,15 @@ export interface PollutionComponents {
   [key: string]: number;
 }
 
-export type PollutantLevel =
-  | "good"
-  | "fair"
-  | "moderate"
-  | "poor"
-  | "very-poor";
+export const PollutantLevels = [
+  "good",
+  "fair",
+  "moderate",
+  "poor",
+  "very-poor",
+] as const;
+
+export type PollutantLevel = typeof PollutantLevels[number];
 
 export interface CurrentWeatherResponse {
   state: "ok";

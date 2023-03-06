@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 interface BoxProps {
-  title?: string;
+  title?: string | React.ReactNode;
   className?: string;
   children?: React.ReactNode;
   horizontal?: boolean;

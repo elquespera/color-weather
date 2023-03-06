@@ -247,7 +247,8 @@ body.eastern-blue-theme {
 }
 
 body {
-  overflow: overlay;
+  overflow-y: overlay;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {

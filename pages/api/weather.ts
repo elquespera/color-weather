@@ -54,6 +54,11 @@ export default async function handler(
     const responseData = convertWeatherData(data);
     responseData.extended = convertWeatherDataPoints(data5Days);
     responseData.airPollution = airPollution?.list[0].components;
+    const pollution = airPollution?.list[0];
+    if (pollution) {
+      const aqi = pollution.main?.aqi - 1 || 0;
+      responseData.airPollution = { ...pollution.components, aqi };
+    }
     res.status(200).json(responseData);
   } else {
     res.status(responseCurrent.status).json({
