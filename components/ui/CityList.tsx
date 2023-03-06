@@ -80,9 +80,11 @@ export default function CityList({
             (type === "search" || (type === "favorites" && favoritesEdit)) && (
               <IconButton
                 className={clsx(
-                  type === "favorites"
-                    ? "text-text-secondary"
-                    : "text-yellow-500"
+                  type === "search" &&
+                    isCityFavorite &&
+                    isCityFavorite(lat, lon)
+                    ? "text-yellow-500"
+                    : "text-text-secondary"
                 )}
                 icon={
                   type === "favorites"
