@@ -1,43 +1,75 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { City, ErrorResponse } from "types";
-import { OpenWeatherGeoResponse } from "types/openWeatherMap";
+import {
+  BigDataCloudGeoResponse,
+  OpenWeatherGeoResponse,
+} from "types/openWeatherMap";
 import { fetchData } from "lib/fetchData";
 import findCountryName from "lib/findCountryName";
-import convertLanguageCode from "@/lib/convertLanguageCode";
-import findCityLocalName from "@/lib/findCityLocalName";
+import convertLanguageCode from "lib/convertLanguageCode";
+import findCityLocalName from "lib/findCityLocalName";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<City | ErrorResponse>
 ) {
   const lang = convertLanguageCode(req);
-  const response = await fetchData("open-weather-geo", "reverse", {
+  const lat = typeof req.query.lat === "string" ? Number(req.query.lat) : null;
+  const lon = typeof req.query.lon === "string" ? Number(req.query.lon) : null;
+  if (!lat || !lon) {
+    res
+      .status(400)
+      .json({ status: 404, message: "No latitude or longitude was provided" });
+    return;
+  }
+
+  //First try Big Data Cloud API
+
+  const dataCloudResponse = await fetchData(
+    "big-data-cloud",
+    "reverse-geocode",
+    {
+      latitude: lat,
+      longitude: lon,
+      localityLanguage: lang,
+    }
+  );
+
+  if (dataCloudResponse.ok) {
+    const data: BigDataCloudGeoResponse = await dataCloudResponse.json();
+    res.status(200).json({
+      lat,
+      lon,
+      name: data.city,
+      countryCode: data.countryCode,
+      country: findCountryName(data.countryCode, lang),
+    });
+    return;
+  }
+
+  //Fallback to Open Weather Geocoding
+
+  const openWeatherRespose = await fetchData("open-weather-geo", "reverse", {
     ...req.query,
     limit: 1,
   });
-  if (!response)
-    return {
-      status: 500,
-      message: "Server Error",
-    };
-  const data: OpenWeatherGeoResponse = await response.json();
+
+  const data: OpenWeatherGeoResponse = await openWeatherRespose.json();
   const city = data[0];
 
-  if (response.ok && city) {
-    const responseData: City = {
+  if (openWeatherRespose.ok && city) {
+    res.status(200).json({
       name: findCityLocalName(city, lang),
-      lat: city.lat,
-      lon: city.lon,
+      lat,
+      lon,
       countryCode: city.country,
       country: findCountryName(city.country, lang),
-    };
-
-    res.status(200).json(responseData);
-  } else {
-    res.status(response.status).json({
-      state: "error",
-      status: response.status,
-      message: "Failed to fetch city data",
     });
+    return;
   }
+
+  res.status(500).json({
+    status: 500,
+    message: "Failed to fetch city data",
+  });
 }

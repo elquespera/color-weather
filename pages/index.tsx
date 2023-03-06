@@ -9,13 +9,13 @@ import Box from "components/ui/Box";
 import useTranslation from "hooks/useTranslation";
 import { lng } from "assets/translations";
 import WeatherDetails from "components/WeatherDetails";
-import { TIMEZONE_OFFSET } from "@/consts";
-import LocalTime from "@/components/LocalTime";
-import AirQuality from "@/components/AirQuality";
+import { TIMEZONE_OFFSET } from "consts";
+import LocalTime from "components/LocalTime";
+import AirQuality from "components/AirQuality";
 
 export default function Home() {
   const t = useTranslation();
-  const [convertDate, , convertTime] = useConvertDate();
+  const [, , convertTime] = useConvertDate();
   const { weather } = useContext(LocationContext);
   const timezone = weather?.timezone || 0;
 

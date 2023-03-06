@@ -1,10 +1,5 @@
 import { fetchData } from "lib/fetchData";
-import {
-  CurrentWeatherResponse,
-  ErrorResponse,
-  PollutionComponents,
-  WeatherDataPoint,
-} from "types";
+import { CurrentWeatherResponse, ErrorResponse, WeatherDataPoint } from "types";
 import {
   OpenWeatherCurrentResponse,
   OpenWeather5DaysResponse,

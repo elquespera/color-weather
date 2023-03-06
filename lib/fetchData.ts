@@ -3,10 +3,12 @@ import {
   City,
   CurrentWeatherResponse,
   MeasurementUnits,
-} from "@/types";
+} from "types";
+
+const APP_API_ROUTE = "/api/";
 
 export async function fetchData(
-  base: "open-weather" | "open-weather-geo" | "app",
+  base: "open-weather" | "open-weather-geo" | "big-data-cloud" | "app",
   segment: string,
   query: Partial<{
     [key: string]: string | number | string[];
@@ -17,17 +19,33 @@ export async function fetchData(
       ? process.env.OPEN_WEATHER_URL
       : base === "open-weather-geo"
       ? process.env.OPEN_WEATHER_GEO_URL
-      : "/api/") || "";
+      : base === "big-data-cloud"
+      ? process.env.BIG_DATA_CLOUD_URL
+      : APP_API_ROUTE) || "";
 
   const params = new URLSearchParams({});
-  if (base !== "app") {
+
+  if (base === "open-weather" || base === "open-weather-geo") {
     const appid = process.env.OPEN_WEATHER_KEY || "";
     params.append("appid", appid);
   }
 
-  Object.entries(query).forEach((entry) => {
-    if (typeof entry[1] === "string" || typeof entry[1] === "number")
-      params.append(entry[0], String(entry[1]));
+  if (base === "big-data-cloud") {
+    const key = process.env.BIG_DATA_CLOUD_KEY || "";
+    console.log(key);
+    params.append("key", key);
+  }
+
+  Object.entries(query).forEach(([key, value]) => {
+    if (typeof value === "string" || typeof value === "number") {
+      const actualValue =
+        key === "lang" &&
+        value === "cs" &&
+        (base === "open-weather" || base === "open-weather-geo")
+          ? "cz"
+          : String(value);
+      params.append(key, actualValue);
+    }
   });
 
   const url = `${baseUrl}${segment}?${params.toString()}`;

@@ -53,13 +53,17 @@ export interface OpenWeather5DaysResponse {
 
 export interface OpenWeatherCity {
   name: string;
-  lat: number;
-  lon: number;
   country: string;
   local_names: { [key: string]: string };
 }
 
 export type OpenWeatherGeoResponse = OpenWeatherCity[];
+
+export interface BigDataCloudGeoResponse {
+  city: string;
+  countryCode: string;
+  countryName: string;
+}
 
 interface OpenWeatherAirPollution {
   components: PollutionComponents;

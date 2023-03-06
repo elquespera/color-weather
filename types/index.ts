@@ -1,7 +1,6 @@
 import { lng } from "assets/translations";
 
 export interface ErrorResponse {
-  state: "error";
   status: number;
   message: string;
 }
