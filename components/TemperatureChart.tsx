@@ -49,6 +49,14 @@ export default function TemperatureChart({
   return weather && points.length > 1 ? (
     <div className="w-full-mobile self-center">
       <svg viewBox={`0 0 ${viewBox.w} ${viewBox.h}`}>
+        <filter id="text-shadow">
+          <feDropShadow
+            dx="0"
+            dy="0"
+            stdDeviation="0.5"
+            flood-color="var(--color-background)"
+          />
+        </filter>
         <polyline
           className="stroke-primary-header fill-none"
           strokeWidth="2"
@@ -74,7 +82,8 @@ export default function TemperatureChart({
               key={index}
               x={x}
               y={y}
-              className="fill-primary-sub-header"
+              filter="url(#text-shadow)"
+              className="fill-primary-header"
             >{`${Math.round(temp)}°`}</text>
           );
         })}
@@ -100,12 +109,13 @@ export default function TemperatureChart({
               x={x}
               y={viewBox.h - INCREMENT * 0.2}
               className="fill-text-secondary text-[0.8em]"
+              filter="url(#text-shadow)"
             >
               {convertTime(dt + timezone)}
             </text>
           );
         })}
-        {data.map(({ dt, precipitation }, index) => {
+        {data.map(({ precipitation }, index) => {
           const x = (points[index + 1].x || 0) - INCREMENT * 0.1;
           const chance = Math.round(precipitation?.probability * 100);
           if (chance === 0) return null;
@@ -114,6 +124,7 @@ export default function TemperatureChart({
               key={index}
               x={x}
               y={viewBox.h - INCREMENT * 1.2}
+              filter="url(#text-shadow)"
               className="fill-primary-sub-header text-[0.7em] opacity-85"
             >
               {`${chance}%`}
