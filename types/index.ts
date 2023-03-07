@@ -133,3 +133,5 @@ export interface Range<T> {
 }
 
 export type RangeList<T> = Range<T>[];
+
+export type MaxWeatherPoints = "all" | number;

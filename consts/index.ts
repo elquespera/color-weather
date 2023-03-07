@@ -40,3 +40,5 @@ export const POLLUTION_LEVEL_TRANSLATIONS: { [key in PollutantLevel]: lng } = {
   poor: lng.poor,
   "very-poor": lng.veryPoor,
 };
+
+export const MAX_CURRENT_WEATHER_POINTS = 8;

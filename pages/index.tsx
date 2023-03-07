@@ -9,7 +9,7 @@ import Box from "components/ui/Box";
 import useTranslation from "hooks/useTranslation";
 import { lng } from "assets/translations";
 import WeatherDetails from "components/WeatherDetails";
-import { POLLUTION_LEVELS, TIMEZONE_OFFSET } from "consts";
+import { MAX_CURRENT_WEATHER_POINTS, TIMEZONE_OFFSET } from "consts";
 import LocalTime from "components/LocalTime";
 import AirQuality from "components/AirQuality";
 import AirQualityLevel from "@/components/AirQualityLevel";
@@ -58,7 +58,10 @@ export default function Home() {
               </div>
             </div>
           </Box>
-          <TemperatureChart weather={weather.extended} />
+          <TemperatureChart
+            weather={weather.extended}
+            maxPoints={MAX_CURRENT_WEATHER_POINTS}
+          />
 
           <Box title={t(lng.currentDetails)}>
             <WeatherDetails
@@ -71,7 +74,12 @@ export default function Home() {
             />
           </Box>
           <Box title={t(lng.wind)}>
-            <Wind className="p-2 pt-4 sm:p-4" data={weather.wind} />
+            <Wind
+              className="p-2 pt-4 sm:p-4"
+              data={weather.wind}
+              extended={weather.extended}
+              maxPoints={MAX_CURRENT_WEATHER_POINTS}
+            />
           </Box>
           <Box
             title={

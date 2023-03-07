@@ -1,11 +1,12 @@
-import LocationContext from "@/context/LocationContext";
-import useConvertDate from "@/hooks/useConvertDate";
+import LocationContext from "context/LocationContext";
+import useConvertDate from "hooks/useConvertDate";
+import calculateMaxWeatherPoints from "lib/calculateMaxWeatherPoints";
 import { useContext, useEffect, useState } from "react";
-import { WeatherDataPoint } from "types";
+import { MaxWeatherPoints, WeatherDataPoint } from "types";
 import { getWeatherIconURL } from "./ui/WeatherIcon";
 
 interface TemperatureChartProps {
-  maxPoints?: number | "all";
+  maxPoints?: MaxWeatherPoints;
   weather?: WeatherDataPoint[];
 }
 
@@ -18,12 +19,12 @@ const INCREMENT = 50;
 
 export default function TemperatureChart({
   weather,
-  maxPoints = 8,
+  maxPoints = "all",
 }: TemperatureChartProps) {
   const { weather: currentWeather } = useContext(LocationContext);
   const [, , convertTime] = useConvertDate();
   const [points, setPoints] = useState<Point[]>([]);
-  const length = maxPoints === "all" ? weather?.length || 0 : maxPoints;
+  const length = calculateMaxWeatherPoints(weather, maxPoints);
   const data = weather?.slice(0, length) || [];
   const viewBox = { w: length * INCREMENT, h: INCREMENT * 3 };
   const timezone = currentWeather?.timezone || 0;

@@ -1,18 +1,29 @@
+import clsx from "clsx";
 import Icon from "./ui/Icon";
 
 const ICON_ROTATION = 135;
 
 interface WindIconProps {
   degree?: number;
+  small?: boolean;
+  className?: string;
 }
 
-export default function WindIcon({ degree = 0 }: WindIconProps) {
+export default function WindIcon({
+  degree = 0,
+  small,
+  className,
+}: WindIconProps) {
   return (
     <div
-      className="w-6 h-6 overflow-hidden"
+      className={clsx(
+        "overflow-hidden",
+        small ? "w-4 h-4" : "w-6 h-6",
+        className
+      )}
       style={{ transform: `rotate(${ICON_ROTATION + degree}deg)` }}
     >
-      <Icon type="near" />
+      <Icon type="near" size={small ? "small" : "medium"} />
     </div>
   );
 }
