@@ -14,7 +14,7 @@ export default function SearchPlaceholder({ onClick }: SearchPlaceholderProps) {
       className="relative flex items-center gap-2 px-2 py-[0.2rem]
       text-lg sm:text-xl
       bg-primary-800 rounded-full overflow-hidden
-      min-w-[8rem] max-w-[60vw]
+      min-w-4 max-w-[60vw]
       outline-none transition-all
       focus-visible:bg-primary-300"
       onClick={onClick}
@@ -25,7 +25,7 @@ export default function SearchPlaceholder({ onClick }: SearchPlaceholderProps) {
       />
 
       <Icon type="search" className="flex-shrink-0" />
-      <span className="flex-grow-0 overflow-hidden text-ellipsis whitespace-nowrap">
+      <span className="flex-grow overflow-hidden text-ellipsis text-center whitespace-nowrap">
         {city}
       </span>
     </button>

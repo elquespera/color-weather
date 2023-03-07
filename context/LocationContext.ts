@@ -1,4 +1,3 @@
-import { lng } from "assets/translations";
 import { createContext } from "react";
 import {
   City,
@@ -25,6 +24,9 @@ export interface LocationContextInterface {
 
   currentCity?: City;
   setCurrentCity: (city?: City) => void;
+
+  updateSeed?: number;
+  updateWeather: () => void;
 }
 
 export const defaultLocationContext: LocationContextInterface = {
@@ -38,6 +40,7 @@ export const defaultLocationContext: LocationContextInterface = {
   setCity: () => {},
   setWeather: () => {},
   setCurrentCity: () => {},
+  updateWeather: () => {},
 };
 
 const LocationContext = createContext<LocationContextInterface>(

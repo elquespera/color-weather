@@ -1,5 +1,7 @@
 const LOCATION_PRECISION = 100000;
 
+const WEATHER_UPDATE_MIN_INTERVAL = 5 * 60 * 1000;
+
 import {
   City,
   CurrentWeatherResponse,
@@ -23,6 +25,7 @@ export default function useLocationContext() {
       setLocationState,
       setWeather,
       setCurrentCity,
+      updateWeather,
     });
 
   function setLocation(latitude: number, longitude: number) {
@@ -63,6 +66,18 @@ export default function useLocationContext() {
   function setCurrentCity(city?: City) {
     setLocationContext((current) => {
       return { ...current, currentCity: city };
+    });
+  }
+
+  function updateWeather() {
+    setLocationContext((current) => {
+      if (
+        current.weather &&
+        Date.now() - current.weather.updatedAt > WEATHER_UPDATE_MIN_INTERVAL
+      ) {
+        return { ...current, updateSeed: Math.random() };
+      }
+      return current;
     });
   }
 

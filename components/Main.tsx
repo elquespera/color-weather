@@ -21,6 +21,7 @@ export default function Main({ children }: MainProps) {
     lon,
     lat,
     gpsCoords,
+    updateSeed,
     setLocation,
     setCity,
     setWeather,
@@ -40,7 +41,7 @@ export default function Main({ children }: MainProps) {
 
     if (lon === 0 && lat === 0) return;
     fetchWeather();
-  }, [lon, lat, units, language]);
+  }, [lon, lat, units, language, updateSeed]);
 
   useEffect(() => {
     async function fetchCurrentCity() {

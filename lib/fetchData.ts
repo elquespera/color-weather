@@ -32,7 +32,6 @@ export async function fetchData(
 
   if (base === "big-data-cloud") {
     const key = process.env.BIG_DATA_CLOUD_KEY || "";
-    console.log(key);
     params.append("key", key);
   }
 

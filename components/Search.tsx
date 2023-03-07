@@ -126,8 +126,6 @@ export default function Search({ open, onClose }: SearchProps) {
 
   useEffect(() => {
     async function checkFavoriteCities() {
-      console.log("favorites", language, units);
-
       const favorites = getLocalStorage().favoriteCities || [];
       const cities = await Promise.all<City>(
         favorites.map(async (city) => {
@@ -156,7 +154,6 @@ export default function Search({ open, onClose }: SearchProps) {
 
   useEffect(() => {
     async function getData(q: string) {
-      console.log("search");
       setCities(await fetchCities(q, language));
     }
     const timer = setTimeout(() => getData(value), 500);
