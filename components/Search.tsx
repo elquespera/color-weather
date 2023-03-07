@@ -16,39 +16,19 @@ import {
   THEMES_META,
   THEME_MODE_BACKGROUNDS,
 } from "lib/themes";
-import { AppLanguage, City, CitySearchResponse, MeasurementUnits } from "types";
-import { fetchCityAndWeatherData, fetchData } from "lib/fetchData";
+import { City } from "types";
+import { fetchCityAndWeatherData } from "lib/fetchData";
 import LocationContext from "context/LocationContext";
 import CityList from "./ui/CityList";
 import { getLocalStorage, setLocalStorage } from "lib/storage";
-import { MAX_FAVORITES, ROUTES } from "consts";
+import { MAX_FAVORITES } from "consts";
 import ListItem from "./ui/ListItem";
 import Icon from "./ui/Icon";
+import searchCities from "@/lib/searchCities";
 
 interface SearchProps {
   open?: boolean;
   onClose?: () => void;
-}
-
-function fetchCities() {
-  const cache = new Map<string, CitySearchResponse>();
-
-  return async (q: string, lang: AppLanguage): Promise<CitySearchResponse> => {
-    if (q === "") return [];
-    const request = { lang, q: q.trim() };
-    const key = JSON.stringify(request);
-    if (cache.has(key)) return cache.get(key) || [];
-
-    const response = await fetchData("app", "search", request);
-
-    if (response.ok) {
-      const data: CitySearchResponse = await response.json();
-      cache.set(key, data);
-      return data;
-    } else {
-      return [];
-    }
-  };
 }
 
 export default function Search({ open, onClose }: SearchProps) {
@@ -58,7 +38,7 @@ export default function Search({ open, onClose }: SearchProps) {
   const { currentCity, setLocation, locationState, defineLocation } =
     useContext(LocationContext);
   const inputRef = useRef<HTMLInputElement>(null);
-  const fetch = useCallback(fetchCities(), []);
+  const fetchCities = useCallback(searchCities(), []);
   const [cities, setCities] = useState<City[]>([]);
   const [favorites, setFavorites] = useState<City[]>([]);
   const [favoritesEdit, setFavoritesEdit] = useState(false);
@@ -145,10 +125,9 @@ export default function Search({ open, onClose }: SearchProps) {
   }
 
   useEffect(() => {
-    async function checkFavoriteCities(
-      language: AppLanguage,
-      units: MeasurementUnits
-    ) {
+    async function checkFavoriteCities() {
+      console.log("favorites", language, units);
+
       const favorites = getLocalStorage().favoriteCities || [];
       const cities = await Promise.all<City>(
         favorites.map(async (city) => {
@@ -164,8 +143,9 @@ export default function Search({ open, onClose }: SearchProps) {
 
       setFavorites(cities);
     }
+    const timer = setTimeout(() => checkFavoriteCities(), 1000);
 
-    checkFavoriteCities(language, units);
+    return () => clearTimeout(timer);
   }, [language, units]);
 
   useEffect(() => {
@@ -176,7 +156,7 @@ export default function Search({ open, onClose }: SearchProps) {
 
   useEffect(() => {
     async function getData(q: string) {
-      setCities(await fetch(q, language));
+      setCities(await fetchCities(q, language));
     }
     getData(value);
   }, [value, language]);
