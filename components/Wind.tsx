@@ -39,7 +39,8 @@ export default function Wind({
       ? Math.round(data.gust)
       : null;
 
-  const windSpeeds = extended?.map(({ wind }) => wind.speed) || [];
+  const windSpeeds =
+    extended?.slice(0, extendedLength).map(({ wind }) => wind.speed) || [];
   const minSpeed = Math.min(...windSpeeds);
   const maxSpeed = Math.max(...windSpeeds);
   const speedDifference = maxSpeed - minSpeed;
@@ -66,9 +67,9 @@ export default function Wind({
             className="text-sm sm:text-base text-text-secondary"
           />
           {gust && (
-            <div className="text-sm sm:text-base text-text-secondary">{`Gusts: ${Math.round(
-              data.gust
-            )} ${units}`}</div>
+            <div className="text-sm sm:text-base text-text-secondary">{`${t(
+              lng.windGusts
+            )}: ${Math.round(data.gust)} ${units}`}</div>
           )}
         </div>
       </div>
@@ -88,13 +89,15 @@ export default function Wind({
                     {Math.round(wind.speed)}
                   </div>
                   <div
-                    className="w-5 sm:w-7 bg-primary-400 "
+                    className="w-5 sm:w-7 bg-primary-400"
                     style={{
                       height:
-                        ((wind.speed - minSpeed) / speedDifference) * 40 + 2,
+                        ((wind.speed - minSpeed) / speedDifference) * 20 +
+                        minSpeed * 1.5 +
+                        2,
                     }}
                   />
-                  <div className="text-text-secondary text-sm sm:text-base pt-1 sm:pt-2">
+                  <div className="text-text-secondary text-[0.7em] sm:text-base pt-1 sm:pt-2">
                     {convertTime(dt + timezone)}
                   </div>
                 </li>

@@ -88,6 +88,7 @@ export enum lng {
   windGale,
   windStorm,
   windHurricane,
+  windGusts,
 }
 
 type LanguageData = {
@@ -189,6 +190,7 @@ export const languageData: LanguageData = {
     [lng.windGale]: "gale",
     [lng.windStorm]: "storm",
     [lng.windHurricane]: "hurricane",
+    [lng.windGusts]: "Gusts",
   },
   ru: {
     [lng.currentTab]: "Сейчас",
@@ -264,6 +266,24 @@ export const languageData: LanguageData = {
     [lng.coDescription]:
       "Окись углерода (<i>CO</i>) – ядовитый газ, который выделяется при сжигании различных веществ.",
     [lng.hide]: "Скрыть",
+
+    [lng.north]: "с севера",
+    [lng.northEast]: "с северо-востока",
+    [lng.east]: "с востока",
+    [lng.southEast]: "с юго-востока",
+    [lng.south]: "с юга",
+    [lng.southWest]: "с юго-запада",
+    [lng.west]: "с запада",
+    [lng.northWest]: "с северо-запада",
+
+    [lng.windCalm]: "штиль",
+    [lng.windLight]: "слабый",
+    [lng.windModerate]: "умеренный",
+    [lng.windStrong]: "сильный",
+    [lng.windGale]: "штормовой",
+    [lng.windStorm]: "буря",
+    [lng.windHurricane]: "ураган",
+    [lng.windGusts]: "Порывы",
   },
   es: {
     [lng.currentTab]: "Actual",
@@ -343,6 +363,24 @@ export const languageData: LanguageData = {
     [lng.coDescription]:
       "El monóxido de carbono (<i>CO</i>) es un gas venenoso que se produce al quemar diferentes sustancias.",
     [lng.hide]: "Ocultar",
+
+    [lng.north]: "del norte",
+    [lng.northEast]: "del noreste",
+    [lng.east]: "del este",
+    [lng.southEast]: "del sureste",
+    [lng.south]: "del sur",
+    [lng.southWest]: "del suroeste",
+    [lng.west]: "del oeste",
+    [lng.northWest]: "del noroeste",
+
+    [lng.windCalm]: "calma",
+    [lng.windLight]: "ligero",
+    [lng.windModerate]: "moderado",
+    [lng.windStrong]: "fuerte",
+    [lng.windGale]: "vendaval",
+    [lng.windStorm]: "tormenta",
+    [lng.windHurricane]: "huracán",
+    [lng.windGusts]: "Rachas",
   },
 
   de: {
@@ -422,6 +460,24 @@ export const languageData: LanguageData = {
     [lng.coDescription]:
       "Kohlenmonoxid (<i>CO</i>) ist ein giftiges Gas, das durch Verbrennung verschiedener Substanzen entsteht.",
     [lng.hide]: "Verstecken",
+
+    [lng.north]: "aus Norden",
+    [lng.northEast]: "aus Nordosten",
+    [lng.east]: "aus Osten",
+    [lng.southEast]: "aus Südosten",
+    [lng.south]: "aus Süden",
+    [lng.southWest]: "aus Südwesten",
+    [lng.west]: "aus Westen",
+    [lng.northWest]: "aus Nordwesten",
+
+    [lng.windCalm]: "windstill",
+    [lng.windLight]: "leicht",
+    [lng.windModerate]: "mäßig",
+    [lng.windStrong]: "stark",
+    [lng.windGale]: "Sturm",
+    [lng.windStorm]: "schwerer Sturm",
+    [lng.windHurricane]: "Orkan",
+    [lng.windGusts]: "Böen",
   },
   cs: {
     [lng.currentTab]: "Aktuální",
@@ -500,5 +556,22 @@ export const languageData: LanguageData = {
     [lng.coDescription]:
       "Oxid uhelnatý (<i>CO</i>) je jedovatý plyn produkovaný spalováním různých látek. ",
     [lng.hide]: "Skrýt",
+
+    [lng.north]: "ze severu",
+    [lng.northEast]: "severovýchodně",
+    [lng.east]: "východně",
+    [lng.southEast]: "jihovýchodně",
+    [lng.south]: "ze jihu",
+    [lng.southWest]: "jihozápadně",
+    [lng.west]: "západně",
+    [lng.northWest]: "severozápadně",
+
+    [lng.windLight]: "slabý",
+    [lng.windModerate]: "mírný",
+    [lng.windStrong]: "silný",
+    [lng.windGale]: "vichřice",
+    [lng.windStorm]: "bouře",
+    [lng.windHurricane]: "hurikán",
+    [lng.windGusts]: "Poryvy",
   },
 };
