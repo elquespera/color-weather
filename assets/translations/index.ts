@@ -185,7 +185,7 @@ export const languageData: LanguageData = {
     [lng.windCalm]: "calm",
     [lng.windLight]: "light",
     [lng.windModerate]: "moderate",
-    [lng.windStrong]: "string",
+    [lng.windStrong]: "strong",
     [lng.windGale]: "gale",
     [lng.windStorm]: "storm",
     [lng.windHurricane]: "hurricane",
