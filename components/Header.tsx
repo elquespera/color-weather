@@ -5,7 +5,6 @@ import IconButton from "components/ui/IconButton";
 import Logo from "./Logo";
 import Search from "./Search";
 import SearchPlaceholder from "./SearchPlaceholder";
-import FocusTrap from "focus-trap-react";
 
 interface HeaderProps {}
 
@@ -27,13 +26,16 @@ export default function Header({}: HeaderProps) {
       <header
         className={`
         fixed w-full h-header px-2 pt-2 pb-0 z-10
-        flex flex-col gap-1 items-center justify-between
+        flex flex-col justify-between
         bg-primary-800 text-white
         shadow-lg transition-colors`}
       >
-        <h1 className="flex items-center gap-3 text-3xl select-none">
+        <h1 className="relative min-w-full flex items-center justify-between sm:gap-1 text-3xl select-none">
           <Logo onClick={handleTitleClick} />
-          <SearchPlaceholder onClick={handleSearchOpen} />
+          <div className="flex items-center">
+            <SearchPlaceholder onClick={() => setSearchOpen(true)} />
+            <IconButton icon="loading" />
+          </div>
           <IconButton
             icon="theme"
             animation="spin"

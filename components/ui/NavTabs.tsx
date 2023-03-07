@@ -46,7 +46,7 @@ export default function NavTabs() {
   }, [navRef, selectedIndex]);
 
   return (
-    <nav ref={navRef}>
+    <nav ref={navRef} className="self-center">
       <ul
         className={clsx(
           `relative flex

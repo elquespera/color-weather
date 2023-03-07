@@ -246,7 +246,14 @@ body.eastern-blue-theme {
   --color-primary-900: #1d505c;
 }
 
+@layer components {
+  .small-caps {
+    font-variant-caps: small-caps;
+  }
+}
+
 body {
+  overflow-y: auto;
   overflow-y: overlay;
   overflow-x: hidden;
 }
@@ -265,8 +272,10 @@ body {
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #aaa;
+  background-color: #ccca;
+  border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:active {
-  background-color: #bbb;
+  background-color: #ccc;
+  border-radius: 6px;
 }

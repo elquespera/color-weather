@@ -20,7 +20,7 @@ const WIND_DIRECTIONS: RangeList<lng> = [
   { range: [157.5, 202.5], value: lng.south },
   { range: [202.5, 247.5], value: lng.southWest },
   { range: [247.5, 292.5], value: lng.west },
-  { range: [292.5, 292.5], value: lng.northWest },
+  { range: [292.5, 337.5], value: lng.northWest },
 ];
 
 export default function WindDirection({

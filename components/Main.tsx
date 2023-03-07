@@ -7,7 +7,6 @@ import {
   fetchWeatherData,
 } from "lib/fetchData";
 import Spinner from "./Spinner";
-import LocationHint from "./LocationHint";
 import { getLocalStorage } from "@/lib/storage";
 import { DEFAULT_LOCATION } from "@/consts";
 import getApproximateLocation from "@/lib/getApproximateLocation";

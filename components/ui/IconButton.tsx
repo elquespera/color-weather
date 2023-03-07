@@ -43,7 +43,7 @@ const IconButton = forwardRef(function IconButton(
       className={clsx(
         "relative overflow-hidden rounded-full",
         "flex items-center justify-center",
-        "focus:outline-none focus-visible:bg-primary-300  ",
+        "focus:outline-none focus-visible:bg-primary-300",
         size === "small" && "w-6 h-6",
         size === "medium" && "w-8 h-8",
         size === "large" && "w-10 h-10",
@@ -54,10 +54,8 @@ const IconButton = forwardRef(function IconButton(
       onClick={handleClick}
     >
       <span
-        className={clsx(
-          "absolute inset-0 transition-all bg-primary-400 opacity-0",
-          "hover:opacity-10 active:opacity-30"
-        )}
+        className="absolute inset-0 transition-all bg-primary-400 opacity-0
+          hover:opacity-20 active:opacity-30"
       />
       <Icon type={icon} size="medium" />
     </button>
