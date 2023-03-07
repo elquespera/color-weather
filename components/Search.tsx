@@ -156,9 +156,11 @@ export default function Search({ open, onClose }: SearchProps) {
 
   useEffect(() => {
     async function getData(q: string) {
+      console.log("search");
       setCities(await fetchCities(q, language));
     }
-    getData(value);
+    const timer = setTimeout(() => getData(value), 500);
+    return () => clearTimeout(timer);
   }, [value, language]);
 
   useEffect(() => {
