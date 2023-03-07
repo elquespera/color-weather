@@ -1,16 +1,19 @@
 import { lng } from "@/assets/translations";
-import AppContext from "@/context/AppContext";
 import useTranslation from "@/hooks/useTranslation";
+import capitalizeStr from "@/lib/capitalizeStr";
 import valueInRange from "@/lib/valueInRange";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { RangeList, WindData } from "types";
 
 interface WindPropertiesProps {
   data?: WindData;
+  capitalize?: boolean;
+  className?: string;
 }
 
 const WIND_DIRECTIONS: RangeList<lng> = [
-  { range: [337.5, 22.5], value: lng.north },
+  { range: [-22.5, 22.5], value: lng.north },
+  { range: [337.5, 382.5], value: lng.north },
   { range: [22.5, 67.5], value: lng.northEast },
   { range: [67.5, 112.5], value: lng.east },
   { range: [112.5, 157.5], value: lng.southEast },
@@ -20,14 +23,16 @@ const WIND_DIRECTIONS: RangeList<lng> = [
   { range: [292.5, 292.5], value: lng.northWest },
 ];
 
-export default function WindProperties({ data }: WindPropertiesProps) {
+export default function WindDirection({
+  data,
+  capitalize,
+  className,
+}: WindPropertiesProps) {
   const t = useTranslation();
-  const { units } = useContext(AppContext);
 
-  return data ? (
-    <span className="flex gap-2">
-      <span>{t(valueInRange(data.deg, WIND_DIRECTIONS) || lng.south)}</span>
-      <span></span>
-    </span>
-  ) : null;
+  let value = data
+    ? t(valueInRange(data.deg, WIND_DIRECTIONS) || lng.south)
+    : null;
+  if (value && capitalize) value = capitalizeStr(value);
+  return data ? <span className={className}>{value}</span> : null;
 }

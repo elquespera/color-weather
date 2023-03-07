@@ -80,6 +80,14 @@ export enum lng {
   southWest,
   west,
   northWest,
+
+  windCalm,
+  windLight,
+  windModerate,
+  windStrong,
+  windGale,
+  windStorm,
+  windHurricane,
 }
 
 type LanguageData = {
@@ -173,6 +181,14 @@ export const languageData: LanguageData = {
     [lng.southWest]: "from southwest",
     [lng.west]: "from west",
     [lng.northWest]: "from northwest",
+
+    [lng.windCalm]: "calm",
+    [lng.windLight]: "light",
+    [lng.windModerate]: "moderate",
+    [lng.windStrong]: "string",
+    [lng.windGale]: "gale",
+    [lng.windStorm]: "storm",
+    [lng.windHurricane]: "hurricane",
   },
   ru: {
     [lng.currentTab]: "Сейчас",

@@ -94,7 +94,6 @@ const Icons = [
   "star-filled",
   "loading",
   "info",
-  "wind",
 ] as const;
 
 export type LocationState =

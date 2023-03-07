@@ -1,19 +1,18 @@
 import Icon from "./ui/Icon";
 
-const ICON_ROTATION = 90;
+const ICON_ROTATION = 135;
 
 interface WindIconProps {
   degree?: number;
-  capitalize?: boolean;
 }
 
-export default function WindIcon({ degree = 0, capitalize }: WindIconProps) {
+export default function WindIcon({ degree = 0 }: WindIconProps) {
   return (
     <div
       className="w-6 h-6 overflow-hidden"
       style={{ transform: `rotate(${ICON_ROTATION + degree}deg)` }}
     >
-      <Icon type="wind" />
+      <Icon type="near" />
     </div>
   );
 }

@@ -5,7 +5,8 @@ import { WindData } from "types";
 import useTranslation from "@/hooks/useTranslation";
 import { lng } from "@/assets/translations";
 import WindIcon from "./WindIcon";
-import WindProperties from "./WindProperties";
+import WindDirection from "./WindDirection";
+import WindStrength from "./WindStrength";
 
 interface WindProps {
   data?: WindData;
@@ -18,16 +19,27 @@ export default function Wind({ data, className }: WindProps) {
 
   return data ? (
     <div className={clsx(className)}>
-      <div className="grid grid-cols-[auto,auto,1fr] gap-3 sm:gap-4">
-        <div className="text-3xl sm:text-5xl text-primary-header">
+      <div className="grid grid-cols-[auto,auto,1fr] gap-3 sm:gap-4 items-end">
+        <div className="text-5xl sm:text-6xl text-primary-header">
           {Math.round(data.speed)}
         </div>
-        <div className="flex flex-col text-text-secondary">
+        <div className="flex flex-col text-text-secondary gap-1">
           <WindIcon degree={data.deg} />
-          {t(units === "metric" ? lng.mSec : lng.mph)}
+          <div className="text-sm sm:text-base text-text-secondary">
+            {t(units === "metric" ? lng.mSec : lng.mph)}
+          </div>
         </div>
-        <div>
-          <WindProperties data={data} />
+        <div className="flex flex-col">
+          <WindStrength
+            capitalize
+            data={data}
+            className="text-base sm:text-xl"
+          />
+          <WindDirection
+            capitalize
+            data={data}
+            className="text-sm sm:text-base text-text-secondary"
+          />
         </div>
       </div>
     </div>
