@@ -47,70 +47,105 @@ export default function Settings() {
   }
 
   return (
-    <ul>
-      <ListItem
-        primary={t(lng.measurementUnits)}
-        secondary={t(units === "metric" ? lng.celsius : lng.fahrenheit)}
-        endDecoration={
-          <Switch
-            checked={units === "imperial"}
-            uncheckedDecoration="C°"
-            checkedDecoration="F°"
-            onChange={handleUnits}
-          />
-        }
-        ignoreEndDecorationClick
-        highlight={units === "imperial"}
-        onClick={() => handleUnits(units === "metric")}
-      />
+    <>
+      <ul>
+        <ListItem
+          primary={t(lng.measurementUnits)}
+          secondary={t(units === "metric" ? lng.celsius : lng.fahrenheit)}
+          endDecoration={
+            <Switch
+              checked={units === "imperial"}
+              uncheckedDecoration="C°"
+              checkedDecoration="F°"
+              onChange={handleUnits}
+            />
+          }
+          ignoreEndDecorationClick
+          highlight={units === "imperial"}
+          onClick={() => handleUnits(units === "metric")}
+        />
 
-      <ListItem
-        primary={t(lng.nextTheme)}
-        secondary={`${THEMES_META[theme].name} (${
-          THEMES.indexOf(theme) + 1
-        } ${t(lng.outOf)} ${THEMES.length})`}
-        endDecoration={
-          <IconButton
-            icon="theme"
-            animation="spin"
-            ref={themeButtonRef}
-            className="text-primary-header"
-            onClick={() => nextTheme(theme)}
-          />
-        }
-        ignoreEndDecorationClick
-        onClick={handleNextTheme}
-      />
+        <ListItem
+          primary={t(lng.nextTheme)}
+          secondary={`${THEMES_META[theme].name} (${
+            THEMES.indexOf(theme) + 1
+          } ${t(lng.outOf)} ${THEMES.length})`}
+          endDecoration={
+            <IconButton
+              icon="theme"
+              animation="spin"
+              ref={themeButtonRef}
+              className="text-primary-header"
+              onClick={() => nextTheme(theme)}
+            />
+          }
+          ignoreEndDecorationClick
+          onClick={handleNextTheme}
+        />
 
-      <ListItem
-        primary={t(lng.darkMode)}
-        secondary={t(themeMode === "dark" ? lng.dark : lng.light)}
-        highlight={themeMode === "dark"}
-        endDecoration={
-          <Switch
-            checked={themeMode === "dark"}
-            uncheckedDecoration={<Icon type="sunny" size="small" />}
-            checkedDecoration={<Icon type="moon" size="small" />}
-            onChange={handleThemeMode}
-          />
-        }
-        ignoreEndDecorationClick
-        onClick={() => handleThemeMode(themeMode === "light")}
-      />
+        <ListItem
+          primary={t(lng.darkMode)}
+          secondary={t(themeMode === "dark" ? lng.dark : lng.light)}
+          highlight={themeMode === "dark"}
+          endDecoration={
+            <Switch
+              checked={themeMode === "dark"}
+              uncheckedDecoration={<Icon type="sunny" size="small" />}
+              checkedDecoration={<Icon type="moon" size="small" />}
+              onChange={handleThemeMode}
+            />
+          }
+          ignoreEndDecorationClick
+          onClick={() => handleThemeMode(themeMode === "light")}
+        />
 
-      <ListItem
-        primary={t(lng.language)}
-        secondary={APP_LANGUAGES_META[language].name}
-        endDecoration={
-          <ButtonGroup
-            items={APP_LANGUAGES.map((x) => x)}
-            selected={language}
-            onChange={handleLanguageChange}
-          />
-        }
-        ignoreEndDecorationClick
-        onClick={handleNextLanguage}
-      />
-    </ul>
+        <ListItem
+          primary={t(lng.language)}
+          secondary={APP_LANGUAGES_META[language].name}
+          endDecoration={
+            <ButtonGroup
+              items={APP_LANGUAGES.map((x) => x)}
+              selected={language}
+              onChange={handleLanguageChange}
+            />
+          }
+          ignoreEndDecorationClick
+          onClick={handleNextLanguage}
+        />
+      </ul>
+      <div
+        className="fixed top-[100%] translate-y-[-100%]
+        flex flex-wrap gap-x-4
+        p-app sm:p-app-lg text-sm text-text-secondary
+        before:absolute before:inset-4 sm:before:inset-6
+        before:rounded-full
+        before:bg-background before:opacity-75"
+      >
+        <a
+          className="reference-link"
+          href="https://github.com/elquespera"
+          target="_blank"
+          title="Github"
+        >
+          @elquespera
+        </a>
+        <a
+          className="reference-link"
+          href="https://uicolors.app/"
+          target="_blank"
+          title="Colors by UI Colors"
+        >
+          @uicolors
+        </a>
+        <a
+          className="reference-link"
+          href="https://openweathermap.org/api"
+          target="_blank"
+          title="Weather API from Open Weather"
+        >
+          @openweather
+        </a>
+      </div>
+    </>
   );
 }

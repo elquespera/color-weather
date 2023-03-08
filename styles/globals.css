@@ -250,6 +250,16 @@ body.eastern-blue-theme {
   .small-caps {
     font-variant-caps: small-caps;
   }
+
+  .reference-link {
+    position: relative;
+    opacity: 0.8;
+    transition: opacity 0.2s linear;
+  }
+
+  .reference-link:hover {
+    opacity: 1;
+  }
 }
 
 body {
