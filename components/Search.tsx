@@ -194,6 +194,7 @@ export default function Search({ open, onClose }: SearchProps) {
         md:py-4`,
         open ? "fixed z-20" : "hidden"
       )}
+      onMouseMove={() => setSelected(undefined)}
     >
       <div
         className={clsx(

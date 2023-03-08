@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import useConvertDate from "hooks/useConvertDate";
 import useTranslation from "hooks/useTranslation";
-import { lng } from "@/assets/translations";
+import { lng } from "assets/translations";
+import { TIMEZONE_OFFSET } from "consts";
 
 const REFRESH_INTERVAL = 1000;
 
@@ -16,9 +17,9 @@ export default function LocalTime({ timezone }: LocalTimeProps) {
   const [showDate, setShowDate] = useState(false);
 
   function calculateTime() {
-    const today = new Date();
+    const today = new Date(Date.now() - TIMEZONE_OFFSET);
     const local = Date.now() + (timezone || 0);
-    setShowDate(today.getDate() !== new Date(local).getDate());
+    setShowDate(today.getUTCDate() !== new Date(local).getUTCDate());
     setTime(local);
   }
 
