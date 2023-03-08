@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useConvertDate from "hooks/useConvertDate";
 import { WeatherDataPoint } from "types";
 import Temperature from "./Temperature";
 import ListItem from "./ui/ListItem";
 import WeatherDetails from "./WeatherDetails";
 import WeatherIcon from "./ui/WeatherIcon";
+import LocationContext from "@/context/LocationContext";
 interface DailyWeatherProps {
   weather?: WeatherDataPoint[];
 }
@@ -14,6 +15,9 @@ const MAX_MIDDAY_HOUR = 14;
 
 export default function DailyWeather({ weather }: DailyWeatherProps) {
   const [, convertDate, convertTime] = useConvertDate();
+  const { weather: current } = useContext(LocationContext);
+  const timezone = current?.timezone || 0;
+
   const [currentWeather, setCurrentWeather] = useState<WeatherDataPoint>();
   const [minTemp, setMinTemp] = useState(0);
   const [maxTemp, setMaxTemp] = useState(0);
@@ -48,7 +52,7 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
     <ListItem
       hover
       expanded={expanded}
-      primary={convertDate(currentWeather?.dt || 0, true)}
+      primary={convertDate(currentWeather?.dt || 0, true, false, timezone)}
       secondary={currentWeather?.description}
       endDecoration={
         currentWeather && (

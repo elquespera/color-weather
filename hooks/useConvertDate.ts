@@ -9,11 +9,16 @@ export default function useConvertDate() {
   const t = useTranslation();
   const { language } = useContext(AppContext);
 
-  function date(dt?: number, humanReadable = false, shortMonth = false) {
+  function date(
+    dt?: number,
+    humanReadable = false,
+    shortMonth = false,
+    timezone = 0
+  ) {
     if (dt === undefined) return;
-    const dateObj = new Date(dt + TIMEZONE_OFFSET);
+    const dateObj = new Date(dt + timezone);
     if (humanReadable) {
-      const today = new Date(Date.now());
+      const today = new Date(Date.now() + TIMEZONE_OFFSET);
       let weekDay = dateObj.toLocaleString(language, { weekday: "long" });
 
       if (today.getDate() === dateObj.getDate()) weekDay = t(lng.today);
