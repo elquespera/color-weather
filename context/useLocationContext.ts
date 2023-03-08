@@ -34,7 +34,6 @@ export default function useLocationContext() {
       lon: Math.round(longitude * LOCATION_PRECISION) / LOCATION_PRECISION,
     };
     setLocationContext((current) => {
-      setLocalStorage({ location });
       return { ...current, ...location };
     });
   }
@@ -84,8 +83,10 @@ export default function useLocationContext() {
   function defineLocation() {
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
-        setGpsCoord({ lat: coords.latitude, lon: coords.longitude });
+        const location = { lat: coords.latitude, lon: coords.longitude };
+        setGpsCoord(location);
         setLocation(coords.latitude, coords.longitude);
+        setLocalStorage({ location });
         setLocationState("granted");
       },
       (e) => {
