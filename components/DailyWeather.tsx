@@ -52,7 +52,12 @@ export default function DailyWeather({ weather }: DailyWeatherProps) {
     <ListItem
       hover
       expanded={expanded}
-      primary={convertDate(currentWeather?.dt || 0, true, false, timezone)}
+      primary={convertDate(
+        (currentWeather?.dt || 0) - timezone,
+        true,
+        false,
+        timezone
+      )}
       secondary={currentWeather?.description}
       endDecoration={
         currentWeather && (
