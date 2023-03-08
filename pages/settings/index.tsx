@@ -123,7 +123,7 @@ export default function Settings() {
       >
         <a
           className="reference-link"
-          href="https://github.com/elquespera"
+          href="https://github.com/elquespera/weather-app"
           target="_blank"
           title="Github"
         >
@@ -141,7 +141,7 @@ export default function Settings() {
           className="reference-link"
           href="https://openweathermap.org/api"
           target="_blank"
-          title="Weather API from Open Weather"
+          title="Weather API from OpenWeather"
         >
           @openweather
         </a>
