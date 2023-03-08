@@ -143,12 +143,14 @@ export default function AirQualityItem({ name, value }: AirQualityItemProps) {
                   {mgM3}
                 </div>
               </div>
-              <button
-                className="text-text-secondary text-sm"
-                onClick={() => setCollapsed(true)}
-              >
-                {t(lng.hide)}
-              </button>
+              {!collapsed && (
+                <button
+                  className="text-text-secondary text-sm"
+                  onClick={() => setCollapsed(true)}
+                >
+                  {t(lng.hide)}
+                </button>
+              )}
             </div>
             <div
               className="p-2 mb-2 text-sm"
