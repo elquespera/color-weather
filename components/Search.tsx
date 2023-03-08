@@ -38,6 +38,7 @@ export default function Search({ open, onClose }: SearchProps) {
   const { currentCity, setLocation, locationState, defineLocation } =
     useContext(LocationContext);
   const inputRef = useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const fetchCities = useCallback(searchCities(), []);
   const [cities, setCities] = useState<City[]>([]);
   const [favorites, setFavorites] = useState<City[]>([]);
@@ -48,6 +49,12 @@ export default function Search({ open, onClose }: SearchProps) {
 
   function handleClose() {
     if (onClose) onClose();
+  }
+
+  function handleWrapperClick(event: React.MouseEvent<HTMLDivElement>) {
+    if (event.target === wrapperRef.current) {
+      handleClose();
+    }
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -188,12 +195,14 @@ export default function Search({ open, onClose }: SearchProps) {
 
   return (
     <div
+      ref={wrapperRef}
       className={clsx(
         `inset-0 flex justify-center bg-[#fff0] 
         md:backdrop-filter md:backdrop-blur-sm
         md:py-4`,
         open ? "fixed z-20" : "hidden"
       )}
+      onClick={handleWrapperClick}
       onMouseMove={() => setSelected(undefined)}
     >
       <div
