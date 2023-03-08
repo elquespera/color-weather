@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import LocationContext from "context/LocationContext";
 import { PollutantLevel } from "types";
 import AirQualityLevel from "./AirQualityLevel";
-import IconButton from "./ui/IconButton";
 import clsx from "clsx";
 import { lng } from "assets/translations";
 import useTranslation from "hooks/useTranslation";
@@ -78,6 +77,14 @@ export default function AirQualityItem({ name, value }: AirQualityItemProps) {
     ? calculatePollutantLevel(value, pollutant)
     : undefined;
 
+  const roundedValue = Math.round(value * 10) / 10;
+
+  const mgM3 = (
+    <span className="font-light italic text-text-secondary text-[0.875em]">
+      μg/m<sup>3</sup>
+    </span>
+  );
+
   useEffect(() => {
     setPollutant(POLLUTANTS[name]);
   }, [name]);
@@ -105,11 +112,9 @@ export default function AirQualityItem({ name, value }: AirQualityItemProps) {
             />
           </button>
         </td>
-        <td className="flex gap-1">
-          <span className="font-">{value}</span>
-          <span className="font-light italic text-text-secondary text-[0.875em]">
-            μg/m<sup>3</sup>
-          </span>
+        <td className="hidden sm:inline units-hide">
+          <span>{`${roundedValue}  `}</span>
+          <span className="units">{mgM3}</span>
         </td>
       </tr>
       <tr>
@@ -120,15 +125,26 @@ export default function AirQualityItem({ name, value }: AirQualityItemProps) {
               collapsed ? "max-h-0" : "max-h-60 border-b-[1px]"
             )}
           >
-            <div className="flex gap-1">
-              <span className="text-text-secondary">{`${t(
-                lng.currentLevel
-              )} -`}</span>
-              <span className="font-semibold">
-                {t(POLLUTION_LEVEL_TRANSLATIONS[level || "good"])}
-              </span>
+            <div className="flex justify-between items-start gap-1">
+              <div>
+                <div>
+                  <span className="text-text-secondary">{`${t(
+                    lng.currentLevel
+                  )} - `}</span>
+                  <span className="font-semibold">
+                    {t(POLLUTION_LEVEL_TRANSLATIONS[level || "good"])}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-text-secondary">{`${t(
+                    lng.concentration
+                  )} - `}</span>
+                  <span className="font-semibold">{`${value} `}</span>
+                  {mgM3}
+                </div>
+              </div>
               <button
-                className="ml-auto text-text-secondary text-sm"
+                className="text-text-secondary text-sm"
                 onClick={() => setCollapsed(true)}
               >
                 {t(lng.hide)}

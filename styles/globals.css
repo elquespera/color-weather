@@ -260,6 +260,31 @@ body.eastern-blue-theme {
   .reference-link:hover {
     opacity: 1;
   }
+
+  .padded-table th,
+  .padded-table td {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .padded-table th:first-child,
+  .padded-table td:first-child {
+    padding-left: 0;
+  }
+
+  .padded-table th:last-child,
+  .padded-table td:last-child {
+    padding-right: 0;
+  }
+
+  .units-hide .units {
+    opacity: 0;
+    transition: opacity 0.2s linear;
+  }
+
+  .units-hide:hover .units {
+    opacity: 1;
+  }
 }
 
 body {
