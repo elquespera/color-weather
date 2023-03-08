@@ -23,6 +23,13 @@ module.exports = {
         "app-lg": "2rem",
       },
 
+      backgroundImage: {
+        "gradient-radial":
+          "radial-gradient(circle 8rem at 4rem -2rem, var(--tw-gradient-stops))",
+        "gradient-radial-sm":
+          "radial-gradient(circle 4rem at 0rem 1rem, var(--tw-gradient-stops))",
+      },
+
       keyframes: {
         appear: {
           "0%": { transform: "scale(0)", opacity: 0 },

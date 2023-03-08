@@ -25,7 +25,9 @@ export default function Header({}: HeaderProps) {
         className={`
         fixed w-full h-header px-2 pt-2 pb-0 z-10
         flex flex-col justify-between
-        bg-primary-800 text-white
+        bg-primary-800 bg-gradient-radial-sm md:bg-gradient-radial
+        from-primary-600 via-primary-700
+        text-text-contrast
         shadow-lg transition-colors`}
       >
         <h1 className="min-w-full flex items-center justify-between sm:gap-1 text-3xl select-none">
