@@ -41,6 +41,7 @@ export default function Search({ open, onClose }: SearchProps) {
   const fetchCities = useCallback(searchCities(), []);
   const [cities, setCities] = useState<City[]>([]);
   const [favorites, setFavorites] = useState<City[]>([]);
+  const [selected, setSelected] = useState<City>();
   const [favoritesEdit, setFavoritesEdit] = useState(false);
 
   const [value, setValue] = useState("");
@@ -52,10 +53,36 @@ export default function Search({ open, onClose }: SearchProps) {
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
     setFavoritesEdit(false);
+    setSelected(undefined);
   }
 
-  function handleKeyDown(event: React.KeyboardEvent) {
-    if (event.key === "Escape") handleClose();
+  function highlightCity(next: boolean = true) {
+    let list: City[] = cities;
+    if (value === "") {
+      list = [...favorites];
+      if (currentCity) list.unshift(currentCity);
+    }
+
+    const foundIndex = list.findIndex((city) => city === selected);
+    let nextIndex = foundIndex + 1 * (next ? 1 : -1);
+    if (nextIndex < 0) nextIndex = list.length - 1;
+    if (nextIndex >= list.length) nextIndex = 0;
+
+    if (nextIndex >= 0) setSelected(list[nextIndex]);
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
+    switch (event.key) {
+      case "Escape":
+        handleClose();
+        break;
+      case "ArrowUp":
+      case "ArrowDown":
+        highlightCity(event.key === "ArrowDown");
+        break;
+      case "Enter":
+        handleCityClick(selected);
+    }
   }
 
   function handleClear() {
@@ -63,23 +90,14 @@ export default function Search({ open, onClose }: SearchProps) {
     inputRef.current?.focus();
   }
 
-  function checkRoute() {
+  function handleCityClick(city?: City) {
+    if (!city) return;
+    setLocation(city.lat, city.lon);
+    handleClose();
+
     if (!["/", "/5-days"].includes(router.pathname)) {
       router.push("/");
     }
-  }
-
-  function handleCityClick(lat: number, lon: number) {
-    setLocation(lat, lon);
-    checkRoute();
-    handleClose();
-  }
-
-  function handleCurrentCityClick() {
-    if (!currentCity) return;
-    setLocation(currentCity.lat, currentCity.lon);
-    checkRoute();
-    handleClose();
   }
 
   function findFavoriteIndex(latitude: number, longitude: number) {
@@ -163,6 +181,7 @@ export default function Search({ open, onClose }: SearchProps) {
   useEffect(() => {
     if (open) inputRef.current?.focus();
     setValue("");
+    setSelected(undefined);
     setFavoritesEdit(false);
     document.body.classList.toggle("no-scroll", open);
   }, [open]);
@@ -223,7 +242,8 @@ export default function Search({ open, onClose }: SearchProps) {
                 <CityList
                   type="current"
                   cities={[currentCity]}
-                  onClick={handleCurrentCityClick}
+                  selected={selected}
+                  onClick={() => handleCityClick(currentCity)}
                 />
               ) : (
                 locationState !== "granted" && (
@@ -273,6 +293,7 @@ export default function Search({ open, onClose }: SearchProps) {
               <CityList
                 type="favorites"
                 cities={favorites}
+                selected={selected}
                 favoritesEdit={favoritesEdit}
                 onClick={handleCityClick}
                 onToggleFavorite={toggleFavoriteCity}
@@ -287,6 +308,7 @@ export default function Search({ open, onClose }: SearchProps) {
           <CityList
             type="search"
             cities={cities}
+            selected={selected}
             onClick={handleCityClick}
             onToggleFavorite={toggleFavoriteCity}
             isCityFavorite={isCityFavorite}
