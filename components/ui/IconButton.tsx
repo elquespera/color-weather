@@ -10,13 +10,21 @@ type IconButtonAnimation = "spin";
 interface IconButtonProps {
   icon: IconType;
   size?: IconSize;
+  title?: string;
   animation?: IconButtonAnimation;
   className?: string;
   onClick?: (event: React.MouseEvent) => void;
 }
 
 const IconButton = forwardRef(function IconButton(
-  { icon, size = "medium", className, animation, onClick }: IconButtonProps,
+  {
+    icon,
+    size = "medium",
+    title,
+    className,
+    animation,
+    onClick,
+  }: IconButtonProps,
   ref: React.Ref<HTMLButtonElement>
 ) {
   const [currentAnimation, setCurrentAnimation] =
@@ -50,6 +58,7 @@ const IconButton = forwardRef(function IconButton(
         currentAnimation === "spin" && "animate-spin-fast",
         className
       )}
+      title={title}
       ref={ref}
       onClick={handleClick}
     >

@@ -210,7 +210,7 @@ export default function Search({ open, onClose }: SearchProps) {
           `bg-background w-full md:w-max-app p-2 sm:p-4 
           md:shadow-search md:rounded-2xl
           overflow-hidden flex flex-col
-          aminate-tr scale-80 opacity-0 origin-top`,
+          aminate-tr opacity-0 origin-top`,
           open && "animate-appear"
         )}
       >

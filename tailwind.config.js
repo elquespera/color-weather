@@ -25,7 +25,7 @@ module.exports = {
 
       keyframes: {
         appear: {
-          "0%": { transform: "scale(80%)", opacity: 0 },
+          "0%": { transform: "scale(0)", opacity: 0 },
           "100%": { transform: "scale(1)", opacity: 1 },
         },
         rotate: {
@@ -44,9 +44,9 @@ module.exports = {
       animation: {
         "spin-fast":
           "spin 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) infinite",
-        appear: "appear 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards",
+        appear: "appear 0.4s cubic-bezier(0, .96, .46, 1.2) forwards",
         rotate:
-          "rotate 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.2s forwards",
+          "rotate 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) 0.4s forwards",
         "spinner-appear":
           "spinner-appear 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) forwards",
         "spinner-disappear":
