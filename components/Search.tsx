@@ -189,13 +189,16 @@ export default function Search({ open, onClose }: SearchProps) {
   return (
     <div
       className={clsx(
-        "inset-0 flex justify-center",
+        `inset-0 flex justify-center bg-[#fff0] 
+        md:backdrop-filter md:backdrop-blur-sm
+        md:py-4`,
         open ? "fixed z-20" : "hidden"
       )}
     >
       <div
         className={clsx(
-          `bg-background w-full p-2 sm:p-4 
+          `bg-background w-full md:w-max-app p-2 sm:p-4 
+          md:shadow-search md:rounded-2xl
           overflow-hidden flex flex-col
           aminate-tr scale-80 opacity-0 origin-top`,
           open && "animate-appear"
