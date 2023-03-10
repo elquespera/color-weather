@@ -6,7 +6,7 @@
 
 ## Features
 
-<img src="screenshots/composite-2.png" align="right" width="600px">
+<img src="screenshots/composite-2.png" align="right" width="450px">
 
 - Get a detailed **current** and **5-day weather forecast** for your current location and any city in the world.
 - **Search** for cities and add them to **favories** to check out conditions and forecasts later.
@@ -17,7 +17,7 @@
 
 ## Technologies
 
-- Developed with [Next.js 13](https://nextjs.org/) & [Tailwind CSS](https://tailwindcss.com/), the app uses modern technologies such as **Next.js API** routes and **mobile-first UI design** approach.
+- Developed with [Next.js 13](https://nextjs.org/) and [Tailwind CSS](https://tailwindcss.com/), the app uses modern technologies such as **Next.js API** routes and **mobile-first UI design** approach.
 - **Weather information** is fetched from [OpenWeather APIs](https://openweathermap.org/) and complemented by [BigData Cloud Reverse Geocoding APIs](https://www.bigdatacloud.com/packages/reverse-geocoding) for more precise location names.
 - **Color palletes** were generated with [Tailwind CSS Color Generator](https://uicolors.app/create).
 - [Material Symbols](https://fonts.google.com/icons) iconography
