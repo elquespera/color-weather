@@ -6,7 +6,7 @@
 
 ## Features
 
-<img src="screenshots/composite-2.png" align="right">
+<img src="screenshots/composite-2.png" align="right" width="600px">
 
 - Get a detailed **current** and **5-day weather forecast** for your current location and any city in the world.
 - **Search** for cities and add them to **favories** to check out conditions and forecasts later.
